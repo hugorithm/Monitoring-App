@@ -22,6 +22,7 @@ server = app.listen(3000)
 //socket.io instantiation
 const io = require("socket.io")(server)
 
+//ping
 var ping = require("net-ping");
 
 var session = ping.createSession();
