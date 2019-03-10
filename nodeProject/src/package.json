@@ -1,0 +1,34 @@
+{
+  "name": "simplechatapp",
+  "version": "1.0.0",
+  "description": "Simple chat app built with node.js and socket.io",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngrt/simpleChatApp.git"
+  },
+  "author": "Noufel Gouirhate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ngrt/simpleChatApp/issues"
+  },
+  "homepage": "https://github.com/ngrt/simpleChatApp#readme",
+  "dependencies": {
+    "cron": "^1.6.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "net-ping": "^1.2.3",
+    "nodemon": "^1.18.10",
+    "socket.io": "^2.0.4",
+    "body-parser": ">=1.15.2",
+    "cookie-parser": ">=1.4.3",
+    "date-format": ">=0.0.2",
+    "debug": ">=2.2.0",
+    "mongoose": "^4.8.2",
+    "serve-favicon": ">=2.3.0"
+  }
+}
