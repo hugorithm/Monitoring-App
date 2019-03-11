@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-
+const http = require('http')
 const teste = require('./teste')
 
 
@@ -34,6 +34,22 @@ var target = "172.217.16.238";
 console.log('start cron');
 var Job = new cronJob('*/5 * * * * *', function(){
     console.log('cron started');
+    http.get('http://127.0.0.1:8080', (resp) => {
+  let data = '';
+
+  // A chunk of data has been recieved.
+  resp.on('data', (chunk) => {
+    data += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log(JSON.parse(data).explanation);
+  });
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});
     session.pingHost (target, function (error, target, sent, rcvd) {
        var ms = rcvd - sent;
        msf = "" + ms;
