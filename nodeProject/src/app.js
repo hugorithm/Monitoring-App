@@ -4,6 +4,7 @@ const http = require('http')
 const teste = require('./teste')
 
 
+
 //set the template engine ejs
 app.set('view engine', 'ejs')
 
@@ -34,6 +35,8 @@ var target = "172.217.16.238";
 console.log('start cron');
 var Job = new cronJob('*/5 * * * * *', function(){
     console.log('cron started');
+
+  //GET request  
     http.get('http://127.0.0.1:8080', (resp) => {
   let data = '';
 
@@ -46,6 +49,38 @@ var Job = new cronJob('*/5 * * * * *', function(){
   resp.on('end', () => {
     console.log(JSON.parse(data).explanation);
   });
+
+  //POST Request
+  const dados = JSON.stringify({
+    tasks: 'Buy the milk'
+  })
+ 
+  const options = {
+    hostname: 'http://127.0.0.1',
+    port: 8080,
+    path: '/tasks',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Content-Length': dados.length
+    }
+  }
+
+
+  const req = http.request(options, (res) => {
+    console.log(`statusCode: ${res.statusCode}`)
+  
+    res.on('data', (d) => {
+      process.stdout.write(d)
+    })
+  })
+  
+  req.on('error', (error) => {
+    console.error(error)
+  })
+  
+  req.write(dados)
+  req.end()
 
 }).on("error", (err) => {
   console.log("Error: " + err.message);
