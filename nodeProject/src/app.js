@@ -10,6 +10,7 @@ app.set('view engine', 'ejs')
 //middlewares
 app.use(express.static('public'))
 
+//teste commit
 
 //routes
 app.get('/', (req, res) => {
