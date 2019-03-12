@@ -1,12 +1,13 @@
 var ping = require("net-ping");
-const teste = require('./teste');
+const teste = require('./teste')
+var session = ping.createSession();
+const io = require("socket.io")(server)
 
 var exports = module.exports = {}
+var target = "172.217.16.238";
+exports.ping_host = function(){
 
-var session = ping.createSession();
-
-exports.send_ping = function(target, io){
-    session.pingHost (target, function (error, target, sent, rcvd) {
+session.pingHost (target, function (error, target, sent, rcvd) {
     var ms = rcvd - sent;
     msf = "" + ms;
      if (error)

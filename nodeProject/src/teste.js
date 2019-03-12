@@ -1,7 +1,6 @@
 var User = require('./db.js');
 var exports = module.exports = {}
 
-
 exports.create_user = function (api, time){
   var teste = new User ({
     api_name : api,
