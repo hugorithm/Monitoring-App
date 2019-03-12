@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const http = require('http')
 const teste = require('./teste')
 
 
@@ -10,9 +9,6 @@ app.set('view engine', 'ejs')
 
 //middlewares
 app.use(express.static('public'))
-
-//teste commit
-//teste2
 
 //routes
 app.get('/', (req, res) => {
@@ -36,55 +32,9 @@ console.log('start cron');
 var Job = new cronJob('*/5 * * * * *', function(){
     console.log('cron started');
 
-  //GET request  
-    http.get('http://127.0.0.1:8080', (resp) => {
-  let data = '';
+    var http_request = require('./http_Request');
+    http_request.send_http_request();
 
-  // A chunk of data has been recieved.
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    console.log(JSON.parse(data).explanation);
-  });
-
-  //POST Request
-  const dados = JSON.stringify({
-    tasks: 'Buy the milk'
-  })
- 
-  const options = {
-    hostname: 'http://127.0.0.1',
-    port: 8080,
-    path: '/tasks',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Content-Length': dados.length
-    }
-  }
-
-
-  const req = http.request(options, (res) => {
-    console.log(`statusCode: ${res.statusCode}`)
-  
-    res.on('data', (d) => {
-      process.stdout.write(d)
-    })
-  })
-  
-  req.on('error', (error) => {
-    console.error(error)
-  })
-  
-  req.write(dados)
-  req.end()
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-});
     session.pingHost (target, function (error, target, sent, rcvd) {
        var ms = rcvd - sent;
        msf = "" + ms;
@@ -106,6 +56,7 @@ var Job = new cronJob('*/5 * * * * *', function(){
 }); 
 Job.start();
 
+/*
 //listen on every connection
 io.on('connection', (socket) => {
 	console.log('New user connected')
@@ -129,3 +80,4 @@ io.on('connection', (socket) => {
     	socket.broadcast.emit('typing', {username : socket.username})
     })
 })
+*/
