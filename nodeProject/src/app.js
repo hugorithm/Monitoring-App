@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const teste = require('./teste')
 
 
 
@@ -21,10 +20,6 @@ server = app.listen(3000)
 //socket.io instantiation
 const io = require("socket.io")(server)
 
-//ping
-var ping = require("net-ping");
-
-var session = ping.createSession();
 
 var cronJob = require('cron').CronJob;
 var target = "172.217.16.238";
@@ -35,23 +30,8 @@ var Job = new cronJob('*/5 * * * * *', function(){
     var http_request = require('./http_Request');
     http_request.send_http_request();
 
-    session.pingHost (target, function (error, target, sent, rcvd) {
-       var ms = rcvd - sent;
-       msf = "" + ms;
-        if (error)
-        {
-            msf = -1;
-            io.emit('ping_time', {username: "ping", pingtime : msf});
-        }
-        else
-        {
-            io.emit('ping_time', {username: "ping", pingtime : msf});
-            //introduz dados do ping no mongo xD
-            var a = teste.create_user('Google', msf);
-            teste.save_user(a);
-        }
-    });
-    
+    var ping_request = require('./ping_request');
+    ping_request.send_ping(target, io);
     console.log('cron job completed');
 }); 
 Job.start();
