@@ -2,7 +2,6 @@ const http = require('http');
 var exports = module.exports = {}
 
 exports.send_http_request = function(){
-
     
 http.get('http://127.0.0.1:8080', (resp) => {
     let data = '';
@@ -32,7 +31,6 @@ http.get('http://127.0.0.1:8080', (resp) => {
       'Content-Length': dados.length
     }
   }
-
 
   const req = http.request(options, (res) => {
     console.log(`statusCode: ${res.statusCode}`)
