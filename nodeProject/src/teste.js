@@ -14,7 +14,7 @@ exports.create_user = function (api, time){
 exports.save_user = function (user){
   user.save(function(err){
     if (err) throw err;
-    console.log('Utilizador salvo com sucesso!');
+    console.log('Ping salvo com sucesso!');
   });
 }
 //salvar utilzador
