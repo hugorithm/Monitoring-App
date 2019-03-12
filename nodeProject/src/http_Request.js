@@ -13,7 +13,7 @@ http.get('http://127.0.0.1:8080', (resp) => {
 
   // The whole response has been received. Print out the result.
   resp.on('end', () => {
-    console.log(JSON.parse(data).explanation);
+    console.log('GET Request: '+ resp.statusCode +' ' + JSON.parse(data).explanation);
   });
 
   //POST Request
