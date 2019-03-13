@@ -17,9 +17,11 @@ exports.send_ping = function(target, io){
      else
      {
          io.emit('ping_time', {username: "ping", pingtime : msf});
+         
          //introduz dados do ping no mongo xD
-         var a = teste.create_user('Google', msf);
-         teste.save_user(a);
+         var a = JSON.stringify({});
+         var b = teste.create_user(a);
+         teste.save_user(b);
      }
  });
 }

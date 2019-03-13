@@ -1,19 +1,20 @@
-var User = require('./db.js');
+var Jsonsc = require('./db.js');
 var exports = module.exports = {}
 
-exports.create_user = function (api, time){
-  var teste = new User ({
-    api_name : api,
-    response_time : time,
+// Criar user 
+exports.create_user = function (new_json){
+  var teste = new Jsonsc ({
+    json : new_json
   });
   return teste;
 }
-//criar uma chamada User
+
+//Guardar na DB
 
 exports.save_user = function (user){
   user.save(function(err){
     if (err) throw err;
-    console.log('Utilizador salvo com sucesso!');
+    console.log('Guardado com sucesso!');
   });
 }
 //salvar utilzador

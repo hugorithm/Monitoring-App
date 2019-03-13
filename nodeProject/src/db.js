@@ -8,13 +8,18 @@ var db = mongoose.connection;
     console.log('Connection succeeded.');
     });
  
-var Schema = mongoose.Schema;
+var api = mongoose.Schema;
  
-var userSchema = new Schema({
-     api_name: String,
-     response_time: String,
- });
+var jsonSchema = new api({
+    json: {
+        type: String,
+        required: true
+    }
+    }, {
+         versionKey: false
+    
+});
 
-var User = mongoose.model('User', userSchema);
+var Jsonsc = mongoose.model('json', jsonSchema);
 
-module.exports = User;
+module.exports = Jsonsc;
