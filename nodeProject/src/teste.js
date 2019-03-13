@@ -9,7 +9,7 @@ exports.create_user = function (new_json){
   return teste;
 }
 
-//Guardar na DB
+//guardar user na DB
 
 exports.save_user = function (user){
   user.save(function(err){
@@ -17,7 +17,8 @@ exports.save_user = function (user){
     console.log('Guardado com sucesso!');
   });
 }
-//salvar utilzador
+
+
     
 /*
 // procurar todos (findById- procurar pelo id)
