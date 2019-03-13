@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 //Listen on port 3000
 server = app.listen(3000)
 
-//socket.io instantiation
+//socket.io instantiation.
 const io = require("socket.io")(server)
 
 var cronJob = require('cron').CronJob;
