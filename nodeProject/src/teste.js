@@ -22,40 +22,22 @@ exports.getjson_teste = function(json){
   Jsonsc.find({}, function(err, users){
     if (err) throw err;
     console.log(users);
-  });
+   /*var a = new Array();
+    for(var i = 0 ; i < users.length; i++){
+      
+      var linha = JSON.parse('[i]');
+      delete linha['_id'];
+      a.push(linha);
+    }
+    return a;*/
+  }); 
 }
 
-/*
-exports.get_user = function (json){
-  jsonsc.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("mydb");
-    dbo.collection("customers").findOne({}, function(err, result) {
-      if (err) throw err;
-      console.log(result.name);
-      db.close();
-    });
-  }) 
-}*/
 
     
 /*
-// procurar todos (findById- procurar pelo id)
-    User.find({}, function(err, users) {
-    if (err) throw err;
-      console.log(users);
-    });
-
-
-// guardar na DB
-
-    teste.save(function(err){
-        if (err) throw err;
-
-        console.log('Viva ao PORTO!! Bem guardado');
-
-    });
-    */
+JSONObject obj = new JSONObject(jstring);
+obj.getJSONArray("fileName");
 
 // atualizar/guardar/adicionar data 
 /*
