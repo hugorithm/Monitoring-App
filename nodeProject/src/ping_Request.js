@@ -19,8 +19,8 @@ exports.send_ping = function(target, io){
          io.emit('ping_time', {username: "ping", pingtime : msf});
          
          //introduz dados do ping no mongo xD
-         var np = new Array('google', msf, sent, rcvd);
-         var a = JSON.stringify(np);
+        //var np = new Array('google', msf, sent, rcvd);
+         var a = JSON.stringify({api_name : 'google', response_time : msf});
          var b = teste.create_user(a);
          var c = teste.save_user(b);
          var d = teste.getjson_teste(c);

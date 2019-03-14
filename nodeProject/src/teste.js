@@ -17,8 +17,8 @@ exports.save_user = function (user){
     console.log('Guardado com sucesso!');
   });
 }
-//receber info da bd
-exports.getjson_teste = function(user){
+//receber dados da bd
+exports.getjson_teste = function(json){
   Jsonsc.find({}, function(err, users){
     if (err) throw err;
     console.log(users);
