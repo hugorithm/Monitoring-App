@@ -17,7 +17,26 @@ exports.save_user = function (user){
     console.log('Guardado com sucesso!');
   });
 }
+//receber info da bd
+exports.getjson_teste = function(user){
+  Jsonsc.find({}, function(err, users){
+    if (err) throw err;
+    console.log(users);
+  });
+}
 
+/*
+exports.get_user = function (json){
+  jsonsc.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("mydb");
+    dbo.collection("customers").findOne({}, function(err, result) {
+      if (err) throw err;
+      console.log(result.name);
+      db.close();
+    });
+  }) 
+}*/
 
     
 /*
@@ -27,12 +46,6 @@ exports.save_user = function (user){
       console.log(users);
     });
 
- //
-    teste.dudify(function(err, ApiName) {
-            if(err) throw err;
-
-            console.log('O nome da API é' + ApiName);
-    });
 
 // guardar na DB
 
