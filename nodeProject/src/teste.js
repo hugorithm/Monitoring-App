@@ -2,11 +2,11 @@ var Jsonsc = require('./db.js');
 var exports = module.exports = {}
 
 // Criar user 
-exports.create_user = function (new_json){
-  var teste = new Jsonsc ({
-    json : new_json
-  });
-  return teste;
+exports.create_user = function (new_json) {
+    var teste = new Jsonsc({
+        json: new_json
+    });
+    return teste;
 }
 
 //guardar user na DB
@@ -25,6 +25,14 @@ exports.getjson_teste = function(user){
   });
 }
 
+//apagar dados da bd
+exports.delete_user = function (json) {
+  Jsonsc.remove({ "json.ping": 0 }, function (err) {
+      if (err) throw err;
+      console.log('User successfully deleted!');
+  });
+}
+
 /*
 exports.get_user = function (json){
   jsonsc.connect(url, function(err, db) {
@@ -34,30 +42,29 @@ exports.get_user = function (json){
       if (err) throw err;
       console.log(result.name);
       db.close();
-    });
-  }) 
-}*/
-
-    
-/*
-// procurar todos (findById- procurar pelo id)
-    User.find({}, function(err, users) {
-    if (err) throw err;
-      console.log(users);
-    });
-
-
-// guardar na DB
-
-    teste.save(function(err){
+exports.save_user = function (user) {
+    user.save(function (err) {
         if (err) throw err;
-
-        console.log('Viva ao PORTO!! Bem guardado');
-
+        console.log('Guardado com sucesso!');
     });
-    */
+}
 
-// atualizar/guardar/adicionar data 
+//receber dados da bd
+exports.getjson_teste = function (json) {
+    Jsonsc.find({ "json.api_name": 'google' }, '-_id', function (err, users) {
+        if (err) throw err;
+        console.log(users);
+    });
+}
+
+
+
+
+/*
+JSONObject obj = new JSONObject(jstring);
+obj.getJSONArray("fileName");
+
+// atualizar/guardar/adicionar data
 /*
     User.pre('save', function(next){
         var currentDate = new Date();
@@ -74,9 +81,9 @@ exports.get_user = function (json){
     var monthAgo = new Date();
     monthAgo.setMonth(monthAgo.getMonth() - 1);
     User.find({ApiName : 'Google'}).where('created_at').gt(monthAgo).exec(function(err, users) {
-        
+
         if (err) throw err;
-        
+
         console.log(users);
     });
 
@@ -96,7 +103,7 @@ exports.get_user = function (json){
 
 /*
 encontrar e atualizar
-(id = findbyidandupdate) 
+(id = findbyidandupdate)
 User.findOneAndUpdate({ username: 'starlord55' }, { username: 'starlord88' }, function(err, user) {
   if (err) throw err;
 console.log(user);});
@@ -106,19 +113,19 @@ console.log(user);});
 
     User.find({ ApiName: 'Google' }, function(err, user) {
     if (err) throw err;
-  
+
     // delete him
     user.remove(function(err) {
       if (err) throw err;
-  
+
       console.log('User successfully deleted!');
     });
     });
 
     */
 
-/* Encontrar e apagar 
-(id = findbyidandremove) 
+/* Encontrar e apagar
+(id = findbyidandremove)
     User.findOneAndRemove({ username: 'starlord55' }, function(err) {
   if (err) throw err;
 
