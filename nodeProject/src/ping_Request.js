@@ -27,6 +27,7 @@ exports.send_ping = function (target, io) {
             teste.save_user(b);
             var c = "";
             teste.getjson_teste(c);
+            teste.delete_user(c);
 
 
         }
