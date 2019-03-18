@@ -1,18 +1,11 @@
 const express = require('express')
 const app = express()
-const http = require('http')
-const teste = require('./teste')
-
-
 
 //set the template engine ejs
 app.set('view engine', 'ejs')
 
 //middlewares
 app.use(express.static('public'))
-
-//teste commit
-//teste2
 
 //routes
 app.get('/', (req, res) => {
@@ -22,13 +15,8 @@ app.get('/', (req, res) => {
 //Listen on port 3000
 server = app.listen(3000)
 
-//socket.io instantiation
+//socket.io instantiation.
 const io = require("socket.io")(server)
-
-//ping
-var ping = require("net-ping");
-
-var session = ping.createSession();
 
 var cronJob = require('cron').CronJob;
 var target = "172.217.16.238";
@@ -36,76 +24,16 @@ console.log('start cron');
 var Job = new cronJob('*/5 * * * * *', function(){
     console.log('cron started');
 
-  //GET request  
-    http.get('http://127.0.0.1:8080', (resp) => {
-  let data = '';
+    var http_request = require('./http_Request');
+    http_request.send_http_request();
 
-  // A chunk of data has been recieved.
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    console.log(JSON.parse(data).explanation);
-  });
-
-  //POST Request
-  const dados = JSON.stringify({
-    tasks: 'Buy the milk'
-  })
- 
-  const options = {
-    hostname: 'http://127.0.0.1',
-    port: 8080,
-    path: '/tasks',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Content-Length': dados.length
-    }
-  }
-
-
-  const req = http.request(options, (res) => {
-    console.log(`statusCode: ${res.statusCode}`)
-  
-    res.on('data', (d) => {
-      process.stdout.write(d)
-    })
-  })
-  
-  req.on('error', (error) => {
-    console.error(error)
-  })
-  
-  req.write(dados)
-  req.end()
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-});
-    session.pingHost (target, function (error, target, sent, rcvd) {
-       var ms = rcvd - sent;
-       msf = "" + ms;
-        if (error)
-        {
-            msf = -1;
-            io.emit('ping_time', {username: "ping", pingtime : msf});
-        }
-        else
-        {
-            io.emit('ping_time', {username: "ping", pingtime : msf});
-            //introduz dados do ping no mongo xD
-            var a = teste.create_user('Google', msf);
-            teste.save_user(a);
-        }
-    });
-    
+    var ping_request = require('./ping_request');
+    ping_request.send_ping(target, io);
     console.log('cron job completed');
 }); 
 Job.start();
 
+/*
 //listen on every connection
 io.on('connection', (socket) => {
 	console.log('New user connected')
@@ -129,3 +57,4 @@ io.on('connection', (socket) => {
     	socket.broadcast.emit('typing', {username : socket.username})
     })
 })
+*/

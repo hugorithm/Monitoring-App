@@ -1,15 +1,15 @@
-var User = require('./db.js');
+var Jsonsc = require('./db.js');
 var exports = module.exports = {}
 
-
-exports.create_user = function (api, time){
-  var teste = new User ({
-    api_name : api,
-    response_time : time,
+// Criar user 
+exports.create_user = function (new_json){
+  var teste = new Jsonsc ({
+    json : new_json
   });
   return teste;
 }
-//criar uma chamada User
+
+//guardar user na DB
 
 exports.save_user = function (user){
   user.save(function(err){
@@ -17,7 +17,27 @@ exports.save_user = function (user){
     console.log('Ping salvo com sucesso!');
   });
 }
-//salvar utilzador
+//receber info da bd
+exports.getjson_teste = function(user){
+  Jsonsc.find({}, function(err, users){
+    if (err) throw err;
+    console.log(users);
+  });
+}
+
+/*
+exports.get_user = function (json){
+  jsonsc.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("mydb");
+    dbo.collection("customers").findOne({}, function(err, result) {
+      if (err) throw err;
+      console.log(result.name);
+      db.close();
+    });
+  }) 
+}*/
+
     
 /*
 // procurar todos (findById- procurar pelo id)
@@ -26,12 +46,6 @@ exports.save_user = function (user){
       console.log(users);
     });
 
- //
-    teste.dudify(function(err, ApiName) {
-            if(err) throw err;
-
-            console.log('O nome da API é' + ApiName);
-    });
 
 // guardar na DB
 
