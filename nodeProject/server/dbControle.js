@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/teste');
+mongoose.connect('mongodb://localhost:27017/____');
 
 var db = mongoose.connection;
 
@@ -8,17 +8,35 @@ db.once('open', function (callback) {
     console.log('Connection succeeded.');
 });
 
-var api = mongoose.Schema;
+var controlo = mongoose.Schema;
 
-var jsonSchema = new api({
-    json: {
-        type: mongoose.Schema.Types.Mixed,
+var controloSchema = new controlo({
+    
+    nome: {
+        type: Boolean,
+        required: true
+    },
+    tipo: {
+        type: String,
+        required: true
+    },
+    propriedade1: {
+        type: String,
+        required: true
+    },
+    propriedade2: {
+        type: String,
+        required: true
+    }, 
+    tempo_verificacao : {
+        type: String,
         required: true
     }
 }, {
         versionKey: false
     });
 
-var Jsonsc = mongoose.model('json', jsonSchema);
+var control = mongoose.model('nome', 'tipo', 'propriedade1', 
+                                             'propriedade2', 'tempo_verificacao', controloSchema);
 
-module.exports = Jsonsc;
+module.exports = control;
