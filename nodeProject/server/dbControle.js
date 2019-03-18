@@ -20,11 +20,11 @@ var controloSchema = new controlo({
         type: String,
         required: true
     },
-    propriedade1: {
+    class: {
         type: String,
         required: true
     },
-    propriedade2: {
+    propriedade: {
         type: String,
         required: true
     }, 
@@ -36,7 +36,6 @@ var controloSchema = new controlo({
         versionKey: false
     });
 
-var control = mongoose.model('nome', 'tipo', 'propriedade1', 
-                                             'propriedade2', 'tempo_verificacao', controloSchema);
+var control = mongoose.model('nome', 'tipo', 'class', 'propriedade', 'tempo_verificacao', controloSchema);
 
 module.exports = control;
