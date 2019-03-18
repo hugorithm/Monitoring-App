@@ -10,42 +10,10 @@ exports.create_user = function (new_json) {
 }
 
 //guardar user na DB
-
-exports.save_user = function (user){
-  user.save(function(err){
-    if (err) throw err;
-    console.log('Ping salvo com sucesso!');
-  });
-}
-//receber info da bd
-exports.getjson_teste = function(user){
-  Jsonsc.find({}, function(err, users){
-    if (err) throw err;
-    console.log(users);
-  });
-}
-
-//apagar dados da bd
-exports.delete_user = function (json) {
-  Jsonsc.remove({ "json.ping": 0 }, function (err) {
-      if (err) throw err;
-      console.log('User successfully deleted!');
-  });
-}
-
-/*
-exports.get_user = function (json){
-  jsonsc.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("mydb");
-    dbo.collection("customers").findOne({}, function(err, result) {
-      if (err) throw err;
-      console.log(result.name);
-      db.close();
 exports.save_user = function (user) {
     user.save(function (err) {
         if (err) throw err;
-        console.log('Guardado com sucesso!');
+        console.log('Ping salvo com sucesso!');
     });
 }
 
@@ -57,8 +25,13 @@ exports.getjson_teste = function (json) {
     });
 }
 
-
-
+//apagar dados da bd
+exports.delete_user = function (json) {
+    Jsonsc.remove({ "json.ping": 0 }, function (err) {
+        if (err) throw err;
+        console.log('User successfully deleted!');
+    });
+}
 
 /*
 JSONObject obj = new JSONObject(jstring);

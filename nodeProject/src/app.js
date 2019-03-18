@@ -9,7 +9,7 @@ app.use(express.static('public'))
 
 //routes
 app.get('/', (req, res) => {
-	res.render('index')
+    res.render('index')
 })
 
 //Listen on port 3000
@@ -21,7 +21,7 @@ const io = require("socket.io")(server)
 var cronJob = require('cron').CronJob;
 var target = "172.217.16.238";
 console.log('start cron');
-var Job = new cronJob('*/5 * * * * *', function(){
+var Job = new cronJob('*/5 * * * * *', function () {
     console.log('cron started');
 
     var http_request = require('./http_Request');
@@ -30,7 +30,7 @@ var Job = new cronJob('*/5 * * * * *', function(){
     var ping_request = require('./ping_request');
     ping_request.send_ping(target, io);
     console.log('cron job completed');
-}); 
+});
 Job.start();
 
 /*

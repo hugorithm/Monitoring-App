@@ -28,8 +28,6 @@ exports.send_ping = function (target, io) {
             var c = "";
             teste.getjson_teste(c);
             teste.delete_user(c);
-
-
         }
     });
 }
