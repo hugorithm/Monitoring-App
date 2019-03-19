@@ -1,5 +1,5 @@
 var ping = require("net-ping");
-const teste = require('./teste');
+const teste = require('./funcoes_logs');
 
 var exports = module.exports = {}
 

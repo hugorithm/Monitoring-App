@@ -13,7 +13,7 @@ var controlo = mongoose.Schema;
 var controloSchema = new controlo({
     
     nome: {
-        type: Boolean,
+        type: String,
         required: true
     },
     tipo: {
@@ -36,6 +36,6 @@ var controloSchema = new controlo({
         versionKey: false
     });
 
-var control = mongoose.model('nome', 'tipo', 'class', 'propriedade', 'tempo_verificacao', controloSchema);
+var control = mongoose.model('control', controloSchema);
 
 module.exports = control;
