@@ -13,7 +13,7 @@ var controlo = mongoose.Schema;
 var controloSchema = new controlo({
     
     nome: {
-        type: Boolean,
+        type: String,
         required: true
     },
     tipo: {
@@ -28,6 +28,7 @@ var controloSchema = new controlo({
         type: String,
         required: true
     }, 
+    //tempo entre verificações e disponibilidade
     tempo_verificacao : {
         type: String,
         required: true
