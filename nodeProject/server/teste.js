@@ -1,4 +1,4 @@
-var Jsonsc = require('./db.js');
+var Jsonsc = require('./mongo_logs.js');
 var exports = module.exports = {}
 
 // Criar user 
