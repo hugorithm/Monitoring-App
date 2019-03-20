@@ -20,6 +20,15 @@ server = app.listen(3000);
 
 //socket.io instantiation.
 const io = require("socket.io")(server);
+var a = "";
+console.log("deu crl")
+mainfunction = async => {
+    const sumthin = controlo.listar_servicos("");
+    a = sumthin;
+}
+console.log(a);
 
+/*
 var servicos_lista = controlo.listar_servicos();
 console.log(servicos_lista);
+*/

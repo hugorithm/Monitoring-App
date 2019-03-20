@@ -1,4 +1,4 @@
-var control= require('./mongo_controlo.js');
+var control = require('./mongo_controlo.js');
 var exports = module.exports = {}
 
 // Criar user 
@@ -13,12 +13,9 @@ exports.criar_servico = function (dados) {
 //receber todos os servicos
 //precisa de callback
 // https://stackoverflow.com/questions/40897225/mongoose-js-findone-returning-query-metadata
-exports.listar_servicos = function (json) {
-    var users = control.find({}, '-_id', function (err, users) {
-        if (err) throw err;
-        return users;
-    });
-    return users;
+// https://stackoverflow.com/questions/12030248/what-is-the-right-way-to-make-a-synchronous-mongodb-query-in-node-js
+exports.listar_servicos = async function (json) {
+    return control.find({}, '-_id').exec();
 }
 
 //apagar dados da bd
