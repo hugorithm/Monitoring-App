@@ -6,12 +6,7 @@ exports.create_user = function (new_json) {
     var teste = new Jsonsc({
         json: new_json
     });
-    return teste;
-}
-
-//guardar user na DB
-exports.save_user = function (user) {
-    user.save(function (err) {
+    teste.save(function (err) {
         if (err) throw err;
         console.log('Ping salvo com sucesso!');
     });

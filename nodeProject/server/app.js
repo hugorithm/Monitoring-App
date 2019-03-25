@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const servicos = require('./servicos');
+const mongoose = require('mongoose');
+//const servicos = require('./servicos');
 const logs = require('./funcoes_logs');
 const controlo = require('./funcoes_controlo');
 
@@ -20,15 +21,13 @@ server = app.listen(3000);
 
 //socket.io instantiation.
 const io = require("socket.io")(server);
-var a = "";
-console.log("deu crl")
-mainfunction = async => {
-    const sumthin = controlo.listar_servicos("");
-    a = sumthin;
-}
-console.log(a);
 
-/*
-var servicos_lista = controlo.listar_servicos();
-console.log(servicos_lista);
-*/
+var obj = new Object();
+obj.nome = "google";
+obj.ping = 5;
+logs.create_user(obj);
+var b;
+logs.listar_servicos(obj, function(data){
+    b = data
+    console.log(b);
+});

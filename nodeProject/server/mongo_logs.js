@@ -1,10 +1,5 @@
 var mongoose = require('mongoose');
-var db = mongoose.createConnection('mongodb://localhost:27017/logs');
-
-db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', function (callback) {
-    console.log('Connection succeeded.');
-});
+var db = mongoose.connect('mongodb://localhost:27017/logs');
 
 var api = mongoose.Schema;
 
@@ -17,6 +12,6 @@ var jsonSchema = new api({
         versionKey: false
     });
 
-var Jsonsc = mongoose.model('json', jsonSchema);
+var Jsonsc = mongoose.model('requests', jsonSchema);
 
 module.exports = Jsonsc;

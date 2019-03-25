@@ -6,7 +6,7 @@ exports.criar_servico = function (dados) {
     var servico = new control(dados);
     servico.save(function (err) {
         if (err) throw err;
-        console.log('Ping salvo com sucesso!');
+        console.log('Servico salvo com sucesso!');
     });
 }
 
@@ -14,14 +14,10 @@ exports.criar_servico = function (dados) {
 //precisa de callback
 // https://stackoverflow.com/questions/40897225/mongoose-js-findone-returning-query-metadata
 // https://stackoverflow.com/questions/12030248/what-is-the-right-way-to-make-a-synchronous-mongodb-query-in-node-js
-exports.listar_servicos = async function (json) {
-    return control.find({}, '-_id').exec();
-}
 
-//apagar dados da bd
-exports.delete_user = function (json) {
-    Jsonsc.remove({ "json.ping": 0 }, function (err) {
-        if (err) throw err;
-        console.log('User successfully deleted!');
+//mby fixed, just mby
+exports.listar_servicos = function (json, callback) {
+    control.find({}, '-_id', function(err, data){
+        callback(data);
     });
 }
