@@ -27,7 +27,7 @@ obj.nome = "google";
 obj.ping = 5;
 logs.create_user(obj);
 var b;
-logs.listar_servicos(obj, function(data){
+controlo.listar_servicos(obj, function(data){
     b = data
     console.log(b);
 });
