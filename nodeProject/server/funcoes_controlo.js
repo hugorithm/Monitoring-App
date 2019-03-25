@@ -19,5 +19,5 @@ exports.criar_servico = function (dados) {
 exports.listar_servicos = function (json, callback) {
     control.find({}, '-_id', function(err, data){
         callback(data);
-    });
+    }).lean().exec();
 }
