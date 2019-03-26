@@ -16,8 +16,8 @@ exports.verificar_disponibilidade = function(tipo, endereco, io, tempo){
     }
     else if (tipo == "website") {
         var job_website = new cronJob(tempo, function () {
-            //http_request.send_http_request();
-            ping_request.send_ping(endereco, io);
+            http_request.send_http_request();
+            //ping_request.send_ping(endereco, io);
         });
         job_website.start();
     }

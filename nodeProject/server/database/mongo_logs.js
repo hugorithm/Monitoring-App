@@ -15,3 +15,32 @@ var jsonSchema = new api({
 var Jsonsc = mongoose.model('requests', jsonSchema);
 
 module.exports = Jsonsc;
+
+/*
+-ping
+---nome
+---endereco
+---tipo_servico
+---pedido
+---
+---data_enviado
+---data_recebido
+---ping
+-http
+---nome
+---endereco
+---tipo_servico
+---pedido
+---
+---status_code
+---data_enviado (mby)
+---data_recebido (mby)
+-database
+---nome
+---endereco
+---tipo_servico
+---pedido
+---
+---status_code
+---
+*/
