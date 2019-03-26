@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-//const servicos = require('./servicos');
+const servicos = require('./servicos');
 const logs = require('./funcoes_logs');
 const controlo = require('./funcoes_controlo');
 
@@ -23,19 +23,8 @@ server = app.listen(3000);
 const io = require("socket.io")(server);
 
 /*
-var obj = new Object();
-obj.nome = "google";
-logs.create_user(obj);
-var b;
-controlo.listar_servicos(obj, function (data) {
-    b = data
-    console.log(b);
-});
-*/
-
-/*
 var servico = new Object();
-servico.nome = "google"
+servico.nome = "youtube"
 servico.tipo = "website"
 servico.class = "dunno"
 servico.propriedade = "wut"
@@ -49,11 +38,20 @@ function startup() {
     var obj = new Object();
     //ir buscar lista de serviços
     controlo.listar_servicos(obj, function (data) {
-        console.log(data);
-        var a = new Array();
-        a = data;
-        console.log(a.length())
-        
-    })
+        //inicializa um objeto com a lista
+        var a = new Object(data);
+        //itera sobre os elementos da lista
+        for (var i = 0; i< a.length; i++){
+            //definiçao de vars relativas aos dados de cada elemento
+            var nome = a[i].nome;
+            var tipo = a[i].tipo;
+            var classe = a[i].class;
+            var propriedade = a[i].propriedade;
+            var tempo = a[i].tempo_verificacao;
 
+            var trolha = nome + ".com";
+            //iniciacao de servicos de monitorizacao por cada elemento
+            servicos.verificar_disponibilidade(tipo, trolha, io, tempo);
+        }
+    })
 }
