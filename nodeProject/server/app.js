@@ -24,7 +24,7 @@ const io = require("socket.io")(server);
 
 /*
 var servico = new Object();
-servico.nome = "youtube"
+servico.nome = "facebook"
 servico.tipo = "website"
 servico.class = "dunno"
 servico.propriedade = "wut"
