@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+
 const servicos = require('./funcs/servicos');
 const logs = require('./database/funcoes_logs');
-const controlo = require('./funcoes_controlo');
+const controlo = require('./database/funcoes_controlo');
 
 //set the template engine ejs
 app.set('view engine', 'ejs');
@@ -24,11 +24,11 @@ const io = require("socket.io")(server);
 
 /*
 var servico = new Object();
-servico.nome = "facebook"
+servico.nome = "youtube"
 servico.tipo = "website"
 servico.class = "dunno"
 servico.propriedade = "wut"
-servico.tempo_verificacao = "10"
+servico.tempo_verificacao = "1"
 controlo.criar_servico(servico);
 */
 
@@ -50,8 +50,9 @@ function startup() {
             var tempo = a[i].tempo_verificacao;
 
             var trolha = nome + ".com";
+            var crontime = toCron(tempo);
             //iniciacao de servicos de monitorizacao por cada elemento
-            servicos.verificar_disponibilidade(tipo, trolha, io, tempo);
+            servicos.verificar_disponibilidade(tipo, trolha, io, crontime);
         }
     })
 }
