@@ -1,5 +1,5 @@
 var ping = require("net-ping");
-const teste = require('./funcoes_logs');
+const teste = require('../database/funcoes_logs');
 const dns = require('dns');
 
 var exports = module.exports = {}

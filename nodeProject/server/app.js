@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const servicos = require('./servicos');
-const logs = require('./funcoes_logs');
+const servicos = require('./funcs/servicos');
+const logs = require('./database/funcoes_logs');
 const controlo = require('./funcoes_controlo');
 
 //set the template engine ejs
@@ -54,4 +54,10 @@ function startup() {
             servicos.verificar_disponibilidade(tipo, trolha, io, tempo);
         }
     })
+}
+
+
+function toCron(time){
+    var crontime = '*/' + time + ' * * * * *'
+    return crontime;
 }

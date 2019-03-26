@@ -21,7 +21,7 @@ var controloSchema = new controlo({
         type: String,
         required: true
     }, 
-    //tempo entre verificações e disponibilidade
+    //tempo entre as verificaçoes efetuadas
     tempo_verificacao : {
         type: String,
         required: true
