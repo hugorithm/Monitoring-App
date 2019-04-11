@@ -1,54 +1,65 @@
 import React, { Component } from "react";
-import logo from "./logo.png";
 import searchIcon from "./search-icon.png";
 class menu extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showForm: false
+    };
+  }
+  showForm() {
+    this.setState({
+      showForm: !this.state.showForm
+    });
+  }
   render() {
-    console.log(this.props.links);
+    let searchForm = this.state.showForm ? (
+      <form className="menu__search-form" method="POST">
+        <input
+          className="menu__search-input"
+          placeholder="Type and hit enter"
+        />
+      </form>
+    ) : (
+      ""
+    );
+    let linksMarkup = this.props.links.map((link, index) => {
+      let linksMarkup = link.active ? (
+        <a className="menu__link--active" href={link.link}>
+          {link.label}
+        </a>
+      ) : (
+        <a className="menu__link" href={link.link}>
+          {link.label}
+        </a>
+      );
+
+      return (
+        <li key={index} className="menu__list-item">
+          {linksMarkup}
+        </li>
+      );
+    });
+
     return (
       <nav className="menu">
         <h1
           style={{
-            backgroundImage: "url(" + logo + ")"
+            backgroundImage: "url(" + this.props.logo + ")"
           }}
           className="menu__logo"
         />
         <div className="menu__right">
-          <ul className="menu__list">
-            <li className="menu__list-item">
-              <a className="menu__link menu__link--active" href="#">
-                Home
-              </a>
-            </li>
-            <li className="menu__list-item">
-              <a className="menu__link" href="#">
-                About
-              </a>
-            </li>
-            <li className="menu__list-item">
-              <a className="menu__link" href="#">
-                Portfolio
-              </a>
-            </li>
-            <li className="menu__list-item">
-              <a className="menu__link" href="#">
-                Contact
-              </a>
-            </li>
-          </ul>
+          <ul className="menu__list">{linksMarkup}</ul>
 
           <button
+            onClick={this.showForm.bind(this)}
             style={{
               backgroundImage: "url(" + searchIcon + ")"
             }}
             className="menu__search-button"
           />
-
-          <form className="menu__search-form hide" method="POST">
-            <input
-              className="menu__search-input"
-              placeholderN="Type and hit enter"
-            />
-          </form>
+          {searchForm}
         </div>
       </nav>
     );
