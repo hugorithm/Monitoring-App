@@ -11,7 +11,8 @@ exports.send_ping = function(target, io) {
       var ms = rcvd - sent;
       if (error) {
         ms = -1;
-        io.emit("ping_time", { username: target, pingtime: ms });
+        //io.emit("ping_time_base", { username: target, pingtime: ms });
+        io.emit("ping_time", { name: target, model: [{ data: sent, ping:ms}] });
       } else {
         io.emit("ping_time", { username: target, pingtime: ms });
         var obj = buildObj(target, ms, sent, rcvd);
