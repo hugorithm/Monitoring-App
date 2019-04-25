@@ -34,10 +34,32 @@ controlo.criar_servico(servico);
 
 startup();
 
+function buildDataReact(){
+    var obj = [];
+    controlo.listar_servicos(function (data){
+        for (var entry in data){
+            var servico = new Object;
+            var nome = entry.nome;
+            servico.key = nome;
+            var dados = [];
+            logs.pingsapi(nome, function (pings){
+                for (var ping in pings){
+                    var entrada = new Object;
+                    entrada.data = ping.data;
+                    entrada.ping = ping.ping;
+                    dados.push(entrada);
+                }
+            })
+            obj.push(servico);
+        }
+    })
+    console.log(obj);
+}
+
 function startup() {
-    var obj = new Object();
+    //buildDataReact();
     //ir buscar lista de serviços
-    controlo.listar_servicos(obj, function (data) {
+    controlo.listar_servicos(function (data) {
         //inicializa um objeto com a lista
         var a = new Object(data);
         //itera sobre os elementos da lista
