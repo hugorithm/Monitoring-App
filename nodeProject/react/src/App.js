@@ -4,7 +4,7 @@ import logo from "./logo.png";
 class App extends Component {
   render() {
     let links = [
-      { label: "Home", link: "#home", active: true },
+      { label: "Home", link: "#home" },
       { label: "about", link: "#about" },
       { label: "Portfolio", link: "#portfolio" },
       { label: "Contact Us", link: "#contact-us" }
