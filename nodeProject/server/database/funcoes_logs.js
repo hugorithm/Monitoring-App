@@ -28,12 +28,9 @@ exports.delete_user = function (json) {
     });
 }
 
-//ultimos 50 pings de uma api
-exports.pingsapi = function (nome, callback) {
-    Jsonsc.find({ "json.api_name": nome }, '-_id', function (err, users) {
-        if (err) throw err;
-        callback(users);
-    });
+//pings de uma api
+exports.pingsapi = function (nome) {
+    return Jsonsc.find({"json.nome":nome}, '-_id').exec();
 }
 
 /*
