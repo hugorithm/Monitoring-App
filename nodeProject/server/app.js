@@ -22,22 +22,24 @@ server = app.listen(3000);
 //socket.io instantiation.
 const io = require("socket.io")(server);
 
-//inicializarbd();
 startup();
 
-//ver como funciona o var entry
+function startup() {
+    iniciarMonitor();
+    buildDataReact();
+}
 
-async function buildDataReact() {
+async function emitirDados() {
     var obj = [];
-   await controlo.listar_servicos().then( async function (data) {
+    await controlo.listar_servicos().then(async function (data) {
         for (var entry of data) {
             var servico = new Object;
             var nome = entry.nome;
             servico.key = nome;
             var dados = [];
-            
-        await logs.pingsapi(nome+".com").then(function (pings) {
-                for(var i = 0; i<pings.length; i++) {
+
+            await logs.pingsapi(nome + ".com").then(function (pings) {
+                for (var i = 0; i < pings.length; i++) {
                     var entrada = new Object;
                     entrada.data = pings[i].json.data_recebido;
                     entrada.ping = pings[i].json.ping;
@@ -50,13 +52,9 @@ async function buildDataReact() {
             })
         }
     })
-    console.log(obj);
 }
 
-
-function startup() {
-    buildDataReact();
-    //ir buscar lista de serviços
+function iniciarMonitor() {
     controlo.listar_servicos(function (data) {
         //inicializa um objeto com a lista
         var a = new Object(data);
@@ -74,7 +72,7 @@ function startup() {
             //iniciacao de servicos de monitorizacao por cada elemento
             servicos.verificar_disponibilidade(tipo, trolha, io, crontime);
         }
-    })
+    });
 }
 
 function toCron(time) {
@@ -82,7 +80,7 @@ function toCron(time) {
     return crontime;
 }
 
-function inicializarbd() {
+function construirBd() {
     var servico = new Object();
     servico.nome = "youtube"
     servico.tipo = "website"

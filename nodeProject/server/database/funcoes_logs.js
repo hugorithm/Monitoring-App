@@ -30,7 +30,7 @@ exports.delete_user = function (json) {
 
 //pings de uma api
 exports.pingsapi = function (nome) {
-    return Jsonsc.find({"json.nome":nome}, '-_id').exec();
+    return Jsonsc.find({ "json.nome": nome }, '-_id').exec();
 }
 
 /*
