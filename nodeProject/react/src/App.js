@@ -31,61 +31,63 @@ class App extends Component {
       this.state[api_name] = data.model;
     });
 
-  
+
 
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getData();
-}
+  }
 
-  getData(){
+  getData() {
     //socket.io buscar os dados.
-    this.setState({data : [{
-      key: "google",
-      values: [{
-        "data":  1,
-        "valor":  5
-      },{
-        "data": 2,
-        "valor": 6
-      }],
+    this.setState({
+      data: [{
+        key: "google",
+        values: [{
+          "data": 1,
+          "valor": 5
+        }, {
+          "data": 2,
+          "valor": 6
+        }],
       },
       {
-      key:"youtube",
-      values: [{
-        "data": 1,
-        "valor": 2
-      },{
-        "data":  2,
-        "valor":  5
-      },{
-        "data":  3,
-        "valor":  6
-      },{
-        "data":  4,
-        "valor":  2
-      },{
-        "data":  5,
-        "valor":  0
+        key: "youtube",
+        values: [{
+          "data": 1,
+          "valor": 2
+        }, {
+          "data": 2,
+          "valor": 5
+        }, {
+          "data": 3,
+          "valor": 6
+        }, {
+          "data": 4,
+          "valor": 2
+        }, {
+          "data": 5,
+          "valor": 0
+        }]
       }]
-    }]}); 
-   
-        // var _apiName = [];
-        // for(var entry in data){
-        //   if (data.hasOwnProperty(entry)) {   
-        //     _apiName.push(data[entry].values);
-        //   }               
-        // }
-        // console.log("Nomes: "+_apiName)
-    
-  //       // for(var entry in _apiName){
-            
-            
-  //       // }
-    
+    });
+
+    // var _apiName = [];
+    // for(var entry in data){
+    //   if (data.hasOwnProperty(entry)) {   
+    //     _apiName.push(data[entry].values);
+    //   }               
+    // }
+    // console.log("Nomes: "+_apiName)
+
+    //       // for(var entry in _apiName){
+
+
+    //       // }
+
   }
-  
+
   render() {
     let links = [
       { label: "Home", link: "#home" },
@@ -100,10 +102,11 @@ class App extends Component {
     console.log(this.state["pings"]);
     var i = 0;
     var context = {
-      
+
     }
-    
+
     return (
+      <div>
       <div className="container center">
         <Menu links={links} />
 
@@ -114,35 +117,39 @@ class App extends Component {
           <Dados pings={this.state} />
         } */}
         {/* <Chart chartData={this.state.chartData}/> */}
-          <div>
-              {this.state.data.map(m => {
-                var ret = [m];
-                i++;
-                return (
-            <NVD3Chart key={i} type="lineChart" datum={ret} x="data" y="valor"
-                        useInteractiveGuideline={true}                      
-                        containerStyle={{ height: "500px" }}/>  
-              )})}
-          </div>
-      </div>
-      
+        </div>
+        <div>
+          {this.state.data.map(m => {
+            var ret = [m];
+            i++;
+            return (
+              <div>
+                <h3>{m.key}</h3>
+                <NVD3Chart key={i} type="lineChart" datum={ret} x="data" y="valor"
+                  useInteractiveGuideline={true}
+                  //containerStyle={{ height: "500px" }} 
+                  />
+              </div>
+            )
+          })}
+        </div>
+</div>
     );
   }
 }
 export default App;
 
 class Dados extends Component {
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
     this.state = props;
     console.log("pings : " + this.state.pings);
   }
   render() {
     var b = this.state.pings;
-   var a =  Object.keys(this.state.pings).map(function(name){
+    var a = Object.keys(this.state.pings).map(function (name) {
       return <h1>Nome:{name}, Data: {b[name].data}, Ping: {b[name].ping}</h1>
     });
     return a;
-}
+  }
 }
