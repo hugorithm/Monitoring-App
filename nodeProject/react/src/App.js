@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 import Menu from "./menu";
 import { connect, ping_time } from "./socket";
+import NVD3Chart from 'react-nvd3';
+import d3 from 'd3';
+
 
 class App extends Component {
 
-  constructor() {
+
+  constructor(props) {
     // this.state = {
     //   pings : [],
     //   pings2 : []
     // }
-    super();
+    super(props);
 
-    this.state = {google:{data:2019, ping:30}};
+    this.state = {
+      data: []
+    }
 
     // {google:[{data:2019, ping:30}, {data:2019, ping:25}]};
 
@@ -25,9 +31,61 @@ class App extends Component {
       this.state[api_name] = data.model;
     });
 
+  
+
   }
 
+  componentDidMount(){
+    this.getData();
+}
 
+  getData(){
+    //socket.io buscar os dados.
+    this.setState({data : [{
+      key: "google",
+      values: [{
+        "data":  1,
+        "valor":  5
+      },{
+        "data": 2,
+        "valor": 6
+      }],
+      },
+      {
+      key:"youtube",
+      values: [{
+        "data": 1,
+        "valor": 2
+      },{
+        "data":  2,
+        "valor":  5
+      },{
+        "data":  3,
+        "valor":  6
+      },{
+        "data":  4,
+        "valor":  2
+      },{
+        "data":  5,
+        "valor":  0
+      }]
+    }]}); 
+   
+        // var _apiName = [];
+        // for(var entry in data){
+        //   if (data.hasOwnProperty(entry)) {   
+        //     _apiName.push(data[entry].values);
+        //   }               
+        // }
+        // console.log("Nomes: "+_apiName)
+    
+  //       // for(var entry in _apiName){
+            
+            
+  //       // }
+    
+  }
+  
   render() {
     let links = [
       { label: "Home", link: "#home" },
@@ -40,17 +98,34 @@ class App extends Component {
     console.log("keys : " + Object.keys(this.state));
     console.log("json : " + a);
     console.log(this.state["pings"]);
+    var i = 0;
+    var context = {
+      
+    }
+    
     return (
       <div className="container center">
         <Menu links={links} />
 
-        {this.state === {} &&
+        {/* {this.state === {} &&
           <h1>empty</h1>
         }
         {this.state !== {} &&
           <Dados pings={this.state} />
-        }
+        } */}
+        {/* <Chart chartData={this.state.chartData}/> */}
+          <div>
+              {this.state.data.map(m => {
+                var ret = [m];
+                i++;
+                return (
+            <NVD3Chart key={i} type="lineChart" datum={ret} x="data" y="valor"
+                        useInteractiveGuideline={true}                      
+                        containerStyle={{ height: "500px" }}/>  
+              )})}
+          </div>
       </div>
+      
     );
   }
 }
