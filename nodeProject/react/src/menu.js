@@ -10,9 +10,9 @@ class menu extends Component {
           style={{
             backgroundImage: "url(" + logo + ")"
           }}
-          className="menu__logo"
+          className="menu__logo" href="#home" 
         />
-        <div className="menu__right">
+        <div className="menu__left">
           <ul className="menu__list">
             <li className="menu__list-item">
               <a className="menu__link menu__link--active" href="#">
@@ -20,28 +20,13 @@ class menu extends Component {
               </a>
             </li>
             <li className="menu__list-item">
-              <a className="menu__link" href="#">
-                About
+              <a className="menu__link" href="#config">
+                Configuração
               </a>
-            </li>
-            <li className="menu__list-item">
-              <a className="menu__link" href="#">
-                Portfolio
-              </a>
-            </li>
-            <li className="menu__list-item">
-              <a className="menu__link" href="#">
-                Contact
-              </a>
-            </li>
+            </li>            
           </ul>
 
-          <button
-            style={{
-              backgroundImage: "url(" + searchIcon + ")"
-            }}
-            className="menu__search-button"
-          />
+         
 
           <form className="menu__search-form hide" method="POST">
             <input

@@ -91,7 +91,7 @@ class App extends Component {
   render() {
     let links = [
       { label: "Home", link: "#home" },
-      { label: "about", link: "#about" },
+      { label: "Configuração", link: "#config" },
       { label: "Portfolio", link: "#portfolio" },
       { label: "Contact Us", link: "#contact-us" }
     ];
@@ -118,20 +118,25 @@ class App extends Component {
         } */}
         {/* <Chart chartData={this.state.chartData}/> */}
         </div>
-        <div>
+        <div className="container">
+        <div className="row panel-group">
+        
           {this.state.data.map(m => {
             var ret = [m];
             i++;
             return (
-              <div>
-                <h3>{m.key}</h3>
+              <div className = "col-sm-6 col-md-4 col-lg-3 col-xs-12 panel panel-default">
+                <div className="panel-heading">{m.key}</div>
+                <div className="panel-body">
                 <NVD3Chart key={i} type="lineChart" datum={ret} x="data" y="valor"
                   useInteractiveGuideline={true}
                   //containerStyle={{ height: "500px" }} 
                   />
               </div>
+              </div>
             )
           })}
+        </div>
         </div>
 </div>
     );
