@@ -21,7 +21,7 @@ exports.send_ping = async function (target, io, callback) {
 			io.emit("ping_time", { name: target, model: [{ data: sent, ping: ms }] });
 		} else {
 			io.emit("ping_time", { username: target, pingtime: ms });
-			var obj = buildObj(target, ms, sent, rcvd);
+			var obj = buildObj(target, ms, sent.getTime(), rcvd.getTime());
 			//logs.create_user(obj);
 		}
 		callback();

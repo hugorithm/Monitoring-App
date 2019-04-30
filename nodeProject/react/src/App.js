@@ -26,10 +26,9 @@ class App extends Component {
 
   getData() {
     socket.on("update_data", data => {
-      console.log("testes");
-      this.setState(data);
-      console.log(JSON.stringify(this.state));
-      this.forceUpdate();
+      var ret = {data:data}
+      this.setState(ret);
+      console.log(JSON.stringify(ret));
     });
     //Maybe adicionar update requeste para 1 client
       socket.emit("request_data_from_server");
@@ -64,7 +63,7 @@ class App extends Component {
             var ret = [m];
             i++;
             return (
-              <div className = "col-sm-6 col-md-3 col-lg-4 col-xs-12" >
+              <div className = "col-sm-6 col-md-3 col-lg-4 col-xs-12" key={i}>
               <div className = "card">
                 <div className="card-header">{m.key}</div>
                 <div className="card-body">

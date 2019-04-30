@@ -29,7 +29,7 @@ exports.delete_user = function (json) {
 }
 
 //pings de uma api
-exports.pingsapi = function (nome) {
+exports.pingsapi = async function (nome) {
     return Jsonsc.find({ "json.nome": nome }, '-_id').exec();
 }
 

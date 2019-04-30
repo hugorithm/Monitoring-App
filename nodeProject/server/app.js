@@ -106,14 +106,14 @@ async function emitirDados() {
             var dados = [];
 
             await logs.pingsapi(nome + ".com").then(function (pings) {
-                for (var i = 0; i < pings.length && i<5; i++) {
+                for (var i = 0; i < pings.length && i<20; i++) {
                     var entrada = new Object;
                     entrada.data = pings[i].json.data_recebido;
                     entrada.ping = pings[i].json.ping;
                     dados.push(entrada);
                     servico.data = dados;
                 }
-                servico.data = dados;
+                servico.values = dados;
                 obj.push(servico);
             })
         }
