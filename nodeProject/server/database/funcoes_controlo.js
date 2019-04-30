@@ -11,7 +11,7 @@ exports.criar_servico = function (dados) {
 }
 
 //mby fixed, just mby
-exports.listar_servicos = function () {
+exports.listar_servicos = async function () {
     return control.find({}, '-_id'
     ).lean().exec();
 }

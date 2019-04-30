@@ -22,40 +22,20 @@ server = app.listen(3000);
 //socket.io instantiation.
 const io = require("socket.io")(server);
 
+io.on("request_data_from_server", () => {
+    var dados = emitirDados();
+    io.emit("update_data", dados);
+});
+
 startup();
 
 function startup() {
     iniciarMonitor();
-    buildDataReact();
-}
-
-async function emitirDados() {
-    var obj = [];
-    await controlo.listar_servicos().then(async function (data) {
-        for (var entry of data) {
-            var servico = new Object;
-            var nome = entry.nome;
-            servico.key = nome;
-            var dados = [];
-
-            await logs.pingsapi(nome + ".com").then(function (pings) {
-                for (var i = 0; i < pings.length; i++) {
-                    var entrada = new Object;
-                    entrada.data = pings[i].json.data_recebido;
-                    entrada.ping = pings[i].json.ping;
-                    dados.push(entrada);
-                    servico.data = dados;
-                    console.log(servico);
-                }
-                servico.data = dados;
-                obj.push(servico);
-            })
-        }
-    })
+    //buildDataReact();
 }
 
 function iniciarMonitor() {
-    controlo.listar_servicos(function (data) {
+    controlo.listar_servicos().then(function (data){
         //inicializa um objeto com a lista
         var a = new Object(data);
         //itera sobre os elementos da lista
@@ -68,9 +48,11 @@ function iniciarMonitor() {
             var tempo = a[i].tempo_verificacao;
 
             var trolha = nome + ".com";
+
             var crontime = toCron(tempo);
             //iniciacao de servicos de monitorizacao por cada elemento
-            servicos.verificar_disponibilidade(tipo, trolha, io, crontime);
+            servicos.verificar_disponibilidade(tipo, trolha, io, crontime, controlo, logs);
+            
         }
     });
 }
@@ -104,4 +86,29 @@ function construirBd() {
     servico3.propriedade = "wut"
     servico3.tempo_verificacao = "5"
     controlo.criar_servico(servico3);
+}
+
+async function emitirDados() {
+    var obj = [];
+    await controlo.listar_servicos().then(async function (data) {
+        for (var entry of data) {
+            var servico = new Object;
+            var nome = entry.nome;
+            servico.key = nome;
+            var dados = [];
+
+            await logs.pingsapi(nome + ".com").then(function (pings) {
+                for (var i = 0; i < pings.length && i<5; i++) {
+                    var entrada = new Object;
+                    entrada.data = pings[i].json.data_recebido;
+                    entrada.ping = pings[i].json.ping;
+                    dados.push(entrada);
+                    servico.data = dados;
+                }
+                servico.data = dados;
+                obj.push(servico);
+            })
+        }
+    })
+    return obj;
 }
