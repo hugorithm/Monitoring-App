@@ -22,6 +22,14 @@ server = app.listen(3000);
 //socket.io instantiation.
 const io = require("socket.io")(server);
 
+io.on("connect", (client) =>{
+    console.log("client connected");
+    client.on("request_data_from_server", async function(){
+        var dados = await emitirDados();
+        console.log(dados);
+        client.emit("update_data", dados);
+    })
+})
 io.on("request_data_from_server", () => {
     var dados = emitirDados();
     io.emit("update_data", dados);

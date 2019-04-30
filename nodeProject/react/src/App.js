@@ -18,157 +18,21 @@ class App extends Component {
     this.state = {
       data: []
     }
-
-    // {google:[{data:2019, ping:30}, {data:2019, ping:25}]};
-
-    //   this.setState({ 
-    //     pings: [] });
-    //   connect(message => {
-    //     //dunno
-    //   })
-    ping_time(data => {
-      var api_name = data.name;
-      this.state[api_name] = data.model;
-    });
-
-
-
   }
 
   componentDidMount() {
-    // this.getData();
-    socket.on("update_data", data => {
-      this.setState(data);
-    });
-    //Maybe adicionar update requeste para 1 client
-    socket.emit("request_data_from_server");
+    this.getData();
   }
 
   getData() {
-    //socket.io buscar os dados.
-    this.setState({
-      data: [{
-        key: "google",
-        values: [{
-          "data": 1,
-          "valor": 5
-        }, {
-          "data": 2,
-          "valor": 6
-        }],
-      },
-      {
-        key: "youtube",
-        values: [{
-          "data": 1,
-          "valor": 2
-        }, {
-          "data": 2,
-          "valor": 5
-        }, {
-          "data": 3,
-          "valor": 6
-        }, {
-          "data": 4,
-          "valor": 2
-        }, {
-          "data": 5,
-          "valor": 0
-        }, {
-          "data": 6,
-          "valor": 10
-        }, {
-          "data": 7,
-          "valor": 16
-        }]
-      }, {
-        key: "youtube",
-        values: [{
-          "data": 1,
-          "valor": 2
-        }, {
-          "data": 2,
-          "valor": 5
-        }, {
-          "data": 3,
-          "valor": 6
-        }, {
-          "data": 4,
-          "valor": 2
-        }, {
-          "data": 5,
-          "valor": 0
-        }, {
-          "data": 6,
-          "valor": 10
-        }, {
-          "data": 7,
-          "valor": 16
-        }]
-      }, {
-        key: "youtube",
-        values: [{
-          "data": 1,
-          "valor": 2
-        }, {
-          "data": 2,
-          "valor": 5
-        }, {
-          "data": 3,
-          "valor": 6
-        }, {
-          "data": 4,
-          "valor": 2
-        }, {
-          "data": 5,
-          "valor": 0
-        }, {
-          "data": 6,
-          "valor": 10
-        }, {
-          "data": 7,
-          "valor": 16
-        }]
-      }, {
-        key: "youtube",
-        values: [{
-          "data": 1,
-          "valor": 2
-        }, {
-          "data": 2,
-          "valor": 5
-        }, {
-          "data": 3,
-          "valor": 6
-        }, {
-          "data": 4,
-          "valor": 2
-        }, {
-          "data": 5,
-          "valor": 0
-        }, {
-          "data": 6,
-          "valor": 6
-        }, {
-          "data": 7,
-          "valor": 16
-        }]
-      }]
+    socket.on("update_data", data => {
+      console.log("testes");
+      this.setState(data);
+      console.log(JSON.stringify(this.state));
+      this.forceUpdate();
     });
-
-    // var _apiName = [];
-    // for(var entry in data){
-    //   if (data.hasOwnProperty(entry)) {   
-    //     _apiName.push(data[entry].values);
-    //   }               
-    // }
-    // console.log("Nomes: "+_apiName)
-
-    //       // for(var entry in _apiName){
-
-
-    //       // }
-
+    //Maybe adicionar update requeste para 1 client
+      socket.emit("request_data_from_server");
   }
 
   render() {
@@ -204,7 +68,7 @@ class App extends Component {
               <div className = "card">
                 <div className="card-header">{m.key}</div>
                 <div className="card-body">
-                <NVD3Chart key={i} type="lineChart" datum={ret} x="data" y="valor"
+                <NVD3Chart key={i} type="lineChart" datum={ret} x="data" y="ping"
                   useInteractiveGuideline={true}
                   // containerStyle={{ width: "150px" }} 
                   />
