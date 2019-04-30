@@ -28,6 +28,11 @@ exports.delete_user = function (json) {
     });
 }
 
+//pings de uma api
+exports.pingsapi = function (nome) {
+    return Jsonsc.find({ "json.nome": nome }, '-_id').exec();
+}
+
 /*
 JSONObject obj = new JSONObject(jstring);
 obj.getJSONArray("fileName");

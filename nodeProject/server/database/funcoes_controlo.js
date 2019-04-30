@@ -10,14 +10,8 @@ exports.criar_servico = function (dados) {
     });
 }
 
-//receber todos os servicos
-//precisa de callback
-// https://stackoverflow.com/questions/40897225/mongoose-js-findone-returning-query-metadata
-// https://stackoverflow.com/questions/12030248/what-is-the-right-way-to-make-a-synchronous-mongodb-query-in-node-js
-
 //mby fixed, just mby
-exports.listar_servicos = function (json, callback) {
-    control.find({}, '-_id', function(err, data){
-        callback(data);
-    }).lean().exec();
+exports.listar_servicos = async function () {
+    return control.find({}, '-_id'
+    ).lean().exec();
 }
