@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import Menu from "./menu";
 import { connect, ping_time } from "./socket";
 import NVD3Chart from 'react-nvd3';
 import d3 from 'd3';
 
+import openSocket from "socket.io-client";
+const socket = openSocket("http://localhost:3000");
 
 class App extends Component {
 
@@ -14,7 +15,6 @@ class App extends Component {
     //   pings2 : []
     // }
     super(props);
-
     this.state = {
       data: []
     }
@@ -36,7 +36,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getData();
+    // this.getData();
+    socket.on("update_data", data => {
+      this.setState(data);
+    });
+    //Maybe adicionar update requeste para 1 client
+    socket.emit("request_data_from_server");
   }
 
   getData() {
@@ -69,6 +74,84 @@ class App extends Component {
         }, {
           "data": 5,
           "valor": 0
+        }, {
+          "data": 6,
+          "valor": 10
+        }, {
+          "data": 7,
+          "valor": 16
+        }]
+      }, {
+        key: "youtube",
+        values: [{
+          "data": 1,
+          "valor": 2
+        }, {
+          "data": 2,
+          "valor": 5
+        }, {
+          "data": 3,
+          "valor": 6
+        }, {
+          "data": 4,
+          "valor": 2
+        }, {
+          "data": 5,
+          "valor": 0
+        }, {
+          "data": 6,
+          "valor": 10
+        }, {
+          "data": 7,
+          "valor": 16
+        }]
+      }, {
+        key: "youtube",
+        values: [{
+          "data": 1,
+          "valor": 2
+        }, {
+          "data": 2,
+          "valor": 5
+        }, {
+          "data": 3,
+          "valor": 6
+        }, {
+          "data": 4,
+          "valor": 2
+        }, {
+          "data": 5,
+          "valor": 0
+        }, {
+          "data": 6,
+          "valor": 10
+        }, {
+          "data": 7,
+          "valor": 16
+        }]
+      }, {
+        key: "youtube",
+        values: [{
+          "data": 1,
+          "valor": 2
+        }, {
+          "data": 2,
+          "valor": 5
+        }, {
+          "data": 3,
+          "valor": 6
+        }, {
+          "data": 4,
+          "valor": 2
+        }, {
+          "data": 5,
+          "valor": 0
+        }, {
+          "data": 6,
+          "valor": 6
+        }, {
+          "data": 7,
+          "valor": 16
         }]
       }]
     });
@@ -89,49 +172,43 @@ class App extends Component {
   }
 
   render() {
-    let links = [
-      { label: "Home", link: "#home" },
-      { label: "Configuração", link: "#config" },
-      { label: "Portfolio", link: "#portfolio" },
-      { label: "Contact Us", link: "#contact-us" }
-    ];
-    console.log("this.state estado : " + this.state);
-    var a = JSON.stringify(this.state);
-    console.log("keys : " + Object.keys(this.state));
-    console.log("json : " + a);
-    console.log(this.state["pings"]);
-    var i = 0;
-    var context = {
+    
+    console.log("estado atual : " + this.state);
 
-    }
+    var i = 0;
 
     return (
       <div>
-      <div className="container center">
-        <Menu links={links} />
-
-        {/* {this.state === {} &&
-          <h1>empty</h1>
-        }
-        {this.state !== {} &&
-          <Dados pings={this.state} />
-        } */}
-        {/* <Chart chartData={this.state.chartData}/> */}
-        </div>
+        <nav className="navbar navbar-expand-sm bg-light navbar-light">
+        <ul className="navbar-nav">
+          <li className="nav-item active">
+            <a className="nav-link" href="#">ApiMonitor</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#">Home</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#config">Config</a>
+          </li>
+        </ul>
+      </nav>
+        <br/>
         <div className="container">
-        <div className="row panel-group">
+        <div className="row">
         
           {this.state.data.map(m => {
             var ret = [m];
             i++;
             return (
-              <div className = "col-sm-6 col-md-4 col-lg-3 col-xs-12 panel panel-default">
-                <div className="panel-heading">{m.key}</div>
-                <div className="panel-body">
+              <div className = "col-sm-6 col-md-3 col-lg-4 col-xs-12" >
+              <div className = "card">
+                <div className="card-header">{m.key}</div>
+                <div className="card-body">
                 <NVD3Chart key={i} type="lineChart" datum={ret} x="data" y="valor"
                   useInteractiveGuideline={true}
-                  //containerStyle={{ height: "500px" }} 
+                  // containerStyle={{ width: "150px" }} 
                   />
+              </div>
               </div>
               </div>
             )

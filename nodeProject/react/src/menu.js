@@ -5,37 +5,20 @@ class menu extends Component {
   render() {
     console.log(this.props.links);
     return (
-      <nav className="menu">
-        <h1
-          style={{
-            backgroundImage: "url(" + logo + ")"
-          }}
-          className="menu__logo" href="#home" 
-        />
-        <div className="menu__left">
-          <ul className="menu__list">
-            <li className="menu__list-item">
-              <a className="menu__link menu__link--active" href="#">
-                Home
-              </a>
-            </li>
-            <li className="menu__list-item">
-              <a className="menu__link" href="#config">
-                Configuração
-              </a>
-            </li>            
-          </ul>
-
-         
-
-          <form className="menu__search-form hide" method="POST">
-            <input
-              className="menu__search-input"
-              placeholderN="Type and hit enter"
-            />
-          </form>
-        </div>
-      </nav>
+      <nav className="navbar navbar-default">
+  <div className="container-fluid">
+    <div className="navbar-header">
+      <a className="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul className="nav navbar-nav">
+      <li className="active"><a href="#">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+      <li><a href="#">Page 2</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
+  </div>
+</nav>
+  
     );
   }
 }
