@@ -29,8 +29,10 @@ exports.delete_user = function (json) {
 }
 
 //pings de uma api
-exports.pingsapi = async function (nome) {
-    return Jsonsc.find({ "json.nome": nome }, '-_id').sort({"json.data_enviado": 'descending'}).exec();
+exports.pingsapi = async function (nome, tempo) {
+    return Jsonsc.find({ "json.nome": nome, "json.data_enviado" : {
+        $gte : new Date().getTime()-(tempo * 1000)
+    } }, '-_id').sort({"json.data_enviado": 'descending'}).exec();
 }
 
 /*

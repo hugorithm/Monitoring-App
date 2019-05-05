@@ -27,8 +27,9 @@ exports.emitirDados = async function emitirDados(controlo, logs) {
             servico.key = nome;
             var dados = [];
 
-            await logs.pingsapi(nome).then(function (pings) {
-                for (var i = 0; i < pings.length && i<20; i++) {
+            var tempo = 3*60
+            await logs.pingsapi(nome, tempo).then(function (pings) {
+                for (var i = 0; i < pings.length; i++) {
                     var entrada = new Object;
                     entrada.Data = pings[i].json.data_recebido;
                     entrada.Latencia = pings[i].json.latencia;
