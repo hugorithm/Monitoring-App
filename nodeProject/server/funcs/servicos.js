@@ -1,30 +1,24 @@
 var http_request = require("./http_Request");
-var ping_request = require("./ping_request");
+var ping_request = require("./ping_Request");
 
 var cronJob = require("cron").CronJob;
 
 var exports = (module.exports = {});
 
-exports.verificar_disponibilidade = function (tipo, endereco, io, tempo, controlo, logs) {
+exports.verificar_disponibilidade = function (tipo, nome, endereco, io, tempo, controlo, logs) {
 	if (tipo == "api" || tipo =="website") {
 		var job_api = new cronJob(tempo, function () {
 			//http_request.send_http_request();
-			ping_request.send_ping(endereco, io, function(){
-                emitirDados(controlo, logs);
+			ping_request.send_ping_request(nome, endereco, io, logs, async function(){
+                var dados = await exports.emitirDados(controlo, logs);
+                io.emit("update_data", dados);
             });
 		});
 		job_api.start();
-	} else if (tipo == "maquina") {
-		var job_maquina = new cronJob(tempo, function () {
-			ping_request.send_ping(endereco, io, function(){
-                emitirDados(controlo, logs);
-            });
-		});
-		job_maquina.start();
 	}
 };
 
-async function emitirDados(controlo, logs) {
+exports.emitirDados = async function emitirDados(controlo, logs) {
     var obj = [];
     await controlo.listar_servicos().then(async function (data) {
         for (var entry of data) {
@@ -33,18 +27,19 @@ async function emitirDados(controlo, logs) {
             servico.key = nome;
             var dados = [];
 
-            await logs.pingsapi(nome + ".com").then(function (pings) {
-                for (var i = 0; i < pings.length && i<5; i++) {
+            await logs.pingsapi(nome).then(function (pings) {
+                for (var i = 0; i < pings.length && i<20; i++) {
                     var entrada = new Object;
-                    entrada.data = pings[i].json.data_recebido;
-                    entrada.ping = pings[i].json.ping;
+                    entrada.Data = pings[i].json.data_recebido;
+                    entrada.Latencia = pings[i].json.latencia;
                     dados.push(entrada);
                     servico.data = dados;
                 }
-                servico.data = dados;
+                servico.values = dados;
                 obj.push(servico);
-            });
+            })
         }
-    });
+    })
     return obj;
 }
+

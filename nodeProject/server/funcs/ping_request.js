@@ -1,7 +1,7 @@
 var ping = require("net-ping");
-const logs = require("../database/funcoes_logs");
 const dns = require("dns");
-var session = ping.createSession();
+
+
 
 var exports = (module.exports = {});
 
@@ -9,30 +9,38 @@ var exports = (module.exports = {});
 const util = require('util');
 const dnslookup = util.promisify(dns.lookup);
 
-exports.send_ping = async function (target, io, callback) {
-	var address = await dnslookup(target);
+exports.send_ping_request = async function (nome, endereco, io, logs, callback) {
+
+	var session = ping.createSession();
+
+	session.on("error", function (error) {
+		console.log(error.toString());
+		session.close();
+		session = ping.createSession();
+	});
+
+	var address = await dnslookup(endereco);
 
 	var data = await session.pingHost(address.address, async function (error, address, sent, rcvd) {
 		var ms = rcvd - sent;
-		var a;
 		if (error) {
 			ms = -1;
-			//io.emit("ping_time_base", { username: target, pingtime: ms });
-			io.emit("ping_time", { name: target, model: [{ data: sent, ping: ms }] });
+			//decidir o que fazer quando der erro
 		} else {
-			io.emit("ping_time", { username: target, pingtime: ms });
-			var obj = buildObj(target, ms, sent.getTime(), rcvd.getTime());
-			//logs.create_user(obj);
+			var obj = buildObj(nome, endereco, sent.getTime(), rcvd.getTime(), ms);
+			logs.create_user(obj);
 		}
 		callback();
 	})
 };
 
-function buildObj(nome, ping, data_enviado, data_recebido) {
+function buildObj(nome, endereco, data_enviado, data_recebido, ping) {
 	var obj = new Object();
 	obj.nome = nome;
-	obj.ping = ping;
+	obj.endereco = endereco;
+	obj.tipo = "Ping";
 	obj.data_enviado = data_enviado;
 	obj.data_recebido = data_recebido;
+	obj.latencia = ping;
 	return obj;
 }

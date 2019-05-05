@@ -25,18 +25,16 @@ class App extends Component {
   }
 
   getData() {
-    socket.on("update_data", data => {
-      var ret = {data:data}
+    socket.on("update_data", async data => {
+      var ret = await {data:data}
       this.setState(ret);
-      console.log(JSON.stringify(ret));
+      console.log(JSON.stringify(this.state.data));
     });
     //Maybe adicionar update requeste para 1 client
       socket.emit("request_data_from_server");
   }
 
   render() {
-    
-    console.log("estado atual : " + this.state);
 
     var i = 0;
 
@@ -67,7 +65,7 @@ class App extends Component {
               <div className = "card">
                 <div className="card-header">{m.key}</div>
                 <div className="card-body">
-                <NVD3Chart key={i} type="lineChart" datum={ret} x="data" y="ping"
+                <NVD3Chart key={i} type="lineChart" datum={ret} x="Data" y="Latencia" xAxis={{tickFormat : function (d) { return d3.time.format('%d %b %H:%M:%S')(new Date(d)) }}} yAxis={{tickFormat : function (d) { return d3.format('')(d)+' ms'}}} 
                   useInteractiveGuideline={true}
                   // containerStyle={{ width: "150px" }} 
                   />

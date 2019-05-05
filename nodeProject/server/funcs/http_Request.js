@@ -1,9 +1,10 @@
 const http = require('http');
 var exports = module.exports = {}
 
-exports.send_http_request = function () {
+exports.send_http_request = function (link, logs) {
+    var data_inicio = new Date();
 
-    http.get('http://127.0.0.1:8080', (resp) => {
+    http.get("http://" + link , (resp) => {
         let data = '';
 
         // A chunk of data has been recieved.
@@ -13,7 +14,8 @@ exports.send_http_request = function () {
 
         // The whole response has been received. Print out the result.
         resp.on('end', () => {
-            console.log('GET Request: ' + resp.statusCode);
+            var data_fim = new Date();
+            resp.statusCode;
         });
 
     }).on("error", (err) => {

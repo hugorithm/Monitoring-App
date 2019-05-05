@@ -9,6 +9,10 @@ var controloSchema = new controlo({
         type: String,
         required: true
     },
+    endereco:{
+        type: String,
+        required: true
+    },
     tipo: {
         type: String,
         required: true

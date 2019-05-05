@@ -22,25 +22,30 @@ server = app.listen(3000);
 //socket.io instantiation.
 const io = require("socket.io")(server);
 
+
 io.on("connect", (client) =>{
     console.log("client connected");
     client.on("request_data_from_server", async function(){
-        var dados = await emitirDados();
-        console.log(dados);
+        var dados = await servicos.emitirDados(controlo, logs);
         client.emit("update_data", dados);
     })
 })
+
+/*
 io.on("request_data_from_server", () => {
     var dados = emitirDados();
     io.emit("update_data", dados);
-});
+});*/
 
 startup();
 
 function startup() {
     iniciarMonitor();
-    //buildDataReact();
+    //construirBd();
 }
+
+//const db = require("./funcs/db_Request");
+//db.send_db_request('mongodb://localhost:27017/apimonitor');
 
 function iniciarMonitor() {
     controlo.listar_servicos().then(function (data){
@@ -50,16 +55,15 @@ function iniciarMonitor() {
         for (var i = 0; i < a.length; i++) {
             //definiçao de vars relativas aos dados de cada elemento
             var nome = a[i].nome;
+            var endereco = a[i].endereco;
             var tipo = a[i].tipo;
             var classe = a[i].class;
             var propriedade = a[i].propriedade;
             var tempo = a[i].tempo_verificacao;
 
-            var trolha = nome + ".com";
-
             var crontime = toCron(tempo);
             //iniciacao de servicos de monitorizacao por cada elemento
-            servicos.verificar_disponibilidade(tipo, trolha, io, crontime, controlo, logs);
+            servicos.verificar_disponibilidade(tipo, nome, endereco, io, crontime, controlo, logs);
             
         }
     });
@@ -73,6 +77,7 @@ function toCron(time) {
 function construirBd() {
     var servico = new Object();
     servico.nome = "youtube"
+    servico.endereco = "www.youtube.com"
     servico.tipo = "website"
     servico.class = "dunno"
     servico.propriedade = "wut"
@@ -81,6 +86,7 @@ function construirBd() {
 
     var servico2 = new Object();
     servico2.nome = "google"
+    servico2.endereco = "www.google.com" 
     servico2.tipo = "website"
     servico2.class = "dunno"
     servico2.propriedade = "wut"
@@ -89,6 +95,7 @@ function construirBd() {
 
     var servico3 = new Object();
     servico3.nome = "twitter"
+    servico3.endereco = "www.twitter.com"
     servico3.tipo = "website"
     servico3.class = "dunno"
     servico3.propriedade = "wut"
@@ -105,11 +112,11 @@ async function emitirDados() {
             servico.key = nome;
             var dados = [];
 
-            await logs.pingsapi(nome + ".com").then(function (pings) {
+            await logs.pingsapi(nome).then(function (pings) {
                 for (var i = 0; i < pings.length && i<20; i++) {
                     var entrada = new Object;
-                    entrada.data = pings[i].json.data_recebido;
-                    entrada.ping = pings[i].json.ping;
+                    entrada.Data = pings[i].json.data_recebido;
+                    entrada.Latencia = pings[i].json.latencia;
                     dados.push(entrada);
                     servico.data = dados;
                 }
