@@ -10,10 +10,7 @@ class App extends Component {
 
 
   constructor(props) {
-    // this.state = {
-    //   pings : [],
-    //   pings2 : []
-    // }
+ 
     super(props);
     this.state = {
       data: []
@@ -25,7 +22,7 @@ class App extends Component {
   }
 
   getData() {
-    socket.on("update_data", async data => {
+    socket.on("update_ping_data", async data => {
       var ret = await {data:data}
       this.setState(ret);
       console.log(JSON.stringify(this.state.data));

@@ -20,7 +20,7 @@ export class Home extends React.Component {
     }
 
     getData() {
-        socket.on("update_data", async data => {
+        socket.on("update_ping_data", async data => {
             var ret = await { data: data }
             this.setState(ret);
             console.log(JSON.stringify(this.state.data));

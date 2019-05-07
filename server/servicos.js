@@ -66,6 +66,7 @@ exports.emitir_dados_ligaçao = async function(controlo, logs){
     var tipos = ["http", "ping", "mongo", "mysql"];
     for (var entry of tipos){
         var dados = await exports.emitirDados(entry, controlo, logs);
+        console.log(JSON.stringify(dados))
         io.emit("update_"+entry+"_data", dados);
     }
 }
