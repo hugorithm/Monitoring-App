@@ -14,9 +14,19 @@
   "author": "Hugo",
   "license": "Uminho",
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "css-loader": "^2.1.0",
+    "d3": "^5.9.2",
+    "jquery": "^3.4.1",
+    "nvd3": "^1.8.6",
+    "popper": "^1.0.1",
+    "popper.js": "^1.15.0",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
-    "react-router": "^2.6.1"
+    "react-nvd3": "^0.5.7",
+    "react-router": "^2.6.1",
+    "socket.io": "^2.2.0",
+    "style-loader": "^0.23.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
