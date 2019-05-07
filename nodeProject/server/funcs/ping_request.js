@@ -21,7 +21,7 @@ exports.send_ping_request = async function (nome, endereco, io, logs, callback) 
 
 	var address = await dnslookup(endereco);
 
-	var data = await session.pingHost(address.address, async function (error, address, sent, rcvd) {
+	await session.pingHost(address.address, async function (error, address, sent, rcvd) {
 		var ms = rcvd - sent;
 		if (error) {
 			ms = -1;

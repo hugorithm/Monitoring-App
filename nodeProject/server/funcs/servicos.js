@@ -8,17 +8,20 @@ var exports = (module.exports = {});
 exports.verificar_disponibilidade = function (tipo, nome, endereco, io, tempo, controlo, logs) {
 	if (tipo == "api" || tipo =="website") {
 		var job_api = new cronJob(tempo, function () {
-			//http_request.send_http_request();
+			http_request.send_http_request(nome, endereco, logs, async function(){
+                var dados = await exports.emitirDados("http", controlo, logs);
+                io.emit("update_http_data", dados);
+            });
 			ping_request.send_ping_request(nome, endereco, io, logs, async function(){
-                var dados = await exports.emitirDados(controlo, logs);
-                io.emit("update_data", dados);
+                var dados = await exports.emitirDados("ping", controlo, logs);
+                io.emit("update_ping_data", dados);
             });
 		});
 		job_api.start();
 	}
 };
 
-exports.emitirDados = async function emitirDados(controlo, logs) {
+exports.emitirDados = async function(tipo, controlo, logs) {
     var obj = [];
     await controlo.listar_servicos().then(async function (data) {
         for (var entry of data) {
@@ -27,8 +30,8 @@ exports.emitirDados = async function emitirDados(controlo, logs) {
             servico.key = nome;
             var dados = [];
 
-            var tempo = 3*60
-            await logs.pingsapi(nome, tempo).then(function (pings) {
+            var tempo = 1*60
+            await logs.pingsapi(tipo, nome, tempo).then(function (pings) {
                 for (var i = 0; i < pings.length; i++) {
                     var entrada = new Object;
                     entrada.Data = pings[i].json.data_recebido;
@@ -44,3 +47,10 @@ exports.emitirDados = async function emitirDados(controlo, logs) {
     return obj;
 }
 
+exports.emitir_dados_ligaçao = async function(controlo, logs){
+    var tipos = ["http", "ping"];
+    for (var entry of tipos){
+        var dados = await exports.emitirDados(entry, controlo, logs);
+        io.emit("update_"+entry+"_data", dados);
+    }
+}

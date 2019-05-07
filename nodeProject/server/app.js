@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 
-const servicos = require('./funcs/servicos');
-const logs = require('./database/funcoes_logs');
-const controlo = require('./database/funcoes_controlo');
+//const servicos = require('./funcs/servicos');
+//const logs = require('./database/funcoes_logs');
+//const controlo = require('./database/funcoes_controlo');
 
 //set the template engine ejs
 app.set('view engine', 'ejs');
@@ -26,26 +26,21 @@ const io = require("socket.io")(server);
 io.on("connect", (client) =>{
     console.log("client connected");
     client.on("request_data_from_server", async function(){
-        var dados = await servicos.emitirDados(controlo, logs);
-        client.emit("update_data", dados);
+        servicos.emitir_dados_ligaçao(controlo, logs);
     })
 })
 
-/*
-io.on("request_data_from_server", () => {
-    var dados = emitirDados();
-    io.emit("update_data", dados);
-});*/
+var teste = require('./funcs/mongo_Request');
+teste.send_db_request("mongodb://localhost:27017", "amsa", "requests", "{}", function(latencia){
+    console.log("crl " + latencia)
+})
 
 startup();
 
 function startup() {
-    iniciarMonitor();
+    //iniciarMonitor();
     //construirBd();
 }
-
-//const db = require("./funcs/db_Request");
-//db.send_db_request('mongodb://localhost:27017/apimonitor');
 
 function iniciarMonitor() {
     controlo.listar_servicos().then(function (data){
@@ -101,29 +96,4 @@ function construirBd() {
     servico3.propriedade = "wut"
     servico3.tempo_verificacao = "5"
     controlo.criar_servico(servico3);
-}
-
-async function emitirDados() {
-    var obj = [];
-    await controlo.listar_servicos().then(async function (data) {
-        for (var entry of data) {
-            var servico = new Object;
-            var nome = entry.nome;
-            servico.key = nome;
-            var dados = [];
-
-            await logs.pingsapi(nome).then(function (pings) {
-                for (var i = 0; i < pings.length && i<20; i++) {
-                    var entrada = new Object;
-                    entrada.Data = pings[i].json.data_recebido;
-                    entrada.Latencia = pings[i].json.latencia;
-                    dados.push(entrada);
-                    servico.data = dados;
-                }
-                servico.values = dados;
-                obj.push(servico);
-            })
-        }
-    })
-    return obj;
 }
