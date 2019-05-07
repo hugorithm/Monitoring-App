@@ -1,7 +1,7 @@
-var http_request = require("./http_Request");
-var ping_request = require("./ping_Request");
-var mongo_request = require("./mongodb_Request");
-var mysql_request = require("./myslq_Request");
+var http_request = require("./funcs/http_Request");
+var ping_request = require("./funcs/ping_Request");
+var mongo_request = require("./funcs/mongodb_Request");
+var mysql_request = require("./funcs/myslq_Request");
 
 var cronJob = require("cron").CronJob;
 

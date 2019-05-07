@@ -2,7 +2,7 @@ var MongoClient = require("mongodb").MongoClient
 
 var exports = (module.exports = {});
 
-exports.send_db_request = async function (nome, link, dbname, collection, query, callback) {
+exports.send_mongodb_request = async function (nome, link, dbname, collection, query, callback) {
     var data_inicio = new Date().getTime();
      await MongoClient.connect(link, function (err, db) {
         if (err) throw err;
