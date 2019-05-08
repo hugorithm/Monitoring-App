@@ -7,6 +7,7 @@ import {Home} from "./components/Home";
 import {User} from "./components/User";
 import {Api} from "./components/Api";
 
+import "./nvd3.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.js'
 
