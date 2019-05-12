@@ -11,12 +11,12 @@ exports.verificar_disponibilidade = function (tipo, nome, endereco, io, tempo, c
 	if (tipo == "api" || tipo =="website") {
 		var job_api = new cronJob(tempo, function () {
 			http_request.send_http_request(nome, endereco, logs, async function(){
-                var dados = await exports.emitirDados("http", controlo, logs);
-                io.emit("update_http_data", dados);
+                var dados = await exports.emitirDados("Http", controlo, logs);
+                io.emit("update_Http_data", dados);
             });
 			ping_request.send_ping_request(nome, endereco, io, logs, async function(){
-                var dados = await exports.emitirDados("ping", controlo, logs);
-                io.emit("update_ping_data", dados);
+                var dados = await exports.emitirDados("Ping", controlo, logs);
+                io.emit("update_Ping_data", dados);
             });
 		});
 		job_api.start();
@@ -24,12 +24,12 @@ exports.verificar_disponibilidade = function (tipo, nome, endereco, io, tempo, c
     if (tipo == "database") {
 		var job_api = new cronJob(tempo, function () {
 			mongo_request.send_mongodb_request(nome, endereco, logs, async function(){
-                var dados = await exports.emitirDados("mongo", controlo, logs);
-                io.emit("update_mongodb_data", dados);
+                var dados = await exports.emitirDados("Mongo", controlo, logs);
+                io.emit("update_Mongodb_data", dados);
             });
 			mysql_request.send_mysql_request(nome, endereco, io, logs, async function(){
-                var dados = await exports.emitirDados("mysql", controlo, logs);
-                io.emit("update_mysql_data", dados);
+                var dados = await exports.emitirDados("Mysql", controlo, logs);
+                io.emit("update_Mysql_data", dados);
             });
 		});
 		job_api.start();
@@ -51,8 +51,7 @@ exports.emitirDados = async function(tipo, controlo, logs) {
                     var entrada = new Object;
                     entrada.Data = pings[i].json.data_recebido;
                     entrada.Latencia = pings[i].json.latencia;
-                    dados.push(entrada);
-                    servico.data = dados;
+                    dados.push(entrada);                   
                 }
                 servico.values = dados;
                 obj.push(servico);
@@ -63,7 +62,7 @@ exports.emitirDados = async function(tipo, controlo, logs) {
 }
 
 exports.emitir_dados_ligaçao = async function(controlo, logs){
-    var tipos = ["http", "ping", "mongo", "mysql"];
+    var tipos = ["Http", "Ping", "Mongo", "Mysql"];
     for (var entry of tipos){
         var dados = await exports.emitirDados(entry, controlo, logs);
         console.log(JSON.stringify(dados))
