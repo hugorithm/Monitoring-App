@@ -31,6 +31,8 @@ export class Api extends React.Component {
         var propriedade = this.state.propriedade;
         var tempo = this.state.tempo;
         socket.emit("send_form_data", nome, endereco, tipo, classe, propriedade, tempo);
+        window.alert("Api adicionada com sucesso!");
+        window.location.replace("/api");
         // this.props.onSubmit(this.state);
         // this.setState({
         //     nome: "",
@@ -62,31 +64,31 @@ export class Api extends React.Component {
                 </div>
                 <div className="form-group">
                     <label>Endereço:</label>
-                    <input name="endereco" type="text" className="form-control" placeholder="Endereço"
+                    <input name="endereco" type="text" className="form-control" placeholder="Endereço" required
                         value={this.state.endereco}
                         onChange={e => this.change(e)} />
                 </div>
                 <div className="form-group">
                     <label>Tipo:</label>
-                    <input name="tipo" type="text" className="form-control" placeholder="Tipo"
+                    <input name="tipo" type="text" className="form-control" placeholder="Tipo" required
                         value={this.state.tipo}
                         onChange={e => this.change(e)} />
                 </div>
                 <div className="form-group">
                     <label>Classe:</label>
-                    <input name="classe" type="text" className="form-control" placeholder="Classe"
+                    <input name="classe" type="text" className="form-control" placeholder="Classe" required
                         value={this.state.classe}
                         onChange={e => this.change(e)} />
                 </div>
                 <div className="form-group">
-                    <label>Propiedade:</label>
-                    <input name="propriedade" type="text" className="form-control" placeholder="Propriedade"
+                    <label>Propriedade:</label>
+                    <input name="propriedade" type="text" className="form-control" placeholder="Propriedade" required
                         value={this.state.propriedade}
                         onChange={e => this.change(e)} />
                 </div>
                 <div className="form-group">
                     <label>Tempo de Verificação:</label>
-                    <input name="tempo" type="text" className="form-control" placeholder="Tempo de Verificação (em segundos)"
+                    <input name="tempo" type="text" className="form-control" placeholder="Tempo de Verificação (em segundos)" required
                         value={this.state.tempo}
                         onChange={e => this.change(e)} />
                 </div>
