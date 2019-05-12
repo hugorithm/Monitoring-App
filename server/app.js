@@ -16,8 +16,12 @@ io.on("connect", (client) =>{
     console.log("client connected");
     client.on("request_data_from_server", async function(){
         servicos.emitir_dados_ligaçao(controlo, logs);
-    })
-})
+    });
+    client.on("send_form_data", async function(nome, endereco, tipo, classe, propriedade, tempo){
+        console.log(nome, endereco, tipo, classe, propriedade, tempo);
+
+    });
+});
 
 
 var teste = require('./funcs/mongodb_Request');
