@@ -17,18 +17,20 @@ exports.send_mysql_request = async function (connection_data, query, callback) {
         con.query(query, function (err, result) {
             if (err) throw err;
             var data_fim = new Date().getTime();
-            var obj = buildObj()
+            var latencia = data_inicio - data_fim;
+            var obj = buildObj(connection_data.nome, connection_data.host, connection_data.database, data_inicio, data_fim, latencia);
             callback(obj);
         });
     });
 
 }
 
-function buildObj(nome, endereco, data_enviado, data_recebido, ping) {
+function buildObj(nome, endereco, nome_dbase, data_enviado, data_recebido, ping) {
 	var obj = new Object();
 	obj.nome = nome;
 	obj.endereco = endereco;
-	obj.tipo = "mysql";
+    obj.tipo = "Mysql";
+    obj.nome_dbase = nome_dbase;
 	obj.data_enviado = data_enviado;
 	obj.data_recebido = data_recebido;
 	obj.latencia = ping;

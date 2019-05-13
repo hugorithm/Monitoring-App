@@ -17,20 +17,40 @@ io.on("connect", (client) =>{
     client.on("request_data_from_server", async function(){
         servicos.emitir_dados_ligaçao(controlo, logs);
     })
+    client.on("pedido", function(obj){
+        console.log("funcionou");
+
+    })
 })
+
+
 
 
 var teste = require('./funcs/mongodb_Request');
-teste.send_mongodb_request("nome", "mongodb://localhost:27017", "amsa", "requests", "{}", function(latencia){
+teste.send_mongodb_request("nome", "mongodb://localhost:27017", "amsa", "requests", "{}", async function(latencia){
     console.log("lat " + latencia)
 })
 
-startup();
+//startup();
 
 function startup() {
     iniciarMonitor();
     //construirBd();
 }
+
+var teste_mongo = new Object();
+teste_mongo.nome = "Local";
+teste_mongo.link = "mongodb://localhost:27017";
+teste_mongo.dbname = "amsa";
+teste_mongo.collection = "servicos";
+
+var mongo_request = require("./funcs/mongodb_Request");
+mongo_request.send_mongodb_request(teste_mongo, "{}", function(obj, dados){
+    console.log(JSON.stringify(obj, dados));
+    //io.emit("update_Mongodb_data", dados);
+});
+
+
 
 function iniciarMonitor() {
     controlo.listar_servicos().then(function (data){
