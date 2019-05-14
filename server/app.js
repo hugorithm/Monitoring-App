@@ -19,25 +19,25 @@ io.on("connect", (client) =>{
     });
     client.on("send_form_data", async function(nome, endereco, tipo, classe, propriedade, tempo){
         console.log(nome, endereco, tipo, classe, propriedade, tempo);
-
+        var dados = new Object();
+        dados.nome = nome;
+        dados.endereco = endereco;
+        dados.tipo = tipo;
+        dados.class = classe;
+        dados.propriedade = propriedade;
+        dados.tempo_verificacao = tempo;
+        controlo.criar_servico(dados);
     });
 });
 
-
-
-
-var teste = require('./funcs/mongodb_Request');
-teste.send_mongodb_request("nome", "mongodb://localhost:27017", "amsa", "requests", "{}", async function(latencia){
-    console.log("lat " + latencia)
-})
-
-//startup();
+startup();
 
 function startup() {
     iniciarMonitor();
     //construirBd();
 }
 
+/*
 var teste_mongo = new Object();
 teste_mongo.nome = "Local";
 teste_mongo.link = "mongodb://localhost:27017";
@@ -45,10 +45,10 @@ teste_mongo.dbname = "amsa";
 teste_mongo.collection = "servicos";
 
 var mongo_request = require("./funcs/mongodb_Request");
-mongo_request.send_mongodb_request(teste_mongo, "{}", function(obj, dados){
-    console.log(JSON.stringify(obj, dados));
-    //io.emit("update_Mongodb_data", dados);
+mongo_request.send_mongodb_request(teste_mongo, "{}", async function(obj){
+    console.log(obj);
 });
+*/
 
 
 

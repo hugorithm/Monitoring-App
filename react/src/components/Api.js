@@ -11,11 +11,16 @@ export class Api extends React.Component {
         tipo: "",
         classe: "",
         propriedade: "",
-        tempo: ""
+        tempo: "",
+        username: "",
+        password: "",
+        dbName: "",
+        collection: "",
+        query: ""
     };
 
-    change = e => {
-        // this.props.onChange({ [e.target.name]: e.target.value });
+
+    change = e => {    
         this.setState({
             [e.target.name]: e.target.value
         });
@@ -23,39 +28,33 @@ export class Api extends React.Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log(this.state);
         var nome = this.state.nome;
         var endereco = this.state.endereco;
-        var tipo = this.state.tipo;
+        var tipo = document.getElementById("tipoapi").value;
         var classe = this.state.classe;
         var propriedade = this.state.propriedade;
         var tempo = this.state.tempo;
-        socket.emit("send_form_data", nome, endereco, tipo, classe, propriedade, tempo);
-        window.alert("Api adicionada com sucesso!");
-        window.location.replace("/api");
-        // this.props.onSubmit(this.state);
-        // this.setState({
-        //     nome: "",
-        //     endereco: "",
-        //     tipo: "",
-        //     classe: "",
-        //     propriedade: "",
-        //     tempo: ""
-        // });
-        // this.props.onChange({
-        //     nome: "",
-        //     endereco: "",
-        //     tipo: "",
-        //     classe: "",
-        //     propriedade: "",
-        //     tempo: ""
-        // });
+        //console.log(tipo)
+        // socket.emit("send_form_data", nome, endereco, tipo, classe, propriedade, tempo);
+        // window.location.replace("/home");
+       
     };
+
+    updatePage(e){
+       if(e.target.value === "Mongo"){
+        render (){
+            return (
+                
+            );
+        }
+
+       }
+    }
 
 
     render() {
         return (
-            <form onSubmit="">
+            <form id="addapi" onSubmit="">
                 <div className="form-group">
                     <label>Nome:</label>
                     <input name="nome" type="text" className="form-control" placeholder="Nome" required
@@ -70,9 +69,12 @@ export class Api extends React.Component {
                 </div>
                 <div className="form-group">
                     <label>Tipo:</label>
-                    <input name="tipo" type="text" className="form-control" placeholder="Tipo" required
-                        value={this.state.tipo}
-                        onChange={e => this.change(e)} />
+                    <select name="tipo" id="tipoapi"className="form-control" onChange={e => this.updatePage(e)}>
+                        <option value="Ping">Ping</option>
+                        <option value="Http">Http: GET</option>
+                        <option value="Mongo">MongoDB</option>
+                        <option value="Mysql">MySql</option>
+                    </select>
                 </div>
                 <div className="form-group">
                     <label>Classe:</label>
@@ -88,7 +90,7 @@ export class Api extends React.Component {
                 </div>
                 <div className="form-group">
                     <label>Tempo de Verificação:</label>
-                    <input name="tempo" type="text" className="form-control" placeholder="Tempo de Verificação (em segundos)" required
+                    <input name="tempo" type="number" className="form-control" placeholder="Tempo de Verificação (em segundos)" required
                         value={this.state.tempo}
                         onChange={e => this.change(e)} />
                 </div>

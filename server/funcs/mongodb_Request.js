@@ -11,7 +11,7 @@ exports.send_mongodb_request = async function (connection_data, query, callback)
         var data_fim = new Date().getTime();
         var latencia = data_fim - data_inicio;
         var obj = buildObj(connection_data.nome, connection_data.link, connection_data.dbname, data_inicio, data_fim, latencia)
-        callback(obj, dados);
+        callback(obj);
     });
 }
 

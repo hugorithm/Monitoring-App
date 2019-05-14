@@ -8,7 +8,7 @@ var cronJob = require("cron").CronJob;
 var exports = (module.exports = {});
 
 exports.verificar_disponibilidade = function (tipo, nome, endereco, io, tempo, controlo, logs) {
-	if (tipo == "api" || tipo =="website") {
+	if (tipo == "api" || tipo =="website" || tipo == "Ping") {
 		var job_api = new cronJob(tempo, function () {
 			http_request.send_http_request(nome, endereco, logs, async function(){
                 var dados = await exports.emitirDados("Http", controlo, logs);
@@ -20,7 +20,7 @@ exports.verificar_disponibilidade = function (tipo, nome, endereco, io, tempo, c
             });
 		});
 		job_api.start();
-    } 
+    }
     if (tipo == "database") {
 		var job_api = new cronJob(tempo, function () {
 			mongo_request.send_mongodb_request(nome, endereco, logs, async function(){
