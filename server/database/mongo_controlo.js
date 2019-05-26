@@ -4,12 +4,20 @@ var db = mongoose.connect('mongodb://localhost:27017/amsa');
 var controlo = mongoose.Schema;
 
 var controloSchema = new controlo({
-    
+
     nome: {
         type: String,
         required: true
     },
-    endereco:{
+    endereco: {
+        type: String,
+        required: true
+    },
+    classe: {
+        type: String,
+        required: true
+    },
+    propriedade: {
         type: String,
         required: true
     },
@@ -17,19 +25,42 @@ var controloSchema = new controlo({
         type: String,
         required: true
     },
-    class: {
+    tipo_verificacao: {
+        type: mongoose.Schema.Types.Mixed,
+        required: true
+    },
+    tempo_verificacao: {
         type: String,
         required: true
     },
-    propriedade: {
+    valor_minimo: {
         type: String,
         required: true
-    }, 
-    //tempo entre as verificaçoes efetuadas
-    tempo_verificacao : {
+    },
+    valor_maximo: {
         type: String,
+        required: true
+    },
+    duracao_erro: {
+        type: String,
+        required: true
+    },
+    percentagem_erro: {
+        type: String
+    },
+    estado: {
+        type: String,
+        required: true
+    },
+    cod_funcional: {
+        type: mongoose.Schema.Types.Mixed,
+        required: true
+    },
+    cod_nao_funcional: {
+        type: mongoose.Schema.Types.Mixed,
         required: true
     }
+
 }, {
         versionKey: false
     });

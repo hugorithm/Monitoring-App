@@ -11,11 +11,10 @@ server = app.listen(3000);
 //socket.io instantiation.
 const io = require("socket.io")(server);
 
-
 io.on("connect", (client) =>{
     console.log("client connected");
     client.on("request_data_from_server", async function(){
-        servicos.emitir_dados_ligaçao(controlo, logs);
+        servicos.emitir_dados_ligaçao(io, controlo, logs);
     });
     client.on("send_form_data", async function(nome, endereco, tipo, classe, propriedade, tempo){
         console.log(nome, endereco, tipo, classe, propriedade, tempo);
@@ -23,21 +22,17 @@ io.on("connect", (client) =>{
     });
 });
 
-
-
-
+/* mongo request a funcionar
 var teste = require('./funcs/mongodb_Request');
-teste.send_mongodb_request("nome", "mongodb://localhost:27017", "amsa", "requests", "{}", async function(latencia){
-    console.log("lat " + latencia)
-})
-
-//startup();
-
-function startup() {
-    iniciarMonitor();
-    //construirBd();
-}
-
+var obj = new Object();
+obj.link = "mongodb://localhost:27017";
+obj.dbname = "amsa";
+obj.collection = "requests";
+obj.name = "nome"
+teste.send_mongodb_request(obj, "{}", async function(dados){
+    console.log("lat " + JSON.stringify(dados.latencia))
+})*/
+/*
 var teste_mongo = new Object();
 teste_mongo.nome = "Local";
 teste_mongo.link = "mongodb://localhost:27017";
@@ -49,61 +44,68 @@ mongo_request.send_mongodb_request(teste_mongo, "{}", function(obj, dados){
     console.log(JSON.stringify(obj, dados));
     //io.emit("update_Mongodb_data", dados);
 });
+*/
 
+startup();
 
-
-function iniciarMonitor() {
-    controlo.listar_servicos().then(function (data){
-        //inicializa um objeto com a lista
-        var a = new Object(data);
-        //itera sobre os elementos da lista
-        for (var i = 0; i < a.length; i++) {
-            //definiçao de vars relativas aos dados de cada elemento
-            var nome = a[i].nome;
-            var endereco = a[i].endereco;
-            var tipo = a[i].tipo;
-            var classe = a[i].class;
-            var propriedade = a[i].propriedade;
-            var tempo = a[i].tempo_verificacao;
-
-            var crontime = toCron(tempo);
-            //iniciacao de servicos de monitorizacao por cada elemento
-            servicos.verificar_disponibilidade(tipo, nome, endereco, io, crontime, controlo, logs);
-            
-        }
-    });
+function startup() {
+    iniciarMonitor();
+    //construirBd();
 }
 
-function toCron(time) {
-    var crontime = '*/' + time + ' * * * * *'
-    return crontime;
+function iniciarMonitor() {
+    servicos.iniciar_verificacao_geral(io, controlo, logs);
 }
 
 function construirBd() {
     var servico = new Object();
-    servico.nome = "youtube"
+    servico.nome = "Youtube"
     servico.endereco = "www.youtube.com"
-    servico.tipo = "website"
-    servico.class = "dunno"
-    servico.propriedade = "wut"
-    servico.tempo_verificacao = "1"
+    servico.classe = "classe1"
+    servico.propriedade = "propriedade1"
+    servico.tipo = "Website";
+    servico.tipo_verificacao = ["Ping", "Http"];
+    servico.tempo_verificacao = "2";
+    servico.valor_minimo = 5;
+    servico.valor_maximo = 100;
+    servico.duracao_erro = 20000;//ms
+    servico.percentagem_erro = 80;
+    servico.estado = "Visivel";
+    servico.cod_funcional = ["200"];
+    servico.cod_nao_funcional = ["400", "301", "404"];
     controlo.criar_servico(servico);
 
+    var servico1 = new Object();
+    servico1.nome = "Google"
+    servico1.endereco = "www.google.com"
+    servico1.classe = "classe2"
+    servico1.propriedade = "propriedade2"
+    servico1.tipo = "Website"
+    servico1.tipo_verificacao = ["Ping"]
+    servico1.tempo_verificacao = "5"
+    servico1.valor_minimo = 5;
+    servico1.valor_maximo = 100;
+    servico1.duracao_erro = 20000;//ms
+    servico1.percentagem_erro = 80;
+    servico1.estado = "Visivel"
+    servico1.cod_funcional = ["200"];
+    servico1.cod_nao_funcional = ["400", "301", "404"];
+    controlo.criar_servico(servico1);
+    
     var servico2 = new Object();
-    servico2.nome = "google"
-    servico2.endereco = "www.google.com" 
-    servico2.tipo = "website"
-    servico2.class = "dunno"
-    servico2.propriedade = "wut"
-    servico2.tempo_verificacao = "2"
+    servico2.nome = "Twitch"
+    servico2.endereco = "www.twitch.tv"
+    servico2.classe = "classe3"
+    servico2.propriedade = "propriedade3"
+    servico2.tipo = "Website"
+    servico2.tipo_verificacao = ["Http"]
+    servico2.tempo_verificacao = "1"
+    servico2.valor_minimo = 5;
+    servico2.valor_maximo = 100;
+    servico2.duracao_erro = 20000;//ms
+    servico2.percentagem_erro = 80;
+    servico2.estado = "Visivel"
+    servico2.cod_funcional = ["200"];
+    servico2.cod_nao_funcional = ["400", "301", "404"];
     controlo.criar_servico(servico2);
-
-    var servico3 = new Object();
-    servico3.nome = "twitter"
-    servico3.endereco = "www.twitter.com"
-    servico3.tipo = "website"
-    servico3.class = "dunno"
-    servico3.propriedade = "wut"
-    servico3.tempo_verificacao = "5"
-    controlo.criar_servico(servico3);
 }

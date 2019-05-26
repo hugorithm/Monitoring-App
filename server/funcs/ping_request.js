@@ -1,10 +1,7 @@
 var ping = require("net-ping");
 const dns = require("dns");
 
-
-
 var exports = (module.exports = {});
-
 
 const util = require('util');
 const dnslookup = util.promisify(dns.lookup);
