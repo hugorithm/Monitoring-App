@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import openSocket from "socket.io-client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery';
+import "./../index.css"
 
 const socket = openSocket("http://localhost:3000");
 
@@ -65,7 +66,7 @@ export class Home extends React.Component {
                         var ret = [m];
                         i++;
                         return (
-                            <div className="col-sm-6 col-md-3 col-lg-4 col-xs-12" key={i}>
+                            <div className="col-sm-12 col-md-6 col-lg-6 col-xs-12 divpadding" key={i}>
                                 <div className="card">
                                     <div className="card-header">{m.key}</div>
                                     <div className="card-body">

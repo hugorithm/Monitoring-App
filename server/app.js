@@ -31,7 +31,7 @@ teste.send_mongodb_request("nome", "mongodb://localhost:27017", "amsa", "request
     console.log("lat " + latencia)
 })
 
-//startup();
+startup();
 
 function startup() {
     iniciarMonitor();

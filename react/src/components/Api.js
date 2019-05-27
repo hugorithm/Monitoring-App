@@ -1,5 +1,6 @@
 import React from "react";
 import openSocket from "socket.io-client";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const socket = openSocket("http://localhost:3000");
 
@@ -55,7 +56,7 @@ export class Api extends React.Component {
 
     render() {
         return (
-            <form onSubmit="">
+            <form onSubmit="" className="col-md-6 col-md-offset-3">
                 <div className="form-group">
                     <label>Nome:</label>
                     <input name="nome" type="text" className="form-control" placeholder="Nome" required
@@ -70,21 +71,26 @@ export class Api extends React.Component {
                 </div>
                 <div className="form-group">
                     <label>Tipo:</label>
-                    <input name="tipo" type="text" className="form-control" placeholder="Tipo" required
-                        value={this.state.tipo}
-                        onChange={e => this.change(e)} />
+                    <select name="tipo" type="text" className="form-control" required value={this.state.tipo} onChange={e => this.change(e)}>
+                        <option value="WebSite">WebSite</option>
+                        <option value="Maquina">Máquina</option>
+                        <option value="BaseDados">Base de Dados</option>
+                    </select>
                 </div>
                 <div className="form-group">
                     <label>Classe:</label>
-                    <input name="classe" type="text" className="form-control" placeholder="Classe" required
-                        value={this.state.classe}
-                        onChange={e => this.change(e)} />
+                    <select name="classe" type="text" className="form-control" required value={this.state.classe} onChange={e => this.change(e)}>
+                        <option value="Cardiologia">Cardiologia</option>
+                        <option value="RecursosHumanos">Recursos Humanos</option>
+                    </select>
                 </div>
                 <div className="form-group">
                     <label>Propriedade:</label>
-                    <input name="propriedade" type="text" className="form-control" placeholder="Propriedade" required
-                        value={this.state.propriedade}
-                        onChange={e => this.change(e)} />
+                    <select name="propriedade" type="text" className="form-control" required value={this.state.propriedade} onChange={e => this.change(e)}>
+                        <option value="Propriedade1">Propriedade1</option>
+                        <option value="Propriedade2">Propriedade2</option>
+                        
+                    </select>
                 </div>
                 <div className="form-group">
                     <label>Tempo de Verificação:</label>
@@ -92,8 +98,8 @@ export class Api extends React.Component {
                         value={this.state.tempo}
                         onChange={e => this.change(e)} />
                 </div>
-                <button type="submit" className="btn btn-primary"
-                    onClick={e => this.onSubmit(e)}>Submit</button>
+               <button type="submit" className="btn btn-primary"
+                    onClick={e => this.onSubmit(e)}><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Submit</button>
             </form>
         );
     }
