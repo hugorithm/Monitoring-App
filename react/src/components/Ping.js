@@ -60,7 +60,7 @@ export class Ping extends React.Component {
         console.log(tipo_verificacao);
         socket.emit("send_form_data", nome, endereco, tipo, classe, propriedade, tempo_verificacao, tipo_verificacao, valor_minimo, valor_maximo, duracao_erro, percentagem_erro, estado, cod_funcional, cod_nao_funcional);
         window.alert("Api adicionada com sucesso!");
-        // window.location.replace("/api");
+        window.location.replace("/home");
         // this.props.onSubmit(this.state);
         // this.setState({
         //     nome: "",
@@ -95,7 +95,7 @@ export class Ping extends React.Component {
                         onChange={e => this.change(e)} />
                 </Form.Group>
                 <Form.Group controlId="tipo">
-                    <Form.Label>Tipo</Form.Label>
+                    <Form.Label>Tipo:</Form.Label>
                     <Form.Control as="select" name="tipo" required
                         onChange={e => this.change(e)}>
                         <option>Máquina</option>
@@ -142,7 +142,7 @@ export class Ping extends React.Component {
                         onChange={e => this.change(e)} />
                 </Form.Group>
                 <Form.Group controlId="estado">
-                    <Form.Label>Estado</Form.Label>
+                    <Form.Label>Estado:</Form.Label>
                     <Form.Control as="select" name="estado" required
                         onChange={e => this.change(e)}>
                         <option>Visível</option>
