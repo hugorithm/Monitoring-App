@@ -3,7 +3,7 @@ import openSocket from "socket.io-client";
 
 const socket = openSocket("http://localhost:3000");
 
-export class Api extends React.Component {
+export class Mysql extends React.Component {
 
     state = {
         nome: "",

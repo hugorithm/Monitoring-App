@@ -50,7 +50,7 @@ startup();
 
 function startup() {
     iniciarMonitor();
-    //construirBd();
+    // construirBd();
 }
 
 function iniciarMonitor() {
