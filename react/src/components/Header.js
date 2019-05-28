@@ -18,6 +18,9 @@ export const Header = (props) => {
             <NavDropdown.Item href="/config/mongo">Adicionar MongoDB</NavDropdown.Item>
             <NavDropdown.Item href="/config/mysql">Adicionar MySql</NavDropdown.Item>
             <NavDropdown.Divider />
+            <NavDropdown.Item href="/edit/ping">Editar Api</NavDropdown.Item>
+            <NavDropdown.Item href="/edit/mongo">Editar MongoDB</NavDropdown.Item>
+            <NavDropdown.Item href="/edit/mysql">Editar MySql</NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
