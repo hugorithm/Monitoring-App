@@ -30,7 +30,6 @@ class App extends React.Component {
                     <Route path={"user/:id"} component={User} />
                     <Route path={"home"} component={Home} />
                     <Route path={"config/ping"} component={Ping}/>
-                    {/* <Route path={"config/http"} component={Http}/> */}
                     <Route path={"config/mongo"} component={Mongo}/>
                     <Route path={"config/mysql"} component={Mysql}/>
                 </Route>

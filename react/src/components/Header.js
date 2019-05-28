@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router";
 import {Button, Navbar, Nav, NavDropdown, Form, FormControl} from 'react-bootstrap';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faCog, faPlus, faList  } from '@fortawesome/free-solid-svg-icons'
+library.add(faHome, faCog, faPlus, faList);
 
-
+const icon = (<span><FontAwesomeIcon icon="cog"/> Configurações</span>);
 
 export const Header = (props) => {
   return (
@@ -11,16 +15,14 @@ export const Header = (props) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="/home">Home</Nav.Link>
-          <NavDropdown title="Configurações" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/config/ping">Adicionar Api</NavDropdown.Item>
-            {/* <NavDropdown.Item href="/config/http">Adicionar Http</NavDropdown.Item> */}
-            <NavDropdown.Item href="/config/mongo">Adicionar MongoDB</NavDropdown.Item>
-            <NavDropdown.Item href="/config/mysql">Adicionar MySql</NavDropdown.Item>
+          <Nav.Link href="/home"><FontAwesomeIcon icon="home"/> Home</Nav.Link>
+          <NavDropdown title={icon} id="basic-nav-dropdown">
+            <NavDropdown.Item href="/config/ping"><FontAwesomeIcon icon="plus"/> Api</NavDropdown.Item>
+            <NavDropdown.Item href="/config/mongo"><FontAwesomeIcon icon="plus"/> MongoDB</NavDropdown.Item>
+            <NavDropdown.Item href="/config/mysql"><FontAwesomeIcon icon="plus"/> MySql</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="/edit/ping">Editar Api</NavDropdown.Item>
-            <NavDropdown.Item href="/edit/mongo">Editar MongoDB</NavDropdown.Item>
-            <NavDropdown.Item href="/edit/mysql">Editar MySql</NavDropdown.Item>
+            <NavDropdown.Item href="/servicos/list"><FontAwesomeIcon icon="list"/> Serviços</NavDropdown.Item>
+         
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>

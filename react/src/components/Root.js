@@ -6,10 +6,11 @@ import { Header } from "./Header";
 export class Root extends React.Component {
     render() {
         return (
-            <div>
+            <div>   
                 <div className="header">
                     <Header />
                 </div>
+                <br></br>
                 <div className="body">
                     {this.props.children}
                 </div>
