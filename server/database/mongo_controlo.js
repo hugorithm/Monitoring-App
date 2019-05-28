@@ -54,11 +54,24 @@ var controloSchema = new controlo({
     },
     cod_funcional: {
         type: mongoose.Schema.Types.Mixed,
-        required: true
     },
     cod_nao_funcional: {
         type: mongoose.Schema.Types.Mixed,
-        required: true
+    },
+    //especifico bases dados
+    query: {
+        type: String
+    },
+    database: {
+        type: String
+    },
+
+    //especifico mysql
+    username: {
+        type: String
+    },
+    password: {
+        type: String
     }
 
 }, {
