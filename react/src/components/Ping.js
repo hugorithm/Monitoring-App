@@ -91,7 +91,7 @@ export class Ping extends React.Component {
                 </Form.Group>
                 <Form.Group controlId="endereco">
                     <Form.Label>Endereço:</Form.Label>
-                    <Form.Control type="text" placeholder="Endereço (Ex: www.google.pt)" name="endereco" required
+                    <Form.Control type="text" placeholder="Endereço" name="endereco" required
                         onChange={e => this.change(e)} />
                 </Form.Group>
                 <Form.Group controlId="tipo">
