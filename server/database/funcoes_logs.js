@@ -8,7 +8,6 @@ exports.create_user = function (new_json) {
     });
     teste.save(function (err) {
         if (err) throw err;
-        console.log('Ping salvo com sucesso!');
     });
 }
 

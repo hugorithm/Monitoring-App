@@ -7,6 +7,8 @@ var cronJob = require("cron").CronJob;
 
 var exports = (module.exports = {});
 
+var lista_crons = [];
+
 exports.emitirDados = async function (tipo, controlo, logs) {
     var obj = [];
     await controlo.listar_servicos().then(async function (data) {
@@ -26,7 +28,6 @@ exports.emitirDados = async function (tipo, controlo, logs) {
                 }
                 servico.values = dados;
                 if (dados.length > 0) {
-                    console.log(dados);
                     obj.push(servico);
                 }
             })
@@ -35,11 +36,31 @@ exports.emitirDados = async function (tipo, controlo, logs) {
     return obj;
 }
 
+async function stop_crons() {
+    for (var i = 0; i < lista_crons.length; i++) {
+        var cron = lista_crons[i];
+        if (cron instanceof cronJob) {
+            cron.stop();
+        }
+    }
+    return "done";
+}
+
+exports.stop_cron = async function () {
+    var crons = await stop_crons().then(
+        lista_crons = []
+    );
+    console.log(lista_crons);
+}
+
+exports.start_cron = function(io, controlo, logs){
+    this.iniciar_verificacao_geral(io, controlo, logs);
+}
+
 exports.emitir_dados_ligaçao = async function (io, controlo, logs) {
     var tipos = ["Http", "Ping", "Mongo", "Mysql"];
     for (var entry of tipos) {
         var dados = await exports.emitirDados(entry, controlo, logs);
-        console.log(JSON.stringify(dados))
         io.emit("update_" + entry + "_data", dados);
     }
 }
@@ -64,7 +85,6 @@ exports.iniciar_verificacao_geral = function (io, controlo, logs) {
 function iniciar_verificacao_individual(objeto, io, controlo, logs) {
     for (var i = 0; i < objeto.tipo_verificacao.length; i++) {
         var tipo = objeto.tipo_verificacao[i];
-        console.log(tipo);
         if (tipo == "Ping") {
             start_ping_check(objeto, io, controlo, logs);
         } else if (tipo == "Http") {
@@ -83,9 +103,11 @@ function start_ping_check(objeto, io, controlo, logs) {
     var cron = new cronJob(toCron(objeto.tempo_verificacao), function () {
         ping_request.send_ping_request(objeto.nome, objeto.endereco, io, logs, async function () {
             var dados = await exports.emitirDados("Ping", controlo, logs);
+            console.log("ping")
             io.emit("update_Ping_data", dados);
         });
     });
+    lista_crons.push(cron);
     cron.start();
 }
 
@@ -96,6 +118,7 @@ function start_http_check(objeto, io, controlo, logs) {
             io.emit("update_Http_data", dados);
         });
     });
+    lista_crons.push(cron);
     cron.start();
 }
 
@@ -106,6 +129,7 @@ function start_mongodb_check(objeto, io, controlo, logs) {
             io.emit("update_Mongodb_data", dados);
         });
     });
+    lista_crons.push(cron);
     cron.start();
 }
 
@@ -116,6 +140,7 @@ function start_mysql_check(objeto, io, controlo, logs) {
             io.emit("update_Mysql_data", dados);
         });
     });
+    lista_crons.push(cron);
     cron.start();
 }
 

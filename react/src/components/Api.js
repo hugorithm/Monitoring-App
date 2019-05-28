@@ -21,6 +21,14 @@ export class Api extends React.Component {
         });
     };
 
+    startcron = e =>{
+        socket.emit("start_cron");
+    };
+
+    stopcron = e =>{
+        socket.emit("stop_cron");
+    };
+
     onSubmit = e => {
         e.preventDefault();
         console.log(this.state);
@@ -30,7 +38,7 @@ export class Api extends React.Component {
         var classe = this.state.classe;
         var propriedade = this.state.propriedade;
         var tempo = this.state.tempo;
-        socket.emit("send_form_data", nome, endereco, tipo, classe, propriedade, tempo);
+        // socket.emit("send_form_data", nome, endereco, tipo, classe, propriedade, tempo);
         window.alert("Api adicionada com sucesso!");
         window.location.replace("/api");
         // this.props.onSubmit(this.state);
@@ -55,46 +63,51 @@ export class Api extends React.Component {
 
     render() {
         return (
-            <form onSubmit="">
-                <div className="form-group">
-                    <label>Nome:</label>
-                    <input name="nome" type="text" className="form-control" placeholder="Nome" required
-                        value={this.state.nome}
-                        onChange={e => this.change(e)} />
-                </div>
-                <div className="form-group">
-                    <label>Endereço:</label>
-                    <input name="endereco" type="text" className="form-control" placeholder="Endereço" required
-                        value={this.state.endereco}
-                        onChange={e => this.change(e)} />
-                </div>
-                <div className="form-group">
-                    <label>Tipo:</label>
-                    <input name="tipo" type="text" className="form-control" placeholder="Tipo" required
-                        value={this.state.tipo}
-                        onChange={e => this.change(e)} />
-                </div>
-                <div className="form-group">
-                    <label>Classe:</label>
-                    <input name="classe" type="text" className="form-control" placeholder="Classe" required
-                        value={this.state.classe}
-                        onChange={e => this.change(e)} />
-                </div>
-                <div className="form-group">
-                    <label>Propriedade:</label>
-                    <input name="propriedade" type="text" className="form-control" placeholder="Propriedade" required
-                        value={this.state.propriedade}
-                        onChange={e => this.change(e)} />
-                </div>
-                <div className="form-group">
-                    <label>Tempo de Verificação:</label>
-                    <input name="tempo" type="text" className="form-control" placeholder="Tempo de Verificação (em segundos)" required
-                        value={this.state.tempo}
-                        onChange={e => this.change(e)} />
-                </div>
-                <button type="submit" className="btn btn-primary"
-                    onClick={e => this.onSubmit(e)}>Submit</button>
-            </form>
+            <div>
+                <button onClick={e => this.startcron(e)} >start cron</button>
+                <button onClick={e => this.stopcron(e)} >stop cron</button>
+                <form onSubmit="">
+                    <div className="form-group">
+                        <label>Nome:</label>
+                        <input name="nome" type="text" className="form-control" placeholder="Nome" required
+                            value={this.state.nome}
+                            onChange={e => this.change(e)} />
+                    </div>
+                    <div className="form-group">
+                        <label>Endereço:</label>
+                        <input name="endereco" type="text" className="form-control" placeholder="Endereço" required
+                            value={this.state.endereco}
+                            onChange={e => this.change(e)} />
+                    </div>
+                    <div className="form-group">
+                        <label>Tipo:</label>
+                        <input name="tipo" type="text" className="form-control" placeholder="Tipo" required
+                            value={this.state.tipo}
+                            onChange={e => this.change(e)} />
+                    </div>
+                    <div className="form-group">
+                        <label>Classe:</label>
+                        <input name="classe" type="text" className="form-control" placeholder="Classe" required
+                            value={this.state.classe}
+                            onChange={e => this.change(e)} />
+                    </div>
+                    <div className="form-group">
+                        <label>Propriedade:</label>
+                        <input name="propriedade" type="text" className="form-control" placeholder="Propriedade" required
+                            value={this.state.propriedade}
+                            onChange={e => this.change(e)} />
+                    </div>
+                    <div className="form-group">
+                        <label>Tempo de Verificação:</label>
+                        <input name="tempo" type="text" className="form-control" placeholder="Tempo de Verificação (em segundos)" required
+                            value={this.state.tempo}
+                            onChange={e => this.change(e)} />
+                    </div>
+                    <button type="submit" className="btn btn-primary"
+                        onClick={e => this.onSubmit(e)}>Submit</button>
+                </form>
+            </div>
+
         );
     }
 }

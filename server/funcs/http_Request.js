@@ -2,7 +2,6 @@ const http = require('http');
 var exports = module.exports = {}
 
 exports.send_http_request = function (nome, link, logs, callback) {
-    console.log(link);
     var data_inicio = new Date().getTime();
 
     http.get("http://" + link , (resp) => {

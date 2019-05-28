@@ -16,10 +16,22 @@ io.on("connect", (client) =>{
     client.on("request_data_from_server", async function(){
         servicos.emitir_dados_ligaçao(io, controlo, logs);
     });
-    client.on("send_form_data", async function(nome, endereco, tipo, classe, propriedade, tempo){
-        console.log(nome, endereco, tipo, classe, propriedade, tempo);
-
+    client.on("send_form_data", function(nome, endereco, tipo, classe, propriedade, tempo){
+        //decidir se damos map no react ou aki
+        //criar_api(dados)
+        //deve estar a funcionar
     });
+    client.on("editar_dados_api", function(nomeapi, novosdados){
+        //same historia de cima
+        //editar_dados_api(nomeapi, novosdados);
+        //deve estar a dar
+    })
+    client.on("stop_cron", function(){
+        servicos.stop_cron();
+    })
+    client.on("start_cron", function(){
+        servicos.start_cron(io, controlo, logs);
+    })
 });
 
 /* mongo request a funcionar
@@ -73,7 +85,7 @@ function construirBd() {
     servico.estado = "Visivel";
     servico.cod_funcional = ["200"];
     servico.cod_nao_funcional = ["400", "301", "404"];
-    controlo.criar_servico(servico);
+    controlo.criar_api(servico);
 
     var servico1 = new Object();
     servico1.nome = "Google"
@@ -90,7 +102,7 @@ function construirBd() {
     servico1.estado = "Visivel"
     servico1.cod_funcional = ["200"];
     servico1.cod_nao_funcional = ["400", "301", "404"];
-    controlo.criar_servico(servico1);
+    controlo.criar_api(servico1);
     
     var servico2 = new Object();
     servico2.nome = "Twitch"
@@ -107,5 +119,13 @@ function construirBd() {
     servico2.estado = "Visivel"
     servico2.cod_funcional = ["200"];
     servico2.cod_nao_funcional = ["400", "301", "404"];
-    controlo.criar_servico(servico2);
+    controlo.criar_api(servico2);
+}
+
+function editar_dados_api(nomeapi, novosdados){
+    controlo.editar_dados_api(nomeapi, novosdados);
+}
+
+function criar_api(dadosapi){
+    controlo.criar_api(dadosapi);
 }
