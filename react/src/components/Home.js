@@ -3,8 +3,7 @@ import NVD3Chart from 'react-nvd3';
 import * as d3 from 'd3';
 import openSocket from "socket.io-client";
 import { Tabs, Tab, Card, Row, Col, Container } from 'react-bootstrap';
-
-
+import './../index.css';
 
 const socket = openSocket("http://localhost:3000");
 
@@ -56,8 +55,10 @@ export class Home extends React.Component {
     render() {
         var i = 0;
         return (
+            <div className="divmargin">
             <Tabs defaultActiveKey="ping" id="tabs">
                 <Tab eventKey="ping" title="Ping">
+                <div className='rowmargin'>
                         <Row>
                             {this.state.dataPing.map(m => {
                                 var ret = [m];
@@ -86,8 +87,10 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
+                        </div>
                 </Tab>
                 <Tab eventKey="http" title="Http">
+                        <div className='rowmargin'>
                         <Row>
                             {this.state.dataHttp.map(m => {
                                 var ret = [m];
@@ -116,8 +119,10 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
+</div>
                 </Tab>
                 <Tab eventKey="mongo" title="MongoDB" >               
+                <div className='rowmargin'> 
                         <Row>
                             {this.state.dataMongoDB.map(m => {
                                 var ret = [m];
@@ -146,8 +151,10 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
+                        </div>
                 </Tab>
                 <Tab eventKey="mysql" title="MySql" >
+                <div className='rowmargin'>
                         <Row>
                             {this.state.dataMySql.map(m => {
                                 var ret = [m];
@@ -176,10 +183,11 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
+                        </div>
                 </Tab>
             </Tabs>
 
-
+</div>
 
 
 

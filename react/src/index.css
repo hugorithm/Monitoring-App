@@ -83,18 +83,6 @@ body {
   font-weight: 700;
 }
 
-.menu__logo {
-  text-indent: -9999999px;
-  display: inline-block;
-  height: 100%;
-  width: 92px;
-  background-image: url(logo.png);
-  background-size: cover 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin: 0;
-}
-
 .menu__search-button {
   height: 42px;
   width: 42px;
@@ -121,4 +109,13 @@ body {
   font-size: 18px;
   padding: 5px;
   font-weight: 300;
+}
+
+.divmargin{
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+}
+
+.rowmargin{
+  margin-top: 1%;
 }
