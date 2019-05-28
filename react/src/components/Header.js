@@ -1,22 +1,32 @@
 import React from "react";
-import {Link} from "react-router";
+import { Link } from "react-router";
+import {Button, Navbar, Nav, NavDropdown, Form, FormControl} from 'react-bootstrap';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome, faCog, faPlus, faList  } from '@fortawesome/free-solid-svg-icons'
+library.add(faHome, faCog, faPlus, faList);
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+const icon = (<span><FontAwesomeIcon icon="cog"/> Configurações</span>);
 
 export const Header = (props) => {
-    return (   
-          <nav className="navbar navbar-expand-sm bg-light navbar-light">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
-              <a className="nav-link" href="/home">ApiMonitor</a>
-            </li>
-            <li className="nav-item">
-             <a className="nav-link" href="/home">Home</a>
-            </li>
-            <li className="nav-item">
-            <a className="nav-link" href="/api">Configuração</a>
-            </li>
-          </ul>
-        </nav>
+  return (
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand href="/home">ApiMonitor</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link href="/home"><FontAwesomeIcon icon="home"/> Home</Nav.Link>
+          <NavDropdown title={icon} id="basic-nav-dropdown">
+            <NavDropdown.Item href="/config/ping"><FontAwesomeIcon icon="plus"/> Api</NavDropdown.Item>
+            <NavDropdown.Item href="/config/mongo"><FontAwesomeIcon icon="plus"/> MongoDB</NavDropdown.Item>
+            <NavDropdown.Item href="/config/mysql"><FontAwesomeIcon icon="plus"/> MySql</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/servicos/list"><FontAwesomeIcon icon="list"/> Serviços</NavDropdown.Item>
+         
+          </NavDropdown>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+   
     );
 };

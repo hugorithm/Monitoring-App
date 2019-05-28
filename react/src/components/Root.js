@@ -1,15 +1,16 @@
 import React from "react";
 
 import { Header } from "./Header";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export class Root extends React.Component {
     render() {
         return (
-            <div>
+            <div>   
                 <div className="header">
                     <Header />
                 </div>
+                <br></br>
                 <div className="body">
                     {this.props.children}
                 </div>
