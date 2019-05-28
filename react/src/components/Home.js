@@ -58,6 +58,17 @@ export class Home extends React.Component {
         return (
             <div>
             <div className="container">
+            <ul className="nav nav-tabs">
+    <li className="nav-item">
+        <a href="/home" class="nav-link active">Home</a>
+    </li>
+    <li className="nav-item">
+        <a href="/api" class="nav-link">Profile</a>
+    </li>
+    <li className="nav-item">
+        <a href="/home" class="nav-link">Messages</a>
+    </li>
+</ul>
             <div>
                     Pings
                 </div>
