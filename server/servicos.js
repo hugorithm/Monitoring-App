@@ -65,9 +65,9 @@ exports.emitir_dados_ligaçao = async function (io, controlo, logs) {
     }
 }
 
-exports.adicionar_api = function (dados, controlo, logs) {
-    controlo.criar_servico(dados);
-    iniciar_verificacao_individual(dados);
+exports.adicionar_api = function (dados, io, controlo, logs) {
+    controlo.criar_api(dados);
+    iniciar_verificacao_individual(dados, io, controlo, logs);
 }
 
 exports.iniciar_verificacao_geral = function (io, controlo, logs) {
@@ -103,7 +103,6 @@ function start_ping_check(objeto, io, controlo, logs) {
     var cron = new cronJob(toCron(objeto.tempo_verificacao), function () {
         ping_request.send_ping_request(objeto.nome, objeto.endereco, io, logs, async function () {
             var dados = await exports.emitirDados("Ping", controlo, logs);
-            console.log("ping")
             io.emit("update_Ping_data", dados);
         });
     });
