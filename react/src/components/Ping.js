@@ -50,14 +50,21 @@ export class Ping extends React.Component {
         obj.classe = this.state.classe;
         obj.propriedade = this.state.propriedade;
         obj.tempo_verificacao = this.state.tempo_verificacao;
-        obj.tipo_verificacao = [this.state.ping, this.state.http];
+        var tipo_ver = [];
+        if(this.state.ping == true){
+            tipo_ver.push("Ping");
+        }
+        if(this.state.http == true){
+            tipo_ver.push("Http");
+        }
+        obj.tipo_verificacao = tipo_ver;
         obj.valor_minimo = this.state.valor_minimo;
         obj.valor_maximo = this.state.valor_maximo;
         obj.duracao_erro = this.state.duracao_erro;
         obj.percentagem_erro = this.state.percentagem_erro;
         obj.estado = this.state.estado;
-        obj.cod_funcional = this.state.cod_funcional;
-        obj.cod_nao_funcional = this.state.cod_nao_funcional;
+        obj.cod_funcional = this.state.cod_funcional.split(',');
+        obj.cod_nao_funcional = this.state.cod_nao_funcional.split(',');
         socket.emit("send_form_data", obj);
         window.alert("Api adicionada com sucesso!");
         window.location.replace("/home");

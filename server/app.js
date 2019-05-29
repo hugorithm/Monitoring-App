@@ -16,9 +16,10 @@ io.on("connect", (client) =>{
     client.on("request_data_from_server", async function(){
         servicos.emitir_dados_ligaçao(io, controlo, logs);
     });
-    client.on("send_form_data", function(nome, endereco, tipo, classe, propriedade, tempo){
+    client.on("send_form_data", function(dados){
+        console.log(JSON.stringify(dados));
         //decidir se damos map no react ou aki
-        //criar_api(dados)
+        criar_api(dados)
         //deve estar a funcionar
     });
     client.on("editar_dados_api", function(nomeapi, novosdados){
@@ -26,12 +27,12 @@ io.on("connect", (client) =>{
         //editar_dados_api(nomeapi, novosdados);
         //deve estar a dar
     })
-    client.on("stop_cron", function(){
-        servicos.stop_cron();
-    })
-    client.on("start_cron", function(){
-        servicos.start_cron(io, controlo, logs);
-    })
+    // client.on("stop_cron", function(){
+    //     servicos.stop_cron();
+    // })
+    // client.on("start_cron", function(){
+    //     servicos.start_cron(io, controlo, logs);
+    // })
 });
 
 /* mongo request a funcionar
@@ -62,7 +63,7 @@ startup();
 
 function startup() {
     iniciarMonitor();
-    // construirBd();
+    //construirBd();
 }
 
 function iniciarMonitor() {
@@ -127,7 +128,7 @@ function construirBd() {
     servico3.classe = "classe3"
     servico3.propriedade = "propriedade3"
     servico3.tipo = "Website"
-    servico3.tipo_verificacao = ["Http, Ping"]
+    servico3.tipo_verificacao = ["Http", "Ping"]
     servico3.tempo_verificacao = "5"
     servico3.valor_minimo = 5;
     servico3.valor_maximo = 100;
@@ -144,7 +145,7 @@ function construirBd() {
     servico4.classe = "classe3"
     servico4.propriedade = "propriedade3"
     servico4.tipo = "Website"
-    servico4.tipo_verificacao = ["Http, Ping"]
+    servico4.tipo_verificacao = ["Http", "Ping"]
     servico4.tempo_verificacao = "2"
     servico4.valor_minimo = 5;
     servico4.valor_maximo = 100;
@@ -178,7 +179,7 @@ function construirBd() {
     servico6.classe = "classe3"
     servico6.propriedade = "propriedade3"
     servico6.tipo = "Website"
-    servico6.tipo_verificacao = ["Http, Ping"]
+    servico6.tipo_verificacao = ["Http", "Ping"]
     servico6.tempo_verificacao = "5"
     servico6.valor_minimo = 5;
     servico6.valor_maximo = 100;
@@ -195,7 +196,7 @@ function construirBd() {
     servico7.classe = "classe3"
     servico7.propriedade = "propriedade3"
     servico7.tipo = "Website"
-    servico7.tipo_verificacao = ["Http, Ping"]
+    servico7.tipo_verificacao = ["Http", "Ping"]
     servico7.tempo_verificacao = "5"
     servico7.valor_minimo = 5;
     servico7.valor_maximo = 100;
@@ -212,5 +213,5 @@ function editar_dados_api(nomeapi, novosdados){
 }
 
 function criar_api(dadosapi){
-    controlo.criar_api(dadosapi);
+    servicos.adicionar_api(dadosapi, io, controlo, logs);
 }

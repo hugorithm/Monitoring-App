@@ -10,7 +10,7 @@ export class Mongo extends React.Component {
         nome: "",
         endereco: "",
         tipo: "Base de Dados",
-        tipo_verificacao: "Mongo",
+        tipo_verificacao: ["Mongo"],
         classe: "",
         propriedade: "",
         tempo_verificacao: "",
@@ -43,14 +43,14 @@ export class Mongo extends React.Component {
         obj.classe = this.state.classe;
         obj.propriedade = this.state.propriedade;
         obj.tempo_verificacao = this.state.tempo_verificacao;
-        obj.tipo_verificacao = this.state.tipo_verificacao
+        obj.tipo_verificacao = this.state.tipo_verificacao;
         obj.valor_minimo = this.state.valor_minimo;
         obj.valor_maximo = this.state.valor_maximo;
         obj.duracao_erro = this.state.duracao_erro;
         obj.percentagem_erro = this.state.percentagem_erro;
         obj.estado = this.state.estado;
-        obj.cod_funcional = this.state.cod_funcional;
-        obj.cod_nao_funcional = this.state.cod_nao_funcional;
+        obj.cod_funcional = this.state.cod_funcional.split(',');
+        obj.cod_nao_funcional = this.state.cod_nao_funcional.split(',');
         obj.query = this.state.query;
         obj.database = this.state.database;       
         socket.emit("send_form_data", obj);
