@@ -69,12 +69,12 @@ export class Home extends React.Component {
                 </Container>
                 <Tabs defaultActiveKey="ping" id="tabs" style={{ marginLeft: 5, marginRight: 5 }}>
                     <Tab eventKey="ping" title="Ping">
-                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataPing.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
                                         <Card >
                                             <Card.Header>{m.key} <Badge variant="info">Ping</Badge> </Card.Header>
                                             <Card.Body>
@@ -95,12 +95,12 @@ export class Home extends React.Component {
                         </Row>
                     </Tab>
                     <Tab eventKey="http" title="Http">
-                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataHttp.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
                                         <Card>
                                             <Card.Header>{m.key} <Badge variant="info">Http</Badge></Card.Header>
                                             <Card.Body>
@@ -121,12 +121,12 @@ export class Home extends React.Component {
                         </Row>
                     </Tab>
                     <Tab eventKey="mongo" title="MongoDB" >
-                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataMongoDB.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
 
                                         <Card>
                                             <Card.Header>{m.key} <Badge variant="info">MongoDB</Badge></Card.Header>
@@ -148,13 +148,12 @@ export class Home extends React.Component {
                         </Row>
                     </Tab>
                     <Tab eventKey="mysql" title="MySql" >
-
-                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataMySql.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
 
                                         <Card>
                                             <Card.Header>{m.key} <Badge variant="info">MySql</Badge></Card.Header>
@@ -174,7 +173,6 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
-
                     </Tab>
                 </Tabs>
             </div>

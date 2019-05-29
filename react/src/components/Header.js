@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router";
 import {Button, Navbar, Nav, NavDropdown, Form, FormControl} from 'react-bootstrap';
 import logo from "./img/iconfinder_monitor_285642.svg";
-/*import logo from "./img/iconfinder_monitor_285642.svg";*/
-/*import logo from "./img/iconfinder_view_126581.svg";*/
-/*import logo from "./img/iconfinder_chart-line-outline_216138.svg";*/
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faCog, faPlus, faList  } from '@fortawesome/free-solid-svg-icons'
