@@ -57,15 +57,14 @@ export class Home extends React.Component {
     render() {
         var i = 0;
         return (
-            <Tabs defaultActiveKey="ping" id="tabs">
+            <Tabs defaultActiveKey="ping" id="tabs" style={{marginLeft: 5, marginRight: 5}}>
                 <Tab eventKey="ping" title="Ping">
-                <div className='rowmargin'>
-                        <Row>
+                        <Row style={{marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5}}>
                             {this.state.dataPing.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3}>
+                                    <Col xs={6} md={3} style={{marginTop: 2.5, marginBottom: 2.5, paddingLeft:5, paddingRight:5}}>
 
                                         <Card>
                                             <Card.Header>{m.key}</Card.Header>
@@ -88,16 +87,14 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
-                        </div>
                 </Tab>
                 <Tab eventKey="http" title="Http">
-                <div className='rowmargin'>
-                        <Row>
+                        <Row style={{marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5}}>
                             {this.state.dataHttp.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3}>
+                                    <Col xs={6} md={3} style={{marginTop: 2.5, marginBottom: 2.5, paddingLeft:5, paddingRight:5}}>
 
                                         <Card>
                                             <Card.Header>{m.key}</Card.Header>
@@ -120,16 +117,14 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
-                        </div>
                 </Tab>
-                <Tab eventKey="mongo" title="MongoDB" >               
-                <div className='rowmargin'>
-                        <Row>
+                <Tab eventKey="mongo" title="MongoDB" >    
+                        <Row style={{marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5}}>
                             {this.state.dataMongoDB.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3}>
+                                    <Col xs={6} md={3} style={{marginTop: 2.5, marginBottom: 2.5, paddingLeft:5, paddingRight:5}}>
 
                                         <Card>
                                             <Card.Header>{m.key}</Card.Header>
@@ -152,16 +147,15 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
-                        </div>
                 </Tab>
                 <Tab eventKey="mysql" title="MySql" >
-                <div className='rowmargin'>
-                        <Row>
+                
+                        <Row style={{marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5}}>
                             {this.state.dataMySql.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3}>
+                                    <Col xs={6} md={3}style={{marginTop: 2.5, marginBottom: 2.5, paddingLeft:5, paddingRight:5}}>
 
                                         <Card>
                                             <Card.Header>{m.key}</Card.Header>
@@ -184,10 +178,9 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
-                        </div>
+                       
                 </Tab>
             </Tabs>
-
 
 
 
