@@ -2,8 +2,12 @@ import React from "react";
 import NVD3Chart from 'react-nvd3';
 import * as d3 from 'd3';
 import openSocket from "socket.io-client";
-import { Tabs, Tab, Card, Row, Col, Container, Badge } from 'react-bootstrap';
+import { Tabs, Tab, Card, Row, Col, Container, Badge, Alert } from 'react-bootstrap';
 import "./../index.css";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck  } from '@fortawesome/free-solid-svg-icons'
+library.add(faCheck);
 
 
 
@@ -57,14 +61,20 @@ export class Home extends React.Component {
     render() {
         var i = 0;
         return (
-            <Tabs defaultActiveKey="ping" id="tabs" style={{marginLeft: 5, marginRight: 5}}>
-                <Tab eventKey="ping" title="Ping">
-                        <Row style={{marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5}}>
+            <div>
+                <Container>
+                    <Alert variant="success">
+                    <FontAwesomeIcon icon="check"/> <strong>Aviso: </strong>Todos os serviços estão operacionais!
+                    </Alert>
+                </Container>
+                <Tabs defaultActiveKey="ping" id="tabs" style={{ marginLeft: 5, marginRight: 5 }}>
+                    <Tab eventKey="ping" title="Ping">
+                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
                             {this.state.dataPing.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{marginTop: 2.5, marginBottom: 2.5, paddingLeft:5, paddingRight:5}}>
+                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
                                         <Card >
                                             <Card.Header>{m.key} <Badge variant="info">Ping</Badge> </Card.Header>
                                             <Card.Body>
@@ -83,14 +93,14 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
-                </Tab>
-                <Tab eventKey="http" title="Http">
-                        <Row style={{marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5}}>
+                    </Tab>
+                    <Tab eventKey="http" title="Http">
+                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
                             {this.state.dataHttp.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{marginTop: 2.5, marginBottom: 2.5, paddingLeft:5, paddingRight:5}}>
+                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
                                         <Card>
                                             <Card.Header>{m.key} <Badge variant="info">Http</Badge></Card.Header>
                                             <Card.Body>
@@ -109,14 +119,14 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
-                </Tab>
-                <Tab eventKey="mongo" title="MongoDB" >    
-                        <Row style={{marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5}}>
+                    </Tab>
+                    <Tab eventKey="mongo" title="MongoDB" >
+                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
                             {this.state.dataMongoDB.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{marginTop: 2.5, marginBottom: 2.5, paddingLeft:5, paddingRight:5}}>
+                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
 
                                         <Card>
                                             <Card.Header>{m.key} <Badge variant="info">MongoDB</Badge></Card.Header>
@@ -136,15 +146,15 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
-                </Tab>
-                <Tab eventKey="mysql" title="MySql" >
-                
-                        <Row style={{marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5}}>
+                    </Tab>
+                    <Tab eventKey="mysql" title="MySql" >
+
+                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
                             {this.state.dataMySql.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3}style={{marginTop: 2.5, marginBottom: 2.5, paddingLeft:5, paddingRight:5}}>
+                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
 
                                         <Card>
                                             <Card.Header>{m.key} <Badge variant="info">MySql</Badge></Card.Header>
@@ -164,10 +174,10 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
-                       
-                </Tab>
-            </Tabs>
 
+                    </Tab>
+                </Tabs>
+            </div>
 
 
 
