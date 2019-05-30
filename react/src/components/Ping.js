@@ -22,7 +22,8 @@ export class Ping extends React.Component {
         percentagem_erro: "",
         estado: "Visível",
         cod_funcional: [],
-        cod_nao_funcional: []
+        cod_nao_funcional: [],
+        checed: {}
 
     };
 
@@ -89,6 +90,8 @@ export class Ping extends React.Component {
 
 
     render() {
+        const tipo = this.state.tipo;
+        const disabled = tipo == 'Máquina';
         return (
             <Container>
                 <Form onSubmit={e => this.onSubmit(e)}>
@@ -114,7 +117,7 @@ export class Ping extends React.Component {
                             </Form.Group>
                             <Form.Label>Tipo de Verificação:</Form.Label>
                             <Form.Group controlId="tipo_verificacao" name="tipo_verificacao" >
-                                <Form.Check inline type="checkbox" name="http" label="Http" onChange={e => this.change(e)} />
+                                <Form.Check inline disabled={disabled} type="checkbox" name="http" label="Http" onChange={e => this.change(e)} />
                                 <Form.Check inline type="checkbox" name="ping" label="Ping" onChange={e => this.change(e)} />
                             </Form.Group>
                             <Form.Group controlId="classe">

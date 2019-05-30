@@ -2,8 +2,12 @@ import React from "react";
 import NVD3Chart from 'react-nvd3';
 import * as d3 from 'd3';
 import openSocket from "socket.io-client";
-import { Tabs, Tab, Card, Row, Col, Container } from 'react-bootstrap';
+import { Tabs, Tab, Card, Row, Col, Container, Badge, Alert } from 'react-bootstrap';
 import "./../index.css";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck  } from '@fortawesome/free-solid-svg-icons'
+library.add(faCheck);
 
 
 
@@ -53,18 +57,22 @@ export class Home extends React.Component {
     render() {
         var i = 0;
         return (
-            <Tabs defaultActiveKey="ping" id="tabs">
-                <Tab eventKey="ping" title="Ping">
-                <div className='rowmargin'>
-                        <Row>
+            <div>
+                <Container>
+                    <Alert variant="success">
+                    <FontAwesomeIcon icon="check"/> <strong>Aviso: </strong>Todos os serviços estão operacionais!
+                    </Alert>
+                </Container>
+                <Tabs defaultActiveKey="ping" id="tabs" style={{ marginLeft: 5, marginRight: 5 }}>
+                    <Tab eventKey="ping" title="Ping">
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataPing.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3}>
-
-                                        <Card>
-                                            <Card.Header>{m.key}</Card.Header>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
+                                        <Card >
+                                            <Card.Header>{m.key} <Badge variant="info">Ping</Badge> </Card.Header>
                                             <Card.Body>
                                                 <NVD3Chart key={i} type="lineChart" datum={ret} x="Data" y="Latencia"
                                                     xAxis={{ tickFormat: function (d) { return d3.time.format('%M:%S')(new Date(d)) } }}
@@ -74,29 +82,23 @@ export class Home extends React.Component {
                                                         d3.selectAll(".nvtooltip").remove();
                                                         // d3.selectAll(".hover").remove();
                                                     }}
-
-                                                //  containerStyle={{ width: "320px" }} 
                                                 />
-
                                             </Card.Body>
                                         </Card>
                                     </Col>
                                 )
                             })}
                         </Row>
-                        </div>
-                </Tab>
-                <Tab eventKey="http" title="Http">
-                <div className='rowmargin'>
-                        <Row>
+                    </Tab>
+                    <Tab eventKey="http" title="Http">
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataHttp.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3}>
-
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
                                         <Card>
-                                            <Card.Header>{m.key}</Card.Header>
+                                            <Card.Header>{m.key} <Badge variant="info">Http</Badge></Card.Header>
                                             <Card.Body>
                                                 <NVD3Chart key={i} type="lineChart" datum={ret} x="Data" y="Latencia"
                                                     xAxis={{ tickFormat: function (d) { return d3.time.format('%M:%S')(new Date(d)) } }}
@@ -106,29 +108,24 @@ export class Home extends React.Component {
                                                         d3.selectAll(".nvtooltip").remove();
                                                         // d3.selectAll(".hover").remove();
                                                     }}
-
-                                                //  containerStyle={{ width: "320px" }} 
                                                 />
-
                                             </Card.Body>
                                         </Card>
                                     </Col>
                                 )
                             })}
                         </Row>
-                        </div>
-                </Tab>
-                <Tab eventKey="mongo" title="MongoDB" >               
-                <div className='rowmargin'>
-                        <Row>
+                    </Tab>
+                    <Tab eventKey="mongo" title="MongoDB" >
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataMongoDB.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3}>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
 
                                         <Card>
-                                            <Card.Header>{m.key}</Card.Header>
+                                            <Card.Header>{m.key} <Badge variant="info">MongoDB</Badge></Card.Header>
                                             <Card.Body>
                                                 <NVD3Chart key={i} type="lineChart" datum={ret} x="Data" y="Latencia"
                                                     xAxis={{ tickFormat: function (d) { return d3.time.format('%M:%S')(new Date(d)) } }}
@@ -138,29 +135,24 @@ export class Home extends React.Component {
                                                         d3.selectAll(".nvtooltip").remove();
                                                         // d3.selectAll(".hover").remove();
                                                     }}
-
-                                                //  containerStyle={{ width: "320px" }} 
                                                 />
-
                                             </Card.Body>
                                         </Card>
                                     </Col>
                                 )
                             })}
                         </Row>
-                        </div>
-                </Tab>
-                <Tab eventKey="mysql" title="MySql" >
-                <div className='rowmargin'>
-                        <Row>
+                    </Tab>
+                    <Tab eventKey="mysql" title="MySql" >
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataMySql.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3}>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
 
                                         <Card>
-                                            <Card.Header>{m.key}</Card.Header>
+                                            <Card.Header>{m.key} <Badge variant="info">MySql</Badge></Card.Header>
                                             <Card.Body>
                                                 <NVD3Chart key={i} type="lineChart" datum={ret} x="Data" y="Latencia"
                                                     xAxis={{ tickFormat: function (d) { return d3.time.format('%M:%S')(new Date(d)) } }}
@@ -170,21 +162,16 @@ export class Home extends React.Component {
                                                         d3.selectAll(".nvtooltip").remove();
                                                         // d3.selectAll(".hover").remove();
                                                     }}
-
-                                                //  containerStyle={{ width: "320px" }} 
                                                 />
-
                                             </Card.Body>
                                         </Card>
                                     </Col>
                                 )
                             })}
                         </Row>
-                        </div>
-                </Tab>
-            </Tabs>
-
-
+                    </Tab>
+                </Tabs>
+            </div>
 
 
 
