@@ -11,53 +11,20 @@ server = app.listen(3000);
 //socket.io instantiation.
 const io = require("socket.io")(server);
 
-io.on("connect", (client) =>{
+io.on("connect", (client) => {
     console.log("client connected");
-    client.on("request_data_from_server", async function(){
+    client.on("request_data_from_server", async function () {
         servicos.emitir_dados_ligaçao(io, controlo, logs);
     });
-    client.on("send_form_data", function(dados){
+    client.on("send_form_data", function (dados) {
         console.log(JSON.stringify(dados));
-        //decidir se damos map no react ou aki
         criar_api(dados)
-        //deve estar a funcionar
     });
-    client.on("editar_dados_api", function(nomeapi, novosdados){
-        //same historia de cima
+    client.on("editar_dados_api", function (nomeapi, novosdados) {
         //editar_dados_api(nomeapi, novosdados);
         //deve estar a dar
     })
-    // client.on("stop_cron", function(){
-    //     servicos.stop_cron();
-    // })
-    // client.on("start_cron", function(){
-    //     servicos.start_cron(io, controlo, logs);
-    // })
 });
-
-/* mongo request a funcionar
-var teste = require('./funcs/mongodb_Request');
-var obj = new Object();
-obj.link = "mongodb://localhost:27017";
-obj.dbname = "amsa";
-obj.collection = "requests";
-obj.name = "nome"
-teste.send_mongodb_request(obj, "{}", async function(dados){
-    console.log("lat " + JSON.stringify(dados.latencia))
-})*/
-/*
-var teste_mongo = new Object();
-teste_mongo.nome = "Local";
-teste_mongo.link = "mongodb://localhost:27017";
-teste_mongo.dbname = "amsa";
-teste_mongo.collection = "servicos";
-
-var mongo_request = require("./funcs/mongodb_Request");
-mongo_request.send_mongodb_request(teste_mongo, "{}", function(obj, dados){
-    console.log(JSON.stringify(obj, dados));
-    //io.emit("update_Mongodb_data", dados);
-});
-*/
 
 startup();
 
@@ -104,7 +71,7 @@ function construirBd() {
     servico1.cod_funcional = ["200"];
     servico1.cod_nao_funcional = ["400", "301", "404"];
     controlo.criar_api(servico1);
-    
+
     var servico2 = new Object();
     servico2.nome = "Twitch"
     servico2.endereco = "www.twitch.tv"
@@ -138,7 +105,7 @@ function construirBd() {
     servico3.cod_funcional = ["200"];
     servico3.cod_nao_funcional = ["400", "301", "404"];
     controlo.criar_api(servico3);
-    
+
     var servico4 = new Object();
     servico4.nome = "Stack Overflow"
     servico4.endereco = "www.stackoverflow.com"
@@ -155,7 +122,7 @@ function construirBd() {
     servico4.cod_funcional = ["200"];
     servico4.cod_nao_funcional = ["400", "301", "404"];
     controlo.criar_api(servico4);
-    
+
     var servico5 = new Object();
     servico5.nome = "Github"
     servico5.endereco = "www.github.com"
@@ -208,10 +175,10 @@ function construirBd() {
     controlo.criar_api(servico7);
 }
 
-function editar_dados_api(nomeapi, novosdados){
+function editar_dados_api(nomeapi, novosdados) {
     controlo.editar_dados_api(nomeapi, novosdados);
 }
 
-function criar_api(dadosapi){
+function criar_api(dadosapi) {
     servicos.adicionar_api(dadosapi, io, controlo, logs);
 }

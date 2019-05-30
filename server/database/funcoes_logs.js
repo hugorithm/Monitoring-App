@@ -31,7 +31,7 @@ exports.delete_user = function (json) {
 exports.pingsapi = async function (tipo, nome, tempo) {
     return Jsonsc.find({
         "json.nome": nome,
-        "json.tipo": tipo,
+        "json.tipo_verificacao": tipo,
         "json.data_enviado": {$gte: new Date().getTime() - (tempo * 1000)}
     }, '-_id').sort({ "json.data_enviado": 'descending' }).exec();
 }

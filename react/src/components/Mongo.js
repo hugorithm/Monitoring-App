@@ -22,6 +22,7 @@ export class Mongo extends React.Component {
         cod_funcional: [],
         cod_nao_funcional: [],
         query: "",
+        collection_name: "",
         database: ""    
     
     };
@@ -48,6 +49,7 @@ export class Mongo extends React.Component {
         obj.valor_maximo = this.state.valor_maximo;
         obj.duracao_erro = this.state.duracao_erro;
         obj.percentagem_erro = this.state.percentagem_erro;
+        obj.collection_name = this.state.collection_name;
         obj.estado = this.state.estado;
         obj.cod_funcional = this.state.cod_funcional.split(',');
         obj.cod_nao_funcional = this.state.cod_nao_funcional.split(',');
@@ -93,8 +95,13 @@ export class Mongo extends React.Component {
                                 onChange={e => this.change(e)} />
                         </Form.Group>
                         <Form.Group controlId="database">
+                            <Form.Label>Database:</Form.Label>
+                            <Form.Control type="text" placeholder="Database" name="database" required
+                                onChange={e => this.change(e)} />
+                        </Form.Group>
+                        <Form.Group controlId="collection_name">
                             <Form.Label>Collection:</Form.Label>
-                            <Form.Control type="text" placeholder="Collection" name="database" required
+                            <Form.Control type="text" placeholder="Collection" name="collection_name" required
                                 onChange={e => this.change(e)} />
                         </Form.Group>
                         <Form.Group controlId="query">
