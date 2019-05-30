@@ -65,7 +65,10 @@ var controloSchema = new controlo({
     database: {
         type: String
     },
-
+    //especifico mongo
+    collection_name: {
+        type: String
+    },
     //especifico mysql
     username: {
         type: String

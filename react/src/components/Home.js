@@ -34,26 +34,22 @@ export class Home extends React.Component {
             var ret = await { dataPing: data }
             console.log(JSON.stringify(ret));
             this.setState(ret);
-            console.log(JSON.stringify(this.state.dataPing));
         });
         //Maybe adicionar update requeste para 1 client
         socket.on("update_Http_data", async data => {
             var ret = await { dataHttp: data }
             console.log(JSON.stringify(ret));
             this.setState(ret);
-            console.log(JSON.stringify(this.state.dataHttp));
         });
         socket.on("update_Mongodb_data", async data => {
-            var ret = await { dataMySql: data }
-            console.log(JSON.stringify(ret));
-            this.setState(ret);
-            console.log(JSON.stringify(this.state.dataMySql));
-        });
-        socket.on("update_Mysql_data", async data => {
             var ret = await { dataMongoDB: data }
             console.log(JSON.stringify(ret));
             this.setState(ret);
-            console.log(JSON.stringify(this.state.dataMongoDB));
+        });
+        socket.on("update_Mysql_data", async data => {
+            var ret = await { dataMySql: data }
+            console.log(JSON.stringify(ret));
+            this.setState(ret);
         });
         socket.emit("request_data_from_server");
     }

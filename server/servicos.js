@@ -2,6 +2,7 @@ var http_request = require("./funcs/http_Request");
 var ping_request = require("./funcs/ping_Request");
 var mongo_request = require("./funcs/mongodb_Request");
 var mysql_request = require("./funcs/myslq_Request");
+var build_logs = require("./funcs/build_logs_object");
 
 var cronJob = require("cron").CronJob;
 
@@ -17,7 +18,6 @@ exports.emitirDados = async function (tipo, controlo, logs) {
             var nome = entry.nome;
             servico.key = nome;
             var dados = [];
-
             var tempo = 1 * 60
             await logs.pingsapi(tipo, nome, tempo).then(function (pings) {
                 for (var i = 0; i < pings.length; i++) {
@@ -53,7 +53,7 @@ exports.stop_cron = async function () {
     console.log(lista_crons);
 }
 
-exports.start_cron = function(io, controlo, logs){
+exports.start_cron = function (io, controlo, logs) {
     this.iniciar_verificacao_geral(io, controlo, logs);
 }
 
@@ -101,7 +101,9 @@ function iniciar_verificacao_individual(objeto, io, controlo, logs) {
 
 function start_ping_check(objeto, io, controlo, logs) {
     var cron = new cronJob(toCron(objeto.tempo_verificacao), function () {
-        ping_request.send_ping_request(objeto.nome, objeto.endereco, io, logs, async function () {
+        ping_request.send_ping_request(objeto, async function (nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo) {
+            var objeto = build_logs.build_logs_object(nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo);
+            logs.create_user(objeto);
             var dados = await exports.emitirDados("Ping", controlo, logs);
             io.emit("update_Ping_data", dados);
         });
@@ -112,7 +114,9 @@ function start_ping_check(objeto, io, controlo, logs) {
 
 function start_http_check(objeto, io, controlo, logs) {
     var cron = new cronJob(toCron(objeto.tempo_verificacao), function () {
-        http_request.send_http_request(objeto.nome, objeto.endereco, logs, async function () {
+        http_request.send_http_request(objeto, async function (nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo) {
+            var objeto = build_logs.build_logs_object(nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo);
+            logs.create_user(objeto);
             var dados = await exports.emitirDados("Http", controlo, logs);
             io.emit("update_Http_data", dados);
         });
@@ -123,7 +127,9 @@ function start_http_check(objeto, io, controlo, logs) {
 
 function start_mongodb_check(objeto, io, controlo, logs) {
     var cron = new cronJob(toCron(objeto.tempo_verificacao), function () {
-        mongo_request.send_mongodb_request(objeto.nome, objeto.endereco, logs, async function () {
+        mongo_request.send_mongodb_request(objeto, async function (nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo) {
+            var objeto = build_logs.build_logs_object(nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo);
+            logs.create_user(objeto);
             var dados = await exports.emitirDados("Mongo", controlo, logs);
             io.emit("update_Mongodb_data", dados);
         });
@@ -134,7 +140,9 @@ function start_mongodb_check(objeto, io, controlo, logs) {
 
 function start_mysql_check(objeto, io, controlo, logs) {
     var cron = new cronJob(toCron(objeto.tempo_verificacao), function () {
-        mysql_request.send_mysql_request(objeto.nome, objeto.endereco, io, logs, async function () {
+        mysql_request.send_mysql_request(objeto, async function (nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo) {
+            var objeto = build_logs.build_logs_object(nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo);
+            logs.create_user(objeto);
             var dados = await exports.emitirDados("Mysql", controlo, logs);
             io.emit("update_Mysql_data", dados);
         });
