@@ -69,7 +69,7 @@ export class Home extends React.Component {
                     {this.state.dataAlerta.map(m => {
                             return (
                                 <Alert variant="danger">
-                                <FontAwesomeIcon icon="exclamationtriagle"/> <strong>Alerta! : </strong> {m.data_inicio}: {m.nome} {m.tipo} - {m.mensagem_alerta}
+                                <FontAwesomeIcon icon="exclamation-triagle"/> <strong>Alerta! </strong> {m.data_inicio} {m.nome} <Badge variant="danger">{m.tipo}</Badge>: {m.mensagem_alerta}
                                 </Alert>
                             )       
                     })                     

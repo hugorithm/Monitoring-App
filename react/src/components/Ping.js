@@ -10,7 +10,6 @@ export class Ping extends React.Component {
         nome: "",
         endereco: "",
         tipo: "Máquina",
-        //tipo_verificacao: [],
         ping: false,
         http: false,
         classe: "",
@@ -28,7 +27,6 @@ export class Ping extends React.Component {
     };
 
     change = e => {
-        // this.props.onChange({ [e.target.name]: e.target.value });
         console.log(e.target.name, e.target.value, e.target.checked);
         if (e.target.name == "ping" || e.target.name == "http") {
             this.setState({
@@ -69,29 +67,14 @@ export class Ping extends React.Component {
         socket.emit("send_form_data", obj);
         window.alert("Api adicionada com sucesso!");
         window.location.replace("/home");
-        // this.props.onSubmit(this.state);
-        // this.setState({
-        //     nome: "",
-        //     endereco: "",
-        //     tipo: "",
-        //     classe: "",
-        //     propriedade: "",
-        //     tempo: ""
-        // });
-        // this.props.onChange({
-        //     nome: "",
-        //     endereco: "",
-        //     tipo: "",
-        //     classe: "",
-        //     propriedade: "",
-        //     tempo: ""
-        // });
     };
 
 
     render() {
         const tipo = this.state.tipo;
         const disabled = tipo == 'Máquina';
+        const http = this.state.http
+        const checkboxDisabled = http == false; 
         return (
             <Container>
                 <Form onSubmit={e => this.onSubmit(e)}>
@@ -104,7 +87,7 @@ export class Ping extends React.Component {
                             </Form.Group>
                             <Form.Group controlId="endereco">
                                 <Form.Label>Endereço:</Form.Label>
-                                <Form.Control type="text" placeholder="Endereço" name="endereco" required
+                                <Form.Control type="text" placeholder="Ex.( www.foo-bar.com )" name="endereco" required
                                     onChange={e => this.change(e)} />
                             </Form.Group>
                             <Form.Group controlId="tipo">
@@ -174,14 +157,9 @@ export class Ping extends React.Component {
                             </Form.Group>
                             <Form.Group controlId="cod_funcional">
                                 <Form.Label>Código Funcional:</Form.Label>
-                                <Form.Control type="text" placeholder="Código Funcional" name="cod_funcional"
+                                <Form.Control type="text" placeholder="Código Funcional" disabled={checkboxDisabled} name="cod_funcional"
                                     onChange={e => this.change(e)} />
-                            </Form.Group>
-                            <Form.Group controlId="cod_nao_funcional">
-                                <Form.Label>Código Não Funcional:</Form.Label>
-                                <Form.Control type="text" placeholder="Código Não Funcional" name="cod_nao_funcional"
-                                    onChange={e => this.change(e)} />
-                            </Form.Group>
+                            </Form.Group>                        
                         </Col>
                     </Row>
                     <Button variant="primary" type="submit">
