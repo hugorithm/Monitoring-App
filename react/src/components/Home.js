@@ -6,8 +6,8 @@ import { Tabs, Tab, Card, Row, Col, Container, Badge, Alert } from 'react-bootst
 import "./../index.css";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck  } from '@fortawesome/free-solid-svg-icons'
-library.add(faCheck);
+import { faCheck, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+library.add(faCheck, faExclamationTriangle);
 
 
 
@@ -21,7 +21,8 @@ export class Home extends React.Component {
             dataPing: [],
             dataHttp: [],
             dataMySql: [],
-            dataMongoDB: []
+            dataMongoDB: [],
+            dataAlerta: []
         }
     }
 
@@ -51,6 +52,12 @@ export class Home extends React.Component {
             console.log(JSON.stringify(ret));
             this.setState(ret);
         });
+        socket.on("update_Alerta_data", async data => {
+            var ret = await { dataAlerta: data }
+            console.log(JSON.stringify(ret));
+            this.setState(ret);
+            console.log(JSON.stringify(this.state.dataAlerta));
+        });
         socket.emit("request_data_from_server");
     }
 
@@ -59,9 +66,21 @@ export class Home extends React.Component {
         return (
             <div>
                 <Container>
-                    <Alert variant="success">
-                    <FontAwesomeIcon icon="check"/> <strong>Aviso: </strong>Todos os serviços estão operacionais!
-                    </Alert>
+                    {function (){
+                        if(this.state.dataAlerta.length == 0) return(
+                            <Alert variant="info">
+                            <FontAwesomeIcon icon="check"/> <strong>Aviso: </strong> Todos os serviços estão OK!
+                            </Alert>  
+                        )
+                    }}
+                    {this.state.dataAlerta.map(m => {
+                            return (
+                                <Alert variant="danger">
+                                <FontAwesomeIcon icon="exclamationtriagle"/> <strong>Alerta! : </strong> {m.data_inicio}: {m.nome} {m.tipo} - {m.mensagem_alerta}
+                                </Alert>
+                            )       
+                    })                     
+                    }                   
                 </Container>
                 <Tabs defaultActiveKey="ping" id="tabs" style={{ marginLeft: 5, marginRight: 5 }}>
                     <Tab eventKey="ping" title="Ping">
