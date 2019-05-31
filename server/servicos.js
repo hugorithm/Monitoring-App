@@ -12,7 +12,7 @@ var lista_crons = [];
 
 exports.emitirDados = async function (tipo, controlo, logs) {
     var obj = [];
-    await controlo.listar_servicos().then(async function (data) {
+    await controlo.listar_servicos_visiveis().then(async function (data) {
         for (var entry of data) {
             var servico = new Object;
             var nome = entry.nome;
@@ -168,7 +168,7 @@ async function verifica_erros(io, controlo, logs) {
                         contador += 1;
                         if (entry.valor_maximo < log.json.latencia || log.json.latencia < entry.valor_minimo || (tipo == "Http" && entry.cod_funcional != log.json.codigo) || isNaN(log.json.codigo) == true) {
                             if (data_primeiro_erro == "") {
-                                data_primeiro_erro = new Date(log.json.data_enviado);
+                                data_primeiro_erro = new Date(log.json.data_enviado).toLocaleString();
                             }
                             erros += 1
                         }

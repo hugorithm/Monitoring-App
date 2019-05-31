@@ -33,30 +33,24 @@ export class Home extends React.Component {
     getData() {
         socket.on("update_Ping_data", async data => {
             var ret = await { dataPing: data }
-            console.log(JSON.stringify(ret));
             this.setState(ret);
         });
         //Maybe adicionar update requeste para 1 client
         socket.on("update_Http_data", async data => {
             var ret = await { dataHttp: data }
-            console.log(JSON.stringify(ret));
             this.setState(ret);
         });
         socket.on("update_Mongodb_data", async data => {
             var ret = await { dataMongoDB: data }
-            console.log(JSON.stringify(ret));
             this.setState(ret);
         });
         socket.on("update_Mysql_data", async data => {
             var ret = await { dataMySql: data }
-            console.log(JSON.stringify(ret));
             this.setState(ret);
         });
         socket.on("update_Alerta_data", async data => {
             var ret = await { dataAlerta: data }
-            console.log(JSON.stringify(ret));
             this.setState(ret);
-            console.log(JSON.stringify(this.state.dataAlerta));
         });
         socket.emit("request_data_from_server");
     }
@@ -69,7 +63,7 @@ export class Home extends React.Component {
                     {this.state.dataAlerta.map(m => {
                             return (
                                 <Alert variant="danger">
-                                <FontAwesomeIcon icon="exclamation-triangle"/> <strong>Alerta! </strong> {m.data_inicio} {m.nome} <Badge variant="danger">{m.tipo}</Badge>: {m.mensagem_alerta}
+                                <FontAwesomeIcon icon="exclamation-triangle"/> {m.data_inicio} {m.nome} <Badge variant="danger">{m.tipo}</Badge>: {m.mensagem_alerta}
                                 </Alert>
                             )       
                     })                     

@@ -22,12 +22,10 @@ export class Ping extends React.Component {
         estado: "Visível",
         mensagem_alerta: "",
         cod_funcional: "",
-        checed: {}
-
+       
     };
 
     change = e => {
-        console.log(e.target.name, e.target.value, e.target.checked);
         if (e.target.name == "ping" || e.target.name == "http") {
             this.setState({
                 [e.target.name]: e.target.checked
@@ -41,7 +39,6 @@ export class Ping extends React.Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log(this.state);
         var obj = new Object();
         obj.nome = this.state.nome;
         obj.endereco = this.state.endereco;
