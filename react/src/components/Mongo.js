@@ -19,7 +19,6 @@ export class Mongo extends React.Component {
         duracao_erro: "",
         percentagem_erro: "",
         estado: "Visível",
-        cod_funcional: "",
         query: "",
         collection_name: "",
         database: ""    
@@ -50,31 +49,11 @@ export class Mongo extends React.Component {
         obj.percentagem_erro = this.state.percentagem_erro;
         obj.collection_name = this.state.collection_name;
         obj.estado = this.state.estado;
-        obj.cod_funcional = this.state.cod_funcional;
         obj.query = this.state.query;
         obj.database = this.state.database;       
         socket.emit("send_form_data", obj);
         window.alert("Api adicionada com sucesso!");
         window.location.replace("/home");
-        // window.alert("Api adicionada com sucesso!");
-        // window.location.replace("/home");
-        // this.props.onSubmit(this.state);
-        // this.setState({
-        //     nome: "",
-        //     endereco: "",
-        //     tipo: "",
-        //     classe: "",
-        //     propriedade: "",
-        //     tempo: ""
-        // });
-        // this.props.onChange({
-        //     nome: "",
-        //     endereco: "",
-        //     tipo: "",
-        //     classe: "",
-        //     propriedade: "",
-        //     tempo: ""
-        // });
     };
 
 
@@ -91,7 +70,7 @@ export class Mongo extends React.Component {
                         </Form.Group>
                         <Form.Group controlId="endereco">
                             <Form.Label>Endereço:</Form.Label>
-                            <Form.Control type="text" placeholder="Endereço" name="endereco" required
+                            <Form.Control type="text" placeholder="Ex.( mongodb://localhost:27017 )" name="endereco" required
                                 onChange={e => this.change(e)} />
                         </Form.Group>
                         <Form.Group controlId="database">
@@ -152,17 +131,6 @@ export class Mongo extends React.Component {
                         <Form.Group controlId="percentagem_erro">
                             <Form.Label>Percentagem do Erro:</Form.Label>
                             <Form.Control type="text" placeholder="Percentagem do Erro" name="percentagem_erro" required
-                                onChange={e => this.change(e)} />
-                        </Form.Group>
-
-                        <Form.Group controlId="cod_funcional">
-                            <Form.Label>Código Funcional:</Form.Label>
-                            <Form.Control type="text" placeholder="Código Funcional" name="cod_funcional"
-                                onChange={e => this.change(e)} />
-                        </Form.Group>
-                        <Form.Group controlId="cod_nao_funcional">
-                            <Form.Label>Código Não Funcional:</Form.Label>
-                            <Form.Control type="text" placeholder="Código Não Funcional" name="cod_nao_funcional"
                                 onChange={e => this.change(e)} />
                         </Form.Group>
                     </Col>
