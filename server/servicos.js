@@ -168,7 +168,7 @@ async function verifica_erros(io, controlo, logs) {
                         contador += 1;
                         if (entry.valor_maximo < log.json.latencia || log.json.latencia < entry.valor_minimo || (tipo == "Http" && entry.cod_funcional != log.json.codigo) || isNaN(log.json.codigo) == true) {
                             if (data_primeiro_erro == "") {
-                                data_primeiro_erro = unixtodate(log.json.data_enviado);
+                                data_primeiro_erro = new Date(log.json.data_enviado);
                             }
                             erros += 1
                         }
@@ -192,16 +192,3 @@ function toCron(time) {
     var crontime = '*/' + time + ' * * * * *'
     return crontime;
 }
-
-function unixtodate(unix){
-    var a = new Date(unix * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    return time;
-  }
