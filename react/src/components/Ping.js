@@ -21,6 +21,7 @@ export class Ping extends React.Component {
         duracao_erro: "",
         percentagem_erro: "",
         estado: "Visível",
+        mensagem_alerta: "",
         cod_funcional: [],
         cod_nao_funcional: [],
         checed: {}
@@ -66,6 +67,7 @@ export class Ping extends React.Component {
         obj.estado = this.state.estado;
         obj.cod_funcional = this.state.cod_funcional.split(',');
         obj.cod_nao_funcional = this.state.cod_nao_funcional.split(',');
+        obj.mensagem_alerta = this.state.mensagem_alerta;
         socket.emit("send_form_data", obj);
         window.alert("Api adicionada com sucesso!");
         window.location.replace("/home");
@@ -167,7 +169,11 @@ export class Ping extends React.Component {
                                 <Form.Control type="text" placeholder="Percentagem do Erro" name="percentagem_erro" required
                                     onChange={e => this.change(e)} />
                             </Form.Group>
-
+                            <Form.Group controlId="mensagem_alerta">
+                                <Form.Label>Mensagem do Alerta:</Form.Label>
+                                <Form.Control type="text" placeholder="Mensagem do Alerta" name="mensagem_alerta" required
+                                    onChange={e => this.change(e)} />
+                            </Form.Group>
                             <Form.Group controlId="cod_funcional">
                                 <Form.Label>Código Funcional:</Form.Label>
                                 <Form.Control type="text" placeholder="Código Funcional" name="cod_funcional"
