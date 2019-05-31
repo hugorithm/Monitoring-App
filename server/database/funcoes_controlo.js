@@ -28,5 +28,5 @@ exports.listar_servicos = async function () {
 }
 
 exports.listar_servicos_visiveis = async function(){
-    return control.find({estado:"Visivel"}).lean().exec();
+    return control.find({estado:"Visível"}).lean().exec();
 }
