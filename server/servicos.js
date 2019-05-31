@@ -107,7 +107,7 @@ function start_ping_check(objeto, io, controlo, logs) {
         ping_request.send_ping_request(objeto, async function (nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo) {
             var resposta = build_logs.build_logs_object(nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo);
             logs.create_user(resposta);
-            verifica_erros("Ping", io, controlo, logs);
+            verifica_erros(io, controlo, logs);
             var dados = await exports.emitirDados("Ping", controlo, logs);
             io.emit("update_Ping_data", dados);
         });
@@ -121,7 +121,7 @@ function start_http_check(objeto, io, controlo, logs) {
         http_request.send_http_request(objeto, async function (nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo) {
             var resposta = build_logs.build_logs_object(nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo);
             await logs.create_user(resposta);
-            verifica_erros("Http", io, controlo, logs);
+            verifica_erros(io, controlo, logs);
             var dados = await exports.emitirDados("Http", controlo, logs);
             io.emit("update_Http_data", dados);
         });
@@ -135,7 +135,7 @@ function start_mongodb_check(objeto, io, controlo, logs) {
         mongo_request.send_mongodb_request(objeto, async function (nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo) {
             var resposta = build_logs.build_logs_object(nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo);
             logs.create_user(resposta);
-            verifica_erros("Mongo", io, controlo, logs);
+            verifica_erros(io, controlo, logs);
             var dados = await exports.emitirDados("Mongo", controlo, logs);
             io.emit("update_Mongodb_data", dados);
         });
@@ -149,7 +149,7 @@ function start_mysql_check(objeto, io, controlo, logs) {
         mysql_request.send_mysql_request(objeto, async function (nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo) {
             var resposta = build_logs.build_logs_object(nome, endereco, tipo_verificacao, sent, rcvd, ms, codigo);
             logs.create_user(resposta);
-            verifica_erros("Mysql", io, controlo, logs);
+            verifica_erros(io, controlo, logs);
             var dados = await exports.emitirDados("Mysql", controlo, logs);
             io.emit("update_Mysql_data", dados);
         });
@@ -158,38 +158,40 @@ function start_mysql_check(objeto, io, controlo, logs) {
     cron.start();
 }
 
-async function verifica_erros(tipo, io, controlo, logs) {
+async function verifica_erros(io, controlo, logs) {
     var obj = [];
     await controlo.listar_servicos().then(async function (data) {
         for (var entry of data) {
-            await logs.pingsapi(tipo, entry.nome, entry.duracao_erro).then(async function (data) {
-                var contador = 0;
-                var erros = 0;
-                var data_primeiro_erro = ""
-                for (var log of data) {
-                    contador += 1;
-                    if (entry.valor_maximo > log.json.latencia > entry.valor_minimo || (tipo == "Http" && entry.cod_funcional != log.json.codigo) || isNaN(log.json.codigo) == true) {
-                        if (data_primeiro_erro == "") {
-                            data_primeiro_erro = log.json.data_enviado
+            for (var tipo of entry.tipo_verificacao) {
+                await logs.pingsapi(tipo, entry.nome, entry.duracao_erro).then(async function (data) {
+                    var contador = 0;
+                    var erros = 0;
+                    var data_primeiro_erro = ""
+                    for (var log of data) {
+                        contador += 1;
+                        if (entry.valor_maximo < log.json.latencia || log.json.latencia < entry.valor_minimo || (tipo == "Http" && entry.cod_funcional != log.json.codigo) || isNaN(log.json.codigo) == true) {
+                            if (data_primeiro_erro == "") {
+                                data_primeiro_erro = log.json.data_enviado
+                            }
+                            erros += 1
                         }
-                        erros += 1
                     }
-                }
-                perc_erros = (erros / contador) * 100;
-                if (perc_erros >= entry.percentagem_erro) {
-                    var resposta = build_logs.build_error_object(entry.nome, tipo, data_primeiro_erro, entry.mensagem_alerta)
-                    obj.push(resposta);
-                }
-            });
+                    perc_erros = (erros / contador) * 100;
+                    if (perc_erros >= entry.percentagem_erro) {
+                        var resposta = build_logs.build_error_object(entry.nome, tipo, data_primeiro_erro, entry.mensagem_alerta)
+                        obj.push(resposta);
+                    }
+                });
+            }
         }
-        if(obj.length > 0){
+        if (obj.length > 0) {
             io.emit("update_Alerta_data", obj);
         }
-        
+
     });
 }
 
-    function toCron(time) {
-        var crontime = '*/' + time + ' * * * * *'
-        return crontime;
-    }
+function toCron(time) {
+    var crontime = '*/' + time + ' * * * * *'
+    return crontime;
+}

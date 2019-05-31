@@ -22,8 +22,7 @@ export class Ping extends React.Component {
         percentagem_erro: "",
         estado: "Visível",
         mensagem_alerta: "",
-        cod_funcional: [],
-        cod_nao_funcional: [],
+        cod_funcional: "",
         checed: {}
 
     };
@@ -65,8 +64,7 @@ export class Ping extends React.Component {
         obj.duracao_erro = this.state.duracao_erro;
         obj.percentagem_erro = this.state.percentagem_erro;
         obj.estado = this.state.estado;
-        obj.cod_funcional = this.state.cod_funcional.split(',');
-        obj.cod_nao_funcional = this.state.cod_nao_funcional.split(',');
+        obj.cod_funcional = this.state.cod_funcional;
         obj.mensagem_alerta = this.state.mensagem_alerta;
         socket.emit("send_form_data", obj);
         window.alert("Api adicionada com sucesso!");

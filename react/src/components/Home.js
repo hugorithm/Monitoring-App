@@ -66,13 +66,6 @@ export class Home extends React.Component {
         return (
             <div>
                 <Container>
-                    {function (){
-                        if(this.state.dataAlerta.length == 0) return(
-                            <Alert variant="info">
-                            <FontAwesomeIcon icon="check"/> <strong>Aviso: </strong> Todos os serviços estão OK!
-                            </Alert>  
-                        )
-                    }}
                     {this.state.dataAlerta.map(m => {
                             return (
                                 <Alert variant="danger">

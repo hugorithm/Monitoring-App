@@ -19,8 +19,7 @@ export class Mongo extends React.Component {
         duracao_erro: "",
         percentagem_erro: "",
         estado: "Visível",
-        cod_funcional: [],
-        cod_nao_funcional: [],
+        cod_funcional: "",
         query: "",
         collection_name: "",
         database: ""    
@@ -51,8 +50,7 @@ export class Mongo extends React.Component {
         obj.percentagem_erro = this.state.percentagem_erro;
         obj.collection_name = this.state.collection_name;
         obj.estado = this.state.estado;
-        obj.cod_funcional = this.state.cod_funcional.split(',');
-        obj.cod_nao_funcional = this.state.cod_nao_funcional.split(',');
+        obj.cod_funcional = this.state.cod_funcional;
         obj.query = this.state.query;
         obj.database = this.state.database;       
         socket.emit("send_form_data", obj);

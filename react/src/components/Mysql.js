@@ -19,8 +19,7 @@ export class Mysql extends React.Component {
         duracao_erro: "",
         percentagem_erro: "",
         estado: "Visível",
-        cod_funcional: [],
-        cod_nao_funcional: [],
+        cod_funcional: "",
         query: "",
         database: "",
         username: "",
@@ -50,8 +49,7 @@ export class Mysql extends React.Component {
         obj.duracao_erro = this.state.duracao_erro;
         obj.percentagem_erro = this.state.percentagem_erro;
         obj.estado = this.state.estado;
-        obj.cod_funcional = this.state.cod_funcional.split(',');
-        obj.cod_nao_funcional = this.state.cod_nao_funcional.split(',');
+        obj.cod_funcional = this.state.cod_funcional;
         obj.query = this.state.query;
         obj.database = this.state.database;   
         obj.username = this.state.username;
