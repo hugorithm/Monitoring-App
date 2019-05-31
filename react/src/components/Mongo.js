@@ -56,6 +56,8 @@ export class Mongo extends React.Component {
         obj.query = this.state.query;
         obj.database = this.state.database;       
         socket.emit("send_form_data", obj);
+        window.alert("Api adicionada com sucesso!");
+        window.location.replace("/home");
         // window.alert("Api adicionada com sucesso!");
         // window.location.replace("/home");
         // this.props.onSubmit(this.state);

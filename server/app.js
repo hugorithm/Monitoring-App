@@ -44,15 +44,13 @@ function construirBd() {
     servico.classe = "classe1"
     servico.propriedade = "propriedade1"
     servico.tipo = "Website";
-    servico.tipo_verificacao = ["Ping", "Http"];
+    servico.tipo_verificacao = ["Http","Ping"];
     servico.tempo_verificacao = "2";
-    servico.valor_minimo = 5;
-    servico.valor_maximo = 100;
+    servico.valor_maximo = 250;
     servico.duracao_erro = 20000;//ms
     servico.percentagem_erro = 80;
     servico.estado = "Visivel";
-    servico.cod_funcional = ["200"];
-    servico.cod_nao_funcional = ["400", "301", "404"];
+    servico.cod_funcional ="200";
     controlo.criar_api(servico);
 
     var servico1 = new Object();
@@ -63,13 +61,11 @@ function construirBd() {
     servico1.tipo = "Website"
     servico1.tipo_verificacao = ["Ping"]
     servico1.tempo_verificacao = "5"
-    servico1.valor_minimo = 5;
-    servico1.valor_maximo = 100;
+    servico1.valor_maximo = 250;
     servico1.duracao_erro = 20000;//ms
     servico1.percentagem_erro = 80;
     servico1.estado = "Visivel"
-    servico1.cod_funcional = ["200"];
-    servico1.cod_nao_funcional = ["400", "301", "404"];
+    servico1.cod_funcional = "200";
     controlo.criar_api(servico1);
 
     var servico2 = new Object();
@@ -80,47 +76,41 @@ function construirBd() {
     servico2.tipo = "Website"
     servico2.tipo_verificacao = ["Http"]
     servico2.tempo_verificacao = "1"
-    servico2.valor_minimo = 5;
-    servico2.valor_maximo = 100;
+    servico2.valor_maximo = 250;
     servico2.duracao_erro = 20000;//ms
     servico2.percentagem_erro = 80;
     servico2.estado = "Visivel"
-    servico2.cod_funcional = ["200"];
-    servico2.cod_nao_funcional = ["400", "301", "404"];
+    servico2.cod_funcional = "200";
     controlo.criar_api(servico2);
 
     var servico3 = new Object();
     servico3.nome = "Twitter"
-    servico3.endereco = "www.twitter.com"
+    servico3.endereco = "twitter.com"
     servico3.classe = "classe3"
     servico3.propriedade = "propriedade3"
     servico3.tipo = "Website"
     servico3.tipo_verificacao = ["Http", "Ping"]
     servico3.tempo_verificacao = "5"
-    servico3.valor_minimo = 5;
-    servico3.valor_maximo = 100;
+    servico3.valor_maximo = 250;
     servico3.duracao_erro = 20000;//ms
     servico3.percentagem_erro = 80;
     servico3.estado = "Visivel"
-    servico3.cod_funcional = ["200"];
-    servico3.cod_nao_funcional = ["400", "301", "404"];
+    servico3.cod_funcional = "200";
     controlo.criar_api(servico3);
 
     var servico4 = new Object();
     servico4.nome = "Stack Overflow"
-    servico4.endereco = "www.stackoverflow.com"
+    servico4.endereco = "stackoverflow.com"
     servico4.classe = "classe3"
     servico4.propriedade = "propriedade3"
     servico4.tipo = "Website"
     servico4.tipo_verificacao = ["Http", "Ping"]
     servico4.tempo_verificacao = "2"
-    servico4.valor_minimo = 5;
-    servico4.valor_maximo = 100;
+    servico4.valor_maximo = 250;
     servico4.duracao_erro = 20000;//ms
     servico4.percentagem_erro = 80;
     servico4.estado = "Visivel"
-    servico4.cod_funcional = ["200"];
-    servico4.cod_nao_funcional = ["400", "301", "404"];
+    servico4.cod_funcional = "200";
     controlo.criar_api(servico4);
 
     var servico5 = new Object();
@@ -131,30 +121,26 @@ function construirBd() {
     servico5.tipo = "Website"
     servico5.tipo_verificacao = ["Ping"]
     servico5.tempo_verificacao = "2"
-    servico5.valor_minimo = 5;
-    servico5.valor_maximo = 100;
+    servico5.valor_maximo = 250;
     servico5.duracao_erro = 20000;//ms
     servico5.percentagem_erro = 80;
     servico5.estado = "Visivel"
-    servico5.cod_funcional = ["200"];
-    servico5.cod_nao_funcional = ["400", "301", "404"];
+    servico5.cod_funcional = "200";
     controlo.criar_api(servico5);
 
     var servico6 = new Object();
     servico6.nome = "Uminho"
-    servico6.endereco = "alunos.uminho.pt"
+    servico6.endereco = "alunos.uminho.pt/PT"
     servico6.classe = "classe3"
     servico6.propriedade = "propriedade3"
     servico6.tipo = "Website"
     servico6.tipo_verificacao = ["Http", "Ping"]
     servico6.tempo_verificacao = "5"
-    servico6.valor_minimo = 5;
-    servico6.valor_maximo = 100;
+    servico6.valor_maximo = 250;
     servico6.duracao_erro = 20000;//ms
     servico6.percentagem_erro = 80;
     servico6.estado = "Visivel"
-    servico6.cod_funcional = ["200"];
-    servico6.cod_nao_funcional = ["400", "301", "404"];
+    servico6.cod_funcional = "200";
     controlo.criar_api(servico6);
 
     var servico7 = new Object();
@@ -165,13 +151,11 @@ function construirBd() {
     servico7.tipo = "Website"
     servico7.tipo_verificacao = ["Http", "Ping"]
     servico7.tempo_verificacao = "5"
-    servico7.valor_minimo = 5;
-    servico7.valor_maximo = 100;
+    servico7.valor_maximo = 250;
     servico7.duracao_erro = 20000;//ms
     servico7.percentagem_erro = 80;
     servico7.estado = "Visivel"
-    servico7.cod_funcional = ["200"];
-    servico7.cod_nao_funcional = ["400", "301", "404"];
+    servico7.cod_funcional = "200";
     controlo.criar_api(servico7);
 }
 
@@ -182,3 +166,4 @@ function editar_dados_api(nomeapi, novosdados) {
 function criar_api(dadosapi) {
     servicos.adicionar_api(dadosapi, io, controlo, logs);
 }
+

@@ -10,7 +10,7 @@ exports.send_mongodb_request = async function (objeto, callback) {
         var dados_bd = dbase.collection(objeto.collection_name).find(objeto.query)
         var data_fim = new Date().getTime();
         var latencia = data_fim - data_inicio;
-        var codigo = "ping_request";
+        var codigo = 0;
         callback(objeto.nome, objeto.endereco, "Mongo", data_inicio, data_fim, latencia, codigo);
     });
 }

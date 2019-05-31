@@ -21,7 +21,7 @@ exports.send_mysql_request = async function (objeto, callback) {
             console.log("data_fim " + data_fim);
             var latencia = data_fim - data_inicio;
             console.log(latencia)
-            var codigo = "mysql_request";
+            var codigo = 0;
             callback(objeto.nome, objeto.endereco, "Mysql", data_inicio, data_fim, latencia, codigo);
         });
     });

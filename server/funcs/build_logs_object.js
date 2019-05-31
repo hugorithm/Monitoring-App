@@ -11,3 +11,12 @@ exports.build_logs_object = function (nome, endereco, tipo_verificacao, data_env
     object.codigo = codigo;
     return object;
 }
+
+exports.build_error_object = function(nome,tipo, data_inicio, mensagem){
+    var dados = new Object();
+    dados.nome = nome;
+    dados.tipo = tipo
+    dados.data_inicio = data_inicio;
+    dados.mensagem_alerta = mensagem;
+    return dados;
+}

@@ -33,7 +33,7 @@ var controloSchema = new controlo({
         type: String,
         required: true
     },
-    valor_minimo: {
+    valor_minimo:{
         type: String,
         required: true
     },
@@ -52,11 +52,13 @@ var controloSchema = new controlo({
         type: String,
         required: true
     },
-    cod_funcional: {
-        type: mongoose.Schema.Types.Mixed,
+    mensagem_alerta: {
+        type: String,
+        required: true
     },
-    cod_nao_funcional: {
-        type: mongoose.Schema.Types.Mixed,
+    //apenas configuravel http
+    cod_funcional: {
+        type: String
     },
     //especifico bases dados
     query: {

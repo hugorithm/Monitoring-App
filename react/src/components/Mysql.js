@@ -57,6 +57,8 @@ export class Mysql extends React.Component {
         obj.username = this.state.username;
         obj.password = this.state.password;    
         socket.emit("send_form_data", obj);
+        window.alert("Api adicionada com sucesso!");
+        window.location.replace("/home");
         // window.alert("Api adicionada com sucesso!");
         // window.location.replace("/home");
         // this.props.onSubmit(this.state);
