@@ -35,26 +35,22 @@ export class Home extends React.Component {
             var ret = await { dataPing: data }
             console.log(JSON.stringify(ret));
             this.setState(ret);
-            console.log(JSON.stringify(this.state.dataPing));
         });
         //Maybe adicionar update requeste para 1 client
         socket.on("update_Http_data", async data => {
             var ret = await { dataHttp: data }
             console.log(JSON.stringify(ret));
             this.setState(ret);
-            console.log(JSON.stringify(this.state.dataHttp));
         });
         socket.on("update_Mongodb_data", async data => {
-            var ret = await { dataMySql: data }
-            console.log(JSON.stringify(ret));
-            this.setState(ret);
-            console.log(JSON.stringify(this.state.dataMySql));
-        });
-        socket.on("update_Mysql_data", async data => {
             var ret = await { dataMongoDB: data }
             console.log(JSON.stringify(ret));
             this.setState(ret);
-            console.log(JSON.stringify(this.state.dataMongoDB));
+        });
+        socket.on("update_Mysql_data", async data => {
+            var ret = await { dataMySql: data }
+            console.log(JSON.stringify(ret));
+            this.setState(ret);
         });
         socket.on("update_Alerta_data", async data => {
             var ret = await { dataAlerta: data }
@@ -88,12 +84,12 @@ export class Home extends React.Component {
                 </Container>
                 <Tabs defaultActiveKey="ping" id="tabs" style={{ marginLeft: 5, marginRight: 5 }}>
                     <Tab eventKey="ping" title="Ping">
-                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataPing.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
                                         <Card >
                                             <Card.Header>{m.key} <Badge variant="info">Ping</Badge> </Card.Header>
                                             <Card.Body>
@@ -114,12 +110,12 @@ export class Home extends React.Component {
                         </Row>
                     </Tab>
                     <Tab eventKey="http" title="Http">
-                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataHttp.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
                                         <Card>
                                             <Card.Header>{m.key} <Badge variant="info">Http</Badge></Card.Header>
                                             <Card.Body>
@@ -140,12 +136,12 @@ export class Home extends React.Component {
                         </Row>
                     </Tab>
                     <Tab eventKey="mongo" title="MongoDB" >
-                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataMongoDB.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
 
                                         <Card>
                                             <Card.Header>{m.key} <Badge variant="info">MongoDB</Badge></Card.Header>
@@ -167,13 +163,12 @@ export class Home extends React.Component {
                         </Row>
                     </Tab>
                     <Tab eventKey="mysql" title="MySql" >
-
-                        <Row style={{ marginLeft: 0.5, marginRight: 0.5, marginTop: 2.5, marginBottom: 2.5 }}>
+                        <Row style={{ marginLeft: 1, marginRight: 1, marginTop: 5, marginBottom: 5 }}>
                             {this.state.dataMySql.map(m => {
                                 var ret = [m];
                                 i++;
                                 return (
-                                    <Col xs={6} md={3} style={{ marginTop: 2.5, marginBottom: 2.5, paddingLeft: 5, paddingRight: 5 }}>
+                                    <Col xs={6} md={3} style={{ marginTop: 5, marginBottom: 5, paddingLeft: 10, paddingRight: 10 }}>
 
                                         <Card>
                                             <Card.Header>{m.key} <Badge variant="info">MySql</Badge></Card.Header>
@@ -193,7 +188,6 @@ export class Home extends React.Component {
                                 )
                             })}
                         </Row>
-
                     </Tab>
                 </Tabs>
             </div>
