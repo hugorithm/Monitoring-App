@@ -30,7 +30,7 @@ startup();
 
 function startup() {
     iniciarMonitor();
-    //construirBd();
+    // construirBd();
 }
 
 function iniciarMonitor() {
@@ -52,6 +52,7 @@ function construirBd() {
     servico.percentagem_erro = 80;
     servico.estado = "Visível";
     servico.cod_funcional ="200";
+    servico.mensagem_alerta = "Mensagem de Alerta Standard"
     controlo.criar_api(servico);
 
     var servico1 = new Object();
@@ -68,6 +69,7 @@ function construirBd() {
     servico1.percentagem_erro = 80;
     servico1.estado = "Visível"
     servico1.cod_funcional = "";
+    servico1.mensagem_alerta = "Mensagem de Alerta Standard"
     controlo.criar_api(servico1);
 
     var servico2 = new Object();
@@ -84,6 +86,7 @@ function construirBd() {
     servico2.percentagem_erro = 80;
     servico2.estado = "Visível"
     servico2.cod_funcional = "200";
+    servico2.mensagem_alerta = "Mensagem de Alerta Standard"
     controlo.criar_api(servico2);
 
     var servico3 = new Object();
@@ -100,6 +103,7 @@ function construirBd() {
     servico3.percentagem_erro = 80;
     servico3.estado = "Visível"
     servico3.cod_funcional = "200";
+    servico3.mensagem_alerta = "Mensagem de Alerta Standard"
     controlo.criar_api(servico3);
 
     var servico4 = new Object();
@@ -116,6 +120,7 @@ function construirBd() {
     servico4.percentagem_erro = 80;
     servico4.estado = "Visível"
     servico4.cod_funcional = "200";
+    servico4.mensagem_alerta = "Mensagem de Alerta Standard"
     controlo.criar_api(servico4);
 
     var servico5 = new Object();
@@ -132,6 +137,7 @@ function construirBd() {
     servico5.percentagem_erro = 80;
     servico5.estado = "Visível"
     servico5.cod_funcional = "";
+    servico5.mensagem_alerta = "Mensagem de Alerta Standard"
     controlo.criar_api(servico5);
 
     var servico6 = new Object();
@@ -140,7 +146,7 @@ function construirBd() {
     servico6.classe = "classe3"
     servico6.propriedade = "propriedade3"
     servico6.tipo = "Website"
-    servico6.tipo_verificacao = ["Http", "Ping"]
+    servico6.tipo_verificacao = ["Http"]
     servico6.tempo_verificacao = "5"
     servico6.valor_minimo = 5
     servico6.valor_maximo = 250;
@@ -148,6 +154,7 @@ function construirBd() {
     servico6.percentagem_erro = 80;
     servico6.estado = "Visível"
     servico6.cod_funcional = "200";
+    servico6.mensagem_alerta = "Mensagem de Alerta Standard"
     controlo.criar_api(servico6);
 
     var servico7 = new Object();
@@ -164,6 +171,7 @@ function construirBd() {
     servico7.percentagem_erro = 80;
     servico7.estado = "Visível"
     servico7.cod_funcional = "200";
+    servico7.mensagem_alerta = "Mensagem de Alerta Standard"
     controlo.criar_api(servico7);
 
     var servico8 = new Object();
@@ -171,7 +179,7 @@ function construirBd() {
     servico8.endereco = "mongodb://localhost:27017"
     servico8.collection_name = "amsa"
     servico8.database = "servicos"
-    servico8.query = {}
+    servico8.query = "{}"
     servico8.classe = "classe3"
     servico8.propriedade = "propriedade3"
     servico8.tipo = "Base de Dados"
@@ -183,6 +191,7 @@ function construirBd() {
     servico8.percentagem_erro = 80;
     servico8.estado = "Visível"
     servico8.cod_funcional = "";
+    servico8.mensagem_alerta = "Mensagem de Alerta Standard"
     controlo.criar_api(servico8);
 
     var servico9 = new Object();
@@ -203,7 +212,59 @@ function construirBd() {
     servico9.percentagem_erro = 80;
     servico9.estado = "Visível"
     servico9.cod_funcional = "";
+    servico9.mensagem_alerta = "Mensagem de Alerta Standard"
     controlo.criar_api(servico9);
+
+    var servico10 = new Object();
+    servico10.nome = "Discord"
+    servico10.endereco = "discordapp.com"
+    servico10.classe = "classe3"
+    servico10.propriedade = "propriedade3"
+    servico10.tipo = "Website"
+    servico10.tipo_verificacao = ["Ping"]
+    servico10.tempo_verificacao = "5"
+    servico10.valor_minimo = 5
+    servico10.valor_maximo = 250;
+    servico10.duracao_erro = 50;//ms
+    servico10.percentagem_erro = 80;
+    servico10.estado = "Visível"
+    servico10.cod_funcional = "200";
+    servico10.mensagem_alerta = "Mensagem de Alerta Standard"
+    controlo.criar_api(servico10);
+
+    var servico11 = new Object();
+    servico11.nome = "W3schools"
+    servico11.endereco = "www.w3schools.com"
+    servico11.classe = "classe3"
+    servico11.propriedade = "propriedade3"
+    servico11.tipo = "Website"
+    servico11.tipo_verificacao = ["Ping"]
+    servico11.tempo_verificacao = "5"
+    servico11.valor_minimo = 5
+    servico11.valor_maximo = 250;
+    servico11.duracao_erro = 50;//ms
+    servico11.percentagem_erro = 80;
+    servico11.estado = "Visível"
+    servico11.cod_funcional = "200";
+    servico11.mensagem_alerta = "Mensagem de Alerta Standard"
+    controlo.criar_api(servico11);
+
+    var servico12 = new Object();
+    servico12.nome = "Wikipedia"
+    servico12.endereco = "www.wikipedia.org"
+    servico12.classe = "classe3"
+    servico12.propriedade = "propriedade3"
+    servico12.tipo = "Website"
+    servico12.tipo_verificacao = ["Ping"]
+    servico12.tempo_verificacao = "5"
+    servico12.valor_minimo = 5
+    servico12.valor_maximo = 250;
+    servico12.duracao_erro = 50;//ms
+    servico12.percentagem_erro = 80;
+    servico12.estado = "Visível"
+    servico12.cod_funcional = "200";
+    servico12.mensagem_alerta = "Mensagem de Alerta Standard"
+    controlo.criar_api(servico12);
 }
 
 function editar_dados_api(nomeapi, novosdados) {
